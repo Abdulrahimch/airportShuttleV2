@@ -80,22 +80,13 @@ const turksihColumns: GridColDef[] = [
   },
 ]
 
-const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 90 },
-    { 
-      field: 'payment', 
-      headerName: 'Tur', 
-      width: 300,
-    },
-    {
-      field: 'client',
-      headerName: 'Yetişkin Sayısı',
-      width: 200,
-    },
-  ]
 
-const rows = [{id: '123456', date: '2021-01-01', time: '10:00', type: 'cash', note: 'Abdulrahim paid me all his debt', paid: 50, currency: 'Euro', debt: 0 }]
+const rows = [
+                {id: '123456', date: '2021-01-01', time: '10:00', type: 'cash', note: 'Abdulrahim paid me all his debt', paid: 50, currency: 'Euro', debt: 0 }
+             ];
+
 let lan = 'eng';
+
 function ClientPayment(): JSX.Element {
     return (
         <Box>
