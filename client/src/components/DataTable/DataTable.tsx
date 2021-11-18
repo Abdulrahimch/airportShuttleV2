@@ -3,9 +3,8 @@ import { DataGrid, GridColumns, GridRowData } from '@material-ui/data-grid';
 
 interface Props {  
     rows: GridRowData[];
-    columns: GridColumns
+    columns: GridColumns;
 }
-
 export default function DataTable({ rows, columns }: Props): JSX.Element {
     const classes = useStyles();
     return (
@@ -16,7 +15,8 @@ export default function DataTable({ rows, columns }: Props): JSX.Element {
           pageSize={10}
           disableSelectionOnClick
           disableColumnMenu={true}
-          classes={{columnHeader: classes.columnHeader}}
+          disableDensitySelector={true}
+          classes={{ columnHeader: classes.columnHeader }}
         />
       </div>
     );
