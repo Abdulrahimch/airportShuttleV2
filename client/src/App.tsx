@@ -4,7 +4,7 @@ import ClientReservations from './pages/ClientReservations/ClientReservations';
 import ClientPayment from './pages/ClientPayment/ClientPayment';
 
 import './App.css';
-import Login from './pages/Login';
+import Login from './pages/Login/Login';
 import Header from './components/Header/Header';
 
 

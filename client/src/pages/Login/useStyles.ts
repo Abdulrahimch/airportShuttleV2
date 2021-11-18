@@ -5,6 +5,7 @@ const useStyles = makeStyles((theme) => ({
         minHeight: '100vh',
         justifyContent: 'center',
         alignContent: 'center',
+        marginTop: '2em'
     },
     welcome: {
         paddingTop: theme.spacing(10),
