@@ -1,61 +1,42 @@
-import { useState } from 'react';
 import useStyles from './useStyles';
 import { Link } from 'react-router-dom';
 import { Tabs, Tab, Box } from '@material-ui/core';
+import { tabsDictionary } from '../../../utils/dictionary';
 
-const englishTabs = [
-                        { label: 'new reservations', to: '/new-reservation' },
-                        { label: 'reservations', to: '/reservation' },
-                        { label: 'payments', to: '/payment' }
-                    ];
-const turkishTabs = [
-                        { label: 'yeni rezervasyonlar', to: '/new-reservation' },
-                        { label: 'rezervasyonlar', to: '/reservation' },
-                        { label: 'finans', to: '/payment' }
-                    ]
-
-
+const { englishTabs,  turkishTabs } = tabsDictionary;
 
 
 function ClientHeader(): JSX.Element {
     const classes = useStyles();
-    let lan = 'tr';
-
+    let lan = 'eng';
+    let tabs = [];
+    
     function tabFormation() {
-        if (lan === 'tr'){
-            return turkishTabs.map(({ label, to }) => (
-                <Tab
-                    label={label}
-                    component={Link}
-                    to={to}
-                    className={classes.tabs}
-                />
-            ));
-        }
-        else {
-            return englishTabs.map(({ label, to }) => (
-                <Tab
-                    label={label}
-                    component={Link}
-                    to={to}
-                    className={classes.tabs}
-                />
-            ));
-        }
+        if (lan === 'tr') tabs = turkishTabs;
+        else tabs = englishTabs;
+        return tabs.map(({ label, to }, idx) => (
+            <Tab
+                key={idx}
+                label={label}
+                component={Link}
+                to={to}
+                className={classes.tabs}
+            />
+        ));
     };
 
     return (
         <Box className={classes.root}>
             <Tabs
-                    aria-label="wrapped label tabs example"
-                    TabIndicatorProps={{
-                        style: {
-                            display: "none",
-                        },
-                    }}
-                >
-                    {tabFormation()}
-                </Tabs>
+                aria-label="wrapped label tabs example"
+                TabIndicatorProps={{
+                    style: {
+                        display: "none",
+                    },
+                }}
+            >
+                {tabFormation()}
+            </Tabs>
         </Box>
     )
 }
