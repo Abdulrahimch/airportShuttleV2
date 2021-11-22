@@ -56,9 +56,8 @@ exports.registerUser = asyncHandler(async (req, res, next) => {
 // @desc Login user
 // @access Public
 exports.loginUser = asyncHandler(async (req, res, next) => {
-  const { email, password } = req.body;
-
-  const user = await User.findOne({ email });
+  const { username, password } = req.body;
+  const user = await User.findOne({ username });
 
   if (user && (await user.matchPassword(password))) {
     const token = generateToken(user._id);
@@ -80,7 +79,7 @@ exports.loginUser = asyncHandler(async (req, res, next) => {
     });
   } else {
     res.status(401);
-    throw new Error("Invalid email or password");
+    throw new Error("Invalid username or password");
   }
 });
 

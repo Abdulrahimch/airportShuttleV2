@@ -1,11 +1,26 @@
-import { Formik } from 'formik';
+import { Formik, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
-import { CircularProgress, InputLabel, TextField, Box, Button, Grid } from '@material-ui/core';
+import { CircularProgress, InputLabel, TextField, Button, Grid } from '@material-ui/core';
 import useStyles from './useStyles';
 
 interface Props {
-    handleSubmit: () => void;
-}
+    handleSubmit: (
+      {
+        username,
+        password,
+      }: {
+        username: string;
+        password: string;
+      },
+      {
+        setStatus,
+        setSubmitting,
+      }: FormikHelpers<{
+        username: string;
+        password: string;
+      }>,
+    ) => void;
+  }
 
 function LoginForm ({ handleSubmit }: Props): JSX.Element { 
     const classes = useStyles();
@@ -51,6 +66,7 @@ function LoginForm ({ handleSubmit }: Props): JSX.Element {
                             <TextField
                                 id='password'
                                 name='password'
+                                type='password'
                                 error={Boolean(errors.password)}
                                 helperText={errors.password}
                                 value={values.password}

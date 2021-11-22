@@ -20,7 +20,7 @@ exports.validateRegister = [
 ];
 
 exports.validateLogin = [
-  check("email", "Please enter a valid email address").isEmail(),
+  check("username", "Please enter a valid username").not().isEmpty(),
   check("password", "Password is required").not().isEmpty(),
   (req, res, next) => {
     const errors = validationResult(req);

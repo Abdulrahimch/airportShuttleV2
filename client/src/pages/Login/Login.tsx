@@ -1,11 +1,28 @@
 import { Box, Grid, Typography, Paper } from '@material-ui/core';
+import { FormikHelpers } from 'formik';
 import useStyles from './useStyles';
 import LoginForm from './LoginForm/LoginForm';
+import login from '../../helpers/APICalls/login';
+import { useAuth } from '../../context/useAuthContext';
 
 function Login(): JSX.Element {
     const classes = useStyles();
-    const handleSubmit = () => {console.log('it is submited')};
+    const { updateLoginContext } = useAuth();
 
+    const handleSubmit = (
+        { username, password }: { username: string; password: string }, 
+        { setSubmitting }: FormikHelpers<{ username: string; password: string }>,
+        ) => {
+            login(username, password).then((data) => {
+                if (data.error) {
+                    setSubmitting(false);
+                } else if (data.success){
+                    updateLoginContext(data.success);
+                } else {
+                    setSubmitting(false);
+                }
+            });
+        }
 
     return (
         <>
