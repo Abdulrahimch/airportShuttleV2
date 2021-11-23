@@ -42,6 +42,19 @@ export const tabsDictionary = {
     ]
 };
 
+export const AgencyTabsDictionary = {
+  englishTabs : [
+      { label: 'add client', to: '/add-client' },
+      { label: 'reservations', to: '/agency-reservation' },
+      { label: 'payments', to: '/agency-payment' }
+  ],
+  turkishTabs : [
+      { label: 'müşteri ekle ', to: '/add-client' },
+      { label: 'rezervasyonlar', to: '/agency-reservation' },
+      { label: 'finans', to: '/agency-payment' }
+  ]
+};
+
 export const clientPaymentDictionary = {
     engColumns:  [
         { 
@@ -163,8 +176,8 @@ export const clientReservationsDictionary = {
           width: 150,
         },
         {
-          field: 'payment',
-          headerName: 'Payment',
+          field: 'agencyFee',
+          headerName: 'Agency Fee',
           width: 150,
         },
         {
@@ -220,8 +233,8 @@ export const clientReservationsDictionary = {
           width: 150,
         },
         {
-          field: 'payment',
-          headerName: 'Ödeme',
+          field: 'agencyFee',
+          headerName: 'Ajans Ücreti',
           width: 150,
         },
         {

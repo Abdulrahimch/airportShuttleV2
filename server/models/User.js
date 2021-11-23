@@ -19,6 +19,13 @@ const userSchema = new mongoose.Schema({
   register_date: {
     type: Date,
     default: Date.now
+  },
+  role: {
+    type: String,
+    trim: true,
+    lowercase: true,
+    required: true,
+    enum: ['client', 'agency']
   }
 });
 
