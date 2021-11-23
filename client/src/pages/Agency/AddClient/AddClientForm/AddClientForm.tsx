@@ -1,7 +1,7 @@
 import { Formik } from "formik";
 import * as Yup from 'yup';
 import useStyles from "./useStyles";
-import { Grid, InputLabel, TextField, Select, MenuItem, Typography } from '@material-ui/core';
+import { Grid, InputLabel, TextField, Select, MenuItem, Typography, Box } from '@material-ui/core';
 import CustomButton from "../../../../components/Button/CustomButton";
 
 function AddClientForm(): JSX.Element {
@@ -16,6 +16,7 @@ function AddClientForm(): JSX.Element {
                 firstName: '',
                 lastName: '',
                 businessType: '',
+                address: '',
                 IstAirportMaxFourPaxCost: 0,
                 IstAirportMaxSixPaxCost: 0,
                 IstAirportMaxTenPaxCost: 0,
@@ -25,8 +26,9 @@ function AddClientForm(): JSX.Element {
             }}
             validatoinSchema={Yup.object().shape({
                 email: Yup.string().email('Invalid Email Address').required('Please Enter Email Address'),
-                firstName: Yup.string().required('Please Enter First Name'),
-                lastName: Yup.string().required('Please Enter Last Name'),
+                firstName: Yup.string().required('Please Enter Your First Name'),
+                lastName: Yup.string().required('Please Enter Your Last Name'),
+                address: Yup.string().required('Please Enter Your Address'),
                 businessType: Yup.string().required('please Enter Bussiness Type'),
                 maxFourPaxCost: Yup.number().min(0).required('Please enter the cost for (1 - 4) Pax'),
                 maxsixPaxCost: Yup.number().min(0).required('Please enter the cost for (1 - 6) Pax'),
@@ -118,6 +120,26 @@ function AddClientForm(): JSX.Element {
                                     <MenuItem value={1}>Restaurant</MenuItem>
                                     <MenuItem value={1}>Other</MenuItem>
                                 </Select>
+                            </Grid>
+                        </Grid>
+                        <Grid item container justify="center">
+                            <Grid item>
+                                <InputLabel className={classes.label}>
+                                        address
+                                </InputLabel>
+                                <TextField
+                                    id="address"
+                                    name="address"
+                                    value={values.address}
+                                    onChange={handleChange}
+                                    error={Boolean(errors.address)}
+                                    fullWidth
+                                    helperText={errors.address}
+                                    InputProps={{
+                                        classes: { input: classes.inputs },
+                                        disableUnderline: true
+                                    }}
+                                />
                             </Grid>
                         </Grid>
                         <Typography align="center" className={classes.typography}>
