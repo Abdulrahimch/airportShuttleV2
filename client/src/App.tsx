@@ -4,6 +4,7 @@ import ClientReservations from './pages/ClientReservations/ClientReservations';
 import ClientPayment from './pages/ClientPayment/ClientPayment';
 import NewReservation from './pages/NewReservation/NewReservation';
 import { AuthProvider } from './context/useAuthContext';
+import AddClient from './pages/Agency/AddClient/AddClient';
 
 
 import './App.css';
@@ -21,6 +22,7 @@ function App (): JSX.Element {
                         <Route exact path="/reservation" component={ClientReservations} />
                         <Route exact path="/payment" component={ClientPayment} />
                         <Route exact path="/new-reservation" component={NewReservation} />
+                        <Route exact path="/add-client" component={AddClient} />
                     </Switch>
             </AuthProvider>
         </BrowserRouter>
