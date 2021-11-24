@@ -4,10 +4,14 @@ import useStyles from './useStyles';
 import LoginForm from './LoginForm/LoginForm';
 import login from '../../helpers/APICalls/login';
 import { useAuth } from '../../context/useAuthContext';
+import { useSnackBar } from '../../context/useSnackbarContext';
+
 
 function Login(): JSX.Element {
     const classes = useStyles();
     const { updateLoginContext } = useAuth();
+    const { updateSnackBarMessage } = useSnackBar();
+
 
     const handleSubmit = (
         { username, password }: { username: string; password: string }, 
@@ -16,10 +20,12 @@ function Login(): JSX.Element {
             login(username, password).then((data) => {
                 if (data.error) {
                     setSubmitting(false);
+                    updateSnackBarMessage(data.error.message);
                 } else if (data.success){
                     updateLoginContext(data.success);
                 } else {
                     setSubmitting(false);
+                    updateSnackBarMessage('An unexpected error occurred. Please try again !');
                 }
             });
         }

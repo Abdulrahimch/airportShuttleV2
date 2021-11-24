@@ -3,18 +3,23 @@ import AddClientForm from './AddClientForm/AddClientForm';
 import { Grid, Typography } from '@material-ui/core';
 import { postClient } from '../../../helpers/APICalls/user';
 import { Client } from '../../../interface/Client';
+import { useSnackBar } from '../../../context/useSnackbarContext';
+
 
 function AddClient(): JSX.Element {
     const classes = useStyles();
+    const { updateSnackBarMessage } = useSnackBar();
     
     const handleSubmit = (inputs: Client) => {
         postClient(inputs).then((data) => {
             if (data.error) {
                 console.log(data.error);
+                updateSnackBarMessage(data.error.message);
             } else if (data.success){
                 console.log(data.success);
+                updateSnackBarMessage('Client has been added successfully!')
             } else {
-                console.log('');
+                updateSnackBarMessage('An unexpected error occurred. Please try again !');
             }
         });
     }
