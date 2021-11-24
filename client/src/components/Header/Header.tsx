@@ -9,10 +9,10 @@ function Header(): JSX.Element {
     const classes = useStyles();
 
     return (
-        <Box>
+        <Box> 
             <AppBar position="static" className={classes.root}>
                 <Toolbar>
-                    {loggedInUser?.role === 'client' ?<ClientHeader /> : <AgencyHeader />}
+                    {!loggedInUser ? null :  loggedInUser?.role === 'client' ?<ClientHeader /> : <AgencyHeader />}
                 </Toolbar>
             </AppBar>
         </Box>
