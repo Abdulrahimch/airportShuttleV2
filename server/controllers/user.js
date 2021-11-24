@@ -1,5 +1,8 @@
 const User = require("../models/User");
 const asyncHandler = require("express-async-handler");
+const ObjectId = require("mongoose").Types.ObjectId;
+const generator = require('generate-password');
+
 
 // @route POST /users
 // @desc Search for users
@@ -52,4 +55,58 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
     } catch (e) {
         res.status(400).send(e);
     }
+});
+
+exports.postClient= asyncHandler(async (req, res, next) => {
+  const newClient = {
+    email,
+    firstName,
+    lastName,
+    businessType,
+    address,
+    propertyName,
+    role,
+    IstAirportMaxFourPaxCost,
+    IstAirportMaxSixPaxCost,
+    IstAirportMaxTenPaxCost,
+    SawAirportMaxFourPaxCost,
+    SawAirportMaxSixPaxCost,
+    SawAirportMaxTenPaxCost
+  } = req.body;
+
+  const password = generator.generate({
+    length: 8,
+    numbers: true
+  });
+  const lastThreeRarndomDigits = generator.generate({
+    length: 3,
+    numbers: false
+  });
+  
+  const username = `${newClient.firstName}${newClient.propertyName.slice(0, 2)}${lastThreeRarndomDigits}`;
+
+  newClient.username = username;
+  newClient.password = password;
+
+  const client = await User.create({
+    agencyId: ObjectId(req.user.id),
+    ...newClient
+  });
+
+  
+  const agency = await User.findById(req.user.id);
+  agency.clientId = agency.clientId.concat(client._id);
+  await agency.save();
+
+  if (client) {
+    res.status(201).json({
+      success: {
+        client
+      }
+    });
+  } else {
+    res.status(500);
+    throw new Error("Internal Server Error");
+  }
+
 });

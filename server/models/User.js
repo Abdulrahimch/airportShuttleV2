@@ -2,6 +2,16 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
 const userSchema = new mongoose.Schema({
+  firstName: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  lastName: {
+    type: String,
+    required: true,
+    unique: true
+  },
   username: {
     type: String,
     required: true,
@@ -26,7 +36,25 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     required: true,
     enum: ['client', 'agency']
-  }
+  },
+  businessType: {
+    type: String,
+    required: true,
+    trim: true,
+    enum: ['agency', 'hotel', 'restaurant', 'other']
+  },
+  debt: {
+    type: Number,
+    default: 0
+  },
+  IstAirportMaxFourPaxCost: Number,
+  IstAirportMaxSixPaxCost: Number,
+  IstAirportMaxTenPaxCost: Number,
+  SawAirportMaxFourPaxCost: Number,
+  SawAirportMaxSixPaxCost: Number,
+  SawAirportMaxTenPaxCost: Number,
+  agencyId: { type: mongoose.Types.ObjectId },
+  clientId: Array
 });
 
 userSchema.methods.matchPassword = async function (enteredPassword) {

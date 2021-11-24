@@ -1,11 +1,15 @@
-import { Formik } from "formik";
+import { Form, Formik } from "formik";
 import * as Yup from 'yup';
 import useStyles from "./useStyles";
-import { Grid, InputLabel, TextField, Select, MenuItem, Typography, Box } from '@material-ui/core';
+import { Grid, InputLabel, TextField, Select, MenuItem, Typography } from '@material-ui/core';
 import CustomButton from "../../../../components/Button/CustomButton";
+import { Client } from '../../../../interface/Client';
 
-function AddClientForm(): JSX.Element {
-    const handleSubmit = () => {console.log('submitting')};
+interface Props {
+    handleSubmit: (inputs: Client) => void;
+}
+
+function AddClientForm( { handleSubmit } : Props): JSX.Element {
     const classes = useStyles();
 
     return (
@@ -13,10 +17,12 @@ function AddClientForm(): JSX.Element {
         <Formik
             initialValues={{
                 email: '',
+                role: 'client',
                 firstName: '',
                 lastName: '',
                 businessType: '',
                 address: '',
+                propertyName: '',
                 IstAirportMaxFourPaxCost: 0,
                 IstAirportMaxSixPaxCost: 0,
                 IstAirportMaxTenPaxCost: 0,
@@ -24,20 +30,26 @@ function AddClientForm(): JSX.Element {
                 SawAirportMaxSixPaxCost: 0,
                 SawAirportMaxTenPaxCost: 0,
             }}
-            validatoinSchema={Yup.object().shape({
+            validationSchema={Yup.object().shape({
                 email: Yup.string().email('Invalid Email Address').required('Please Enter Email Address'),
-                firstName: Yup.string().required('Please Enter Your First Name'),
-                lastName: Yup.string().required('Please Enter Your Last Name'),
-                address: Yup.string().required('Please Enter Your Address'),
-                businessType: Yup.string().required('please Enter Bussiness Type'),
-                maxFourPaxCost: Yup.number().min(0).required('Please enter the cost for (1 - 4) Pax'),
-                maxsixPaxCost: Yup.number().min(0).required('Please enter the cost for (1 - 6) Pax'),
-                maxtenPaxCost: Yup.number().min(0).required('Please enter the cost for (1 - 10) Pax'),
-            })}
-            onSubmit={handleSubmit}
+                role: Yup.string(),
+                firstName: Yup.string().required('This field can not be blank'),
+                lastName: Yup.string().required('This field can not be blank'),
+                propertyName: Yup.string().required('This field can not be blank'),
+                address: Yup.string().required('This field can not be blank'),
+                businessType: Yup.string().required('This field can not be blank'),
+                IstAirportMaxFourPaxCost: Yup.number().min(0).required('Please enter the cost for (1 - 4) Pax'),
+                IstAirportMaxSixPaxCost: Yup.number().min(0).required('Please enter the cost for (4 - 6) Pax'),
+                IstAirportMaxTenPaxCost: Yup.number().min(0).required('Please enter the cost for (6 - 10) Pax'),
+                SawAirportMaxFourPaxCost: Yup.number().min(0).required('Please enter the cost for (1 - 4) Pax'),
+                SawAirportMaxSixPaxCost: Yup.number().min(0).required('Please enter the cost for (4 - 6) Pax'),
+                SawAirportMaxTenPaxCost: Yup.number().min(0).required('Please enter the cost for (6 - 10) Pax'),
+            })} 
+            onSubmit={(values) => {handleSubmit(values)}}
+
         >
             {({ handleSubmit, handleChange, values, touched, errors, isSubmitting }) => (
-                <form onSubmit={handleSubmit} className={classes.form} noValidate>
+                <Form onSubmit={handleSubmit} className={classes.form} noValidate>
                     <Grid container direction="column" spacing={2}>
                         <Grid item container justify="space-evenly">
                             <Grid item>
@@ -116,13 +128,31 @@ function AddClientForm(): JSX.Element {
                                     onChange={handleChange}
                                     classes={{ select: classes.select }}
                                 >
-                                    <MenuItem value={0}>Hotel</MenuItem>
-                                    <MenuItem value={1}>Restaurant</MenuItem>
-                                    <MenuItem value={1}>Other</MenuItem>
+                                    <MenuItem value={'hotel'}>Hotel</MenuItem>
+                                    <MenuItem value={'restaurant'}>Restaurant</MenuItem>
+                                    <MenuItem value={'other'}>Other</MenuItem>
                                 </Select>
                             </Grid>
                         </Grid>
-                        <Grid item container justify="center">
+                        <Grid item container justify="space-evenly">
+                        <Grid item>
+                                <InputLabel className={classes.label}>
+                                        property name
+                                </InputLabel>
+                                <TextField
+                                    id="propertyName"
+                                    name="propertyName"
+                                    value={values.propertyName}
+                                    onChange={handleChange}
+                                    error={Boolean(errors.propertyName)}
+                                    fullWidth
+                                    helperText={errors.propertyName}
+                                    InputProps={{
+                                        classes: { input: classes.inputs },
+                                        disableUnderline: true
+                                    }}
+                                />
+                            </Grid>
                             <Grid item>
                                 <InputLabel className={classes.label}>
                                         address
@@ -258,7 +288,7 @@ function AddClientForm(): JSX.Element {
                             <CustomButton isSubmitting={isSubmitting} text='submit'/>
                         </Grid>
                     </Grid>
-                </form> 
+                </Form> 
             )}
         </Formik>
        </>
