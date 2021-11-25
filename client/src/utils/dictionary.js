@@ -11,6 +11,7 @@ export const NewReservationDictionary = {
             passenger: 'passenger',
             driverNote: 'driver note',
             flightNo: 'flight no',
+            selectedDate: 'date and time of arrivale'
         }
     },
     turkishPage: {
@@ -25,6 +26,7 @@ export const NewReservationDictionary = {
             passenger: 'yolcu',
             driverNote: 'sürücü notu',
             flightNo: 'uçuş no',
+            selectedDate: 'variş tarihi ve saatı'
         }
     }
 };

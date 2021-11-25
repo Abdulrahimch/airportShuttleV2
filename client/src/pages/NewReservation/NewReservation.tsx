@@ -4,39 +4,23 @@ import NewReservationForm from './NewReservationForm/NewReservationForm';
 import useStyles from './useStyles';
 import { useHistory } from 'react-router-dom';
 import { NewReservationDictionary } from '../../utils/dictionary';
+import { Page, FormValues } from '../../interface/Reservation';
 
 const { engPage, turkishPage } = NewReservationDictionary;
 let page: Page = {title: 'rezervasyon ekle', form: turkishPage.form};
 
-interface Page {
-    title: string;
-    form: {
-        type: string;
-        from: string;
-        to: string;
-        pax: string;
-        hotel: string;
-        fullName: string;
-        passenger: string;
-        driverNote: string;
-        flightNo: string;
-        handleSubmit?: () => void;
-    };
-    
-}
 
-let lan = 'eng';
+let lan = 'tr';
 
 function NewReservation(): JSX.Element {
     const classes = useStyles();
     const history = useHistory();
 
-    const handleSubmit = () => {console.log('Submitting')};
+    const handleSubmit = (values: FormValues) => {console.log(values)};
 
     useEffect(() => { 
         if (lan === 'tr') page = turkishPage; 
         else page = engPage;
-        page.form.handleSubmit = handleSubmit;
     }, [history])
 
     return (
@@ -52,7 +36,7 @@ function NewReservation(): JSX.Element {
                             <Typography variant="h2" color="primary" className={classes.title}>
                                 { page.title} 
                             </Typography>
-                            <NewReservationForm form={page.form}/>
+                            <NewReservationForm form={page.form} handleSubmit={handleSubmit}/>
                         </Box>
                     </Box>
                 </Grid>

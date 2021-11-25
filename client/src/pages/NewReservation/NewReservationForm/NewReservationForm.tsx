@@ -1,6 +1,15 @@
 import { Formik, FieldArray, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import useStyles from './useStyles';
+import { FormValues, FormLabels } from '../../../interface/Reservation';
+
+import DateFnsUtils from '@date-io/date-fns';
+import {
+    MuiPickersUtilsProvider,
+    KeyboardTimePicker,
+    KeyboardDatePicker,
+    DateTimePicker
+  } from '@material-ui/pickers';
 import { 
         Box, 
         InputLabel, 
@@ -14,35 +23,25 @@ import {
 
 
 const airports = [
-    {value: 1, name: 'Istanbul Airport'}, 
-    {value: 2, name:'Sabiha Airport'}
+    {value: 'IST airport', name: 'Istanbul Airport'}, 
+    {value: 'SAW Airport', name:'Sabiha Airport'}
  ];
 const resorts = [
-    {value: 1, name: 'Sultan Ahmet'},
-    {value: 2, name: 'Sirkeci'},
-    {value: 3, name: 'Taksim'},
-    {value: 4, name: 'Fatih'},
-    {value: 5, name: 'Laleli'}
+    {value: 'SultanAhmet', name: 'SultanAhmet'},
+    {value: 'Sirkeci', name: 'Sirkeci'},
+    {value: 'Taksim', name: 'Taksim'},
+    {value: 'Fatih', name: 'Fatih'},
+    {value: 'Laleli', name: 'Laleli'}
 ];
 
 interface Props {
-    form: {
-        type: string;
-        from: string;
-        to: string;
-        pax: string;
-        hotel: string;
-        fullName: string;
-        passenger: string;
-        driverNote: string;
-        flightNo: string;
-        handleSubmit?: () => void;
-    }
+    form: FormLabels,
+    handleSubmit: (values: FormValues) => void
 }
 
-function NewReservationForm(form : Props): JSX.Element {
+function NewReservationForm({ form, handleSubmit } : Props): JSX.Element {
     const classes = useStyles();
-    const  { type, from, to, pax, hotel, driverNote, flightNo, handleSubmit } = form.form;
+    const  { type, from, to, pax, hotel, driverNote, flightNo, selectedDate } = form;
 
     return (
         <>
@@ -56,6 +55,7 @@ function NewReservationForm(form : Props): JSX.Element {
                         pax: 0,
                         flightNo: '',
                         driverNote: '',
+                        selectedDate: new Date(),
                         passengers: []
                     }}
                     validationSchema={Yup.object().shape({ 
@@ -65,11 +65,12 @@ function NewReservationForm(form : Props): JSX.Element {
                         hotel: Yup.string().required('This Field is required'),
                         flightNo: Yup.string().required('This Field is required'),
                         driverNote: Yup.string(),
+                        selectedDate: Yup.date().required('This Field is required'),
                         pax: Yup.number().min(1).max(10).default(1),
                     })}
-                    onSubmit={handleSubmit ? handleSubmit:  () => {console.log('this is error')}}
+                    onSubmit={(values) => {handleSubmit(values)}}
                 >   
-                    {({ handleSubmit, handleChange, values, touched, errors, isSubmitting }) => (
+                    {({ handleSubmit, handleChange, values, touched, errors, isSubmitting, setFieldValue }) => (
                     <form onSubmit={handleSubmit} className={classes.form} noValidate>
                         <Grid container direction='column' alignItems='center'>
                             <Grid item>
@@ -239,6 +240,27 @@ function NewReservationForm(form : Props): JSX.Element {
                                             
                                         />
                                     </Grid>
+                                </Grid>
+                            </Grid>
+                            <Grid item>
+                                <Grid item container className={classes.itemContainer} spacing={6}>
+                                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                        <Grid item >
+                                            <InputLabel className={classes.inputLabel}>
+                                                {selectedDate}
+                                            </InputLabel>
+                                            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                                                <DateTimePicker
+                                                    InputProps= {{
+                                                        classes: { input: classes.inputs },
+                                                        disableUnderline: true
+                                                    }}
+                                                    value={values.selectedDate}
+                                                    onChange={(date: any) => setFieldValue('selectedDate', date)}
+                                            />
+                                            </MuiPickersUtilsProvider>
+                                        </Grid>
+                                    </MuiPickersUtilsProvider>
                                 </Grid>
                             </Grid>
                             <Grid item>

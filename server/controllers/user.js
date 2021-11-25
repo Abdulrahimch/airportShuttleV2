@@ -82,7 +82,7 @@ exports.postClient= asyncHandler(async (req, res, next) => {
     length: 3,
     numbers: false
   });
-  
+
   const username = `${newClient.firstName}${newClient.propertyName.slice(0, 2)}${lastThreeRarndomDigits}`;
 
   newClient.username = username;
