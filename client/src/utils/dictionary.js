@@ -6,7 +6,7 @@ export const NewReservationDictionary = {
             from: 'from',
             to: 'to',
             pax: 'pax',
-            hotel: 'hotel',
+            property: 'property',
             fullName: 'full name',
             passenger: 'passenger',
             driverNote: 'driver note',
@@ -21,7 +21,7 @@ export const NewReservationDictionary = {
             from: 'nerden',
             to: 'nereye',
             pax: 'pax',
-            hotel: 'otel',
+            property: 'emlak',
             fullName: 'ad soyad',
             passenger: 'yolcu',
             driverNote: 'sürücü notu',
@@ -174,7 +174,7 @@ export const clientReservationsDictionary = {
         },
         {
           field: 'note',
-          headerName: 'Note/Hotel',
+          headerName: 'Note/property',
           width: 150,
         },
         {
@@ -231,7 +231,7 @@ export const clientReservationsDictionary = {
         },
         {
           field: 'note',
-          headerName: 'Note/Hotel',
+          headerName: 'Note/property',
           width: 150,
         },
         {

@@ -3,7 +3,7 @@ export interface FormLabels {
     from: string;
     to: string;
     pax: string;
-    hotel: string;
+    property: string;
     fullName: string;
     passenger: string;
     driverNote: string;
@@ -20,7 +20,7 @@ export interface FormValues {
     type: number;
     from: number;
     to: number;
-    hotel: string;
+    property: string;
     pax: number;
     flightNo: string;
     driverNote: string;

@@ -6,8 +6,6 @@ import { FormValues, FormLabels } from '../../../interface/Reservation';
 import DateFnsUtils from '@date-io/date-fns';
 import {
     MuiPickersUtilsProvider,
-    KeyboardTimePicker,
-    KeyboardDatePicker,
     DateTimePicker
   } from '@material-ui/pickers';
 import { 
@@ -24,7 +22,7 @@ import {
 
 const airports = [
     {value: 'IST airport', name: 'Istanbul Airport'}, 
-    {value: 'SAW Airport', name:'Sabiha Airport'}
+    {value: 'SAW Airport', name:'Sabiha Airport'},
  ];
 const resorts = [
     {value: 'SultanAhmet', name: 'SultanAhmet'},
@@ -41,7 +39,7 @@ interface Props {
 
 function NewReservationForm({ form, handleSubmit } : Props): JSX.Element {
     const classes = useStyles();
-    const  { type, from, to, pax, hotel, driverNote, flightNo, selectedDate } = form;
+    const  { type, from, to, pax, property, driverNote, flightNo, selectedDate } = form;
 
     return (
         <>
@@ -51,7 +49,7 @@ function NewReservationForm({ form, handleSubmit } : Props): JSX.Element {
                         type: 0,
                         from: 0,
                         to: 0,
-                        hotel: '',
+                        property: '',
                         pax: 0,
                         flightNo: '',
                         driverNote: '',
@@ -62,7 +60,7 @@ function NewReservationForm({ form, handleSubmit } : Props): JSX.Element {
                         type: Yup.string().required('This Field is required'),
                         from:  Yup.string().required('This Field is required'),
                         to: Yup.string().required('This Field is required'),
-                        hotel: Yup.string().required('This Field is required'),
+                        property: Yup.string().required('This Field is required'),
                         flightNo: Yup.string().required('This Field is required'),
                         driverNote: Yup.string(),
                         selectedDate: Yup.date().required('This Field is required'),
@@ -208,18 +206,18 @@ function NewReservationForm({ form, handleSubmit } : Props): JSX.Element {
                                 <Grid item container className={classes.itemContainer} spacing={6}>
                                     <Grid item>
                                         <InputLabel className={classes.inputLabel}>
-                                            {hotel}
+                                            {property}
                                         </InputLabel>
                                         <TextField 
-                                            id='hotel'
-                                            name='hotel'
-                                            error={Boolean(errors.hotel)}
-                                            helperText={errors.hotel}
+                                            id='property'
+                                            name='property'
+                                            error={Boolean(errors.property)}
+                                            helperText={errors.property}
                                             InputProps= {{
                                                 classes: { input: classes.inputs },
                                                 disableUnderline: true
                                             }}
-                                            value={values.hotel}
+                                            value={values.property}
                                             onChange={handleChange}
                                             
                                         />
