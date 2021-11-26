@@ -1,6 +1,6 @@
 import { MuiThemeProvider } from '@material-ui/core';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import ClientReservations from './pages/ClientReservations/ClientReservations';
+import ListReservations from './pages/ClientReservations/ListReservations';
 import ClientPayment from './pages/ClientPayment/ClientPayment';
 import AddReservation from './pages/ClientReservations/AddReservation/AddReservation';
 import { AuthProvider } from './context/useAuthContext';
@@ -20,7 +20,7 @@ function App (): JSX.Element {
                     <Header />
                         <Switch>
                             <Route exact path="/login" component={Login} />
-                            <Route exact path="/reservation" component={ClientReservations} />
+                            <Route exact path="/reservation" component={ListReservations} />
                             <Route exact path="/payment" component={ClientPayment} />
                             <Route exact path="/new-reservation" component={AddReservation} />
                             <Route exact path="/add-client" component={AddClient} />

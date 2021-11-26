@@ -11,7 +11,7 @@ const rows = [
 
 let lan = 'eng';
 
-function ClientReservations(): JSX.Element{
+function ListReservations(): JSX.Element{
     const classes = useStyles();
     return (
         <Box className={classes.root}>
@@ -20,4 +20,4 @@ function ClientReservations(): JSX.Element{
     )
 }
 
-export default ClientReservations;
+export default ListReservations;
