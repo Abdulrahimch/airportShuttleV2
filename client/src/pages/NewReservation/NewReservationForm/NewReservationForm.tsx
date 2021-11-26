@@ -54,6 +54,7 @@ function NewReservationForm({ form, handleSubmit } : Props): JSX.Element {
                         flightNo: '',
                         driverNote: '',
                         selectedDate: new Date(),
+                        timezone: 0,
                         passengers: []
                     }}
                     validationSchema={Yup.object().shape({ 

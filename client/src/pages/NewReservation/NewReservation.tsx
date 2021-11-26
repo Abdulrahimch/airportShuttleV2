@@ -5,6 +5,8 @@ import useStyles from './useStyles';
 import { useHistory } from 'react-router-dom';
 import { NewReservationDictionary } from '../../utils/dictionary';
 import { Page, FormValues } from '../../interface/Reservation';
+import { postReservation } from '../../helpers/APICalls/reservation';
+import { useSnackBar } from '../../context/useSnackbarContext';
 
 const { engPage, turkishPage } = NewReservationDictionary;
 let page: Page = {title: 'rezervasyon ekle', form: turkishPage.form};
@@ -15,8 +17,20 @@ let lan = 'tr';
 function NewReservation(): JSX.Element {
     const classes = useStyles();
     const history = useHistory();
+    const { updateSnackBarMessage } = useSnackBar();
 
-    const handleSubmit = (values: FormValues) => {console.log(values)};
+    const handleSubmit = (values: FormValues) => {
+        values.timezone = values.selectedDate.getTimezoneOffset();
+        postReservation(values).then((data) => {
+            if (data.error){
+                updateSnackBarMessage(data.error.message);
+            } else if (data.success){
+                updateSnackBarMessage('reservation has been created successfully');
+            } else {
+                updateSnackBarMessage('An unexpected error occurred. Please try again !');
+            }
+        })
+    };
 
     useEffect(() => { 
         if (lan === 'tr') page = turkishPage; 
