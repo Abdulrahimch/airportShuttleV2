@@ -1,7 +1,7 @@
 import { Formik, FieldArray, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import useStyles from './useStyles';
-import { FormValues, FormLabels } from '../../../interface/Reservation';
+import { FormValues, FormLabels } from '../../../../interface/Reservation';
 
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -37,7 +37,7 @@ interface Props {
     handleSubmit: (values: FormValues) => void
 }
 
-function NewReservationForm({ form, handleSubmit } : Props): JSX.Element {
+function AddReservationForm({ form, handleSubmit } : Props): JSX.Element {
     const classes = useStyles();
     const  { type, from, to, pax, property, driverNote, flightNo, selectedDate } = form;
 
@@ -326,4 +326,4 @@ function NewReservationForm({ form, handleSubmit } : Props): JSX.Element {
         </>
     )
 }
-export default NewReservationForm;
+export default AddReservationForm;

@@ -1,12 +1,12 @@
 import { Box, Grid, Paper, Typography } from '@material-ui/core';
 import {  useEffect } from 'react';
-import NewReservationForm from './NewReservationForm/NewReservationForm';
 import useStyles from './useStyles';
+import AddReservationForm from './AddReservationForm/AddReservationForm';
 import { useHistory } from 'react-router-dom';
-import { NewReservationDictionary } from '../../utils/dictionary';
-import { Page, FormValues } from '../../interface/Reservation';
-import { postReservation } from '../../helpers/APICalls/reservation';
-import { useSnackBar } from '../../context/useSnackbarContext';
+import { NewReservationDictionary } from '../../../utils/dictionary';
+import { Page, FormValues } from '../../../interface/Reservation';
+import { postReservation } from '../../../helpers/APICalls/reservation';
+import { useSnackBar } from '../../../context/useSnackbarContext';
 
 const { engPage, turkishPage } = NewReservationDictionary;
 let page: Page = {title: 'rezervasyon ekle', form: turkishPage.form};
@@ -14,7 +14,7 @@ let page: Page = {title: 'rezervasyon ekle', form: turkishPage.form};
 
 let lan = 'tr';
 
-function NewReservation(): JSX.Element {
+function AddReservation(): JSX.Element {
     const classes = useStyles();
     const history = useHistory();
     const { updateSnackBarMessage } = useSnackBar();
@@ -50,7 +50,7 @@ function NewReservation(): JSX.Element {
                             <Typography variant="h2" color="primary" className={classes.title}>
                                 { page.title} 
                             </Typography>
-                            <NewReservationForm form={page.form} handleSubmit={handleSubmit}/>
+                            <AddReservationForm form={page.form} handleSubmit={handleSubmit}/>
                         </Box>
                     </Box>
                 </Grid>
@@ -59,4 +59,4 @@ function NewReservation(): JSX.Element {
     )
 }
 
-export default NewReservation;
+export default AddReservation;
