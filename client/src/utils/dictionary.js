@@ -1,3 +1,5 @@
+import { Button } from '@material-ui/core';
+
 export const NewReservationDictionary = {
     engPage: {
         title: 'add reservation',
@@ -135,122 +137,146 @@ export const clientPaymentDictionary = {
     ]
 };
 
-export const clientReservationsDictionary = {
-    engColumns: [
-        {
-          field: 'name',
-          headerName: 'Name',
-          width: 150,
-        },
-        { 
-          field: 'date', 
-          headerName: 'Date', 
-          width: 150 
-        },
-        { 
-          field: 'pickUp', 
-          headerName: 'Pick-up', 
-          width: 150,
-        },
-        {
-          field: 'flightNumber',
-          headerName: 'Flight No',
-          width: 150,
-        },
-        {
-          field: 'from',
-          headerName: 'From',
-          width: 150,
-        },
-        {
-          field: 'to',
-          headerName: 'To',
-          width: 150,
-        },
-        {
-          field: 'pax',
-          headerName: 'Pax',
-          width: 120,
-        },
-        {
-          field: 'note',
-          headerName: 'Note/property',
-          width: 150,
-        },
-        {
-          field: 'agencyFee',
-          headerName: 'Agency Fee',
-          width: 150,
-        },
-        {
-          field: 'car',
-          headerName: 'Car',
-          width: 120,
-        },
-        {
-          field: 'status',
-          headerName: 'EDIT',
-          width: 120,
-        },
-      ],
-    turksihColumns: [
-        {
-          field: 'name',
-          headerName: 'Isim',
-          width: 150,
-        },
-        { 
-          field: 'date', 
-          headerName: 'Tarih', 
-          width: 150 
-        },
-        { 
-          field: 'pickUp', 
-          headerName: 'Pick-up', 
-          width: 150,
-        },
-        {
-          field: 'flightNumber',
-          headerName: 'Uçuş No ',
-          width: 150,
-        },
-        {
-          field: 'from',
-          headerName: 'Nerden',
-          width: 150,
-        },
-        {
-          field: 'to',
-          headerName: 'Nereye',
-          width: 150,
-        },
-        {
-          field: 'pax',
-          headerName: 'Pax',
-          width: 120,
-        },
-        {
-          field: 'note',
-          headerName: 'Note/property',
-          width: 150,
-        },
-        {
-          field: 'agencyFee',
-          headerName: 'Ajans Ücreti',
-          width: 150,
-        },
-        {
-          field: 'car',
-          headerName: 'Araç',
-          width: 120,
-        },
-        {
-          field: 'status',
-          headerName: 'EDIT',
-          width: 120,
-        },
-    ]
+export const engColumn = (handleEditClick, handleCancelClick) => {
+  const columns = [
+    { 
+      field: 'date', 
+      headerName: 'Date and Time', 
+      width: 300 
+    },
+    {
+      field: 'flightNo',
+      headerName: 'Flight No',
+      width: 150,
+    },
+    {
+      field: 'from',
+      headerName: 'From',
+      width: 150,
+    },
+    {
+      field: 'to',
+      headerName: 'To',
+      width: 150,
+    },
+    {
+      field: 'pax',
+      headerName: 'Pax',
+      width: 120,
+    },
+    {
+      field: 'driverNote',
+      headerName: 'Note/property',
+      width: 150,
+    },
+    {
+      field: 'cost',
+      headerName: 'Cost',
+      width: 150,
+    },
+    {
+      field: "Edit",
+      width: 150,
+      renderCell: (cellValues) => {
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            onClick={() => handleEditClick(cellValues)}
+          >
+            Edit
+          </Button>
+        );
+      }
+    },
+    {
+      field: "Cancel",
+      width: 150,
+      renderCell: (cellValues) => {
+        return (
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => handleCancelClick(cellValues)}
+          >
+            Cancel
+          </Button>
+        );
+      }
+    }
+  ];
+  return columns;
 };
 
-
-
+export const turksihColumns = (handleEditClick, handleCancelClick) => {
+  const columns = [
+    { 
+      field: 'date', 
+      headerName: 'Traih va Saat', 
+      width: 300 
+    },
+    {
+      field: 'flightNo',
+      headerName: 'Uçuş No ',
+      width: 150,
+    },
+    {
+      field: 'from',
+      headerName: 'Nerden',
+      width: 150,
+    },
+    {
+      field: 'to',
+      headerName: 'Nereye',
+      width: 150,
+    },
+    {
+      field: 'pax',
+      headerName: 'Pax',
+      width: 120,
+    },
+    {
+      field: 'driverNote',
+      headerName: 'Note/Emlak',
+      width: 150,
+    },
+    {
+      field: 'cost',
+      headerName: 'Ücret',
+      width: 150,
+    },
+    {
+      field: "Düzenle",
+      width: 150,
+      renderCell: (cellValues) => {
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            size="small"
+            onClick={() => handleEditClick(cellValues)}
+          >
+            Düzenle
+          </Button>
+        );
+      }
+    },
+    {
+      field: "Iptal",
+      width: 150,
+      renderCell: (cellValues) => {
+        return (
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => handleCancelClick(cellValues)}
+          >
+            Iptal
+          </Button>
+        );
+      }
+    }
+  ];
+  return columns;
+};
