@@ -18,6 +18,7 @@ import {
         Button, 
         CircularProgress, 
         FormHelperText } from '@material-ui/core';
+import { useEffect, useRef } from 'react';
 
 
 const airports = [
@@ -35,9 +36,10 @@ const resorts = [
 interface Props {
     form: FormLabels,
     handleSubmit: (values: FormValues) => void
+    initValues: FormValues;
 }
 
-function AddReservationForm({ form, handleSubmit } : Props): JSX.Element {
+function AddReservationForm({ form, handleSubmit, initValues } : Props): JSX.Element {
     const classes = useStyles();
     const  { type, from, to, pax, property, driverNote, flightNo, selectedDate } = form;
 
@@ -46,16 +48,16 @@ function AddReservationForm({ form, handleSubmit } : Props): JSX.Element {
             <Box>
                 <Formik
                     initialValues={{
-                        type: 0,
-                        from: 0,
-                        to: 0,
-                        property: '',
-                        pax: 0,
-                        flightNo: '',
-                        driverNote: '',
-                        selectedDate: new Date(),
-                        timezone: 0,
-                        passengers: []
+                        type: initValues.type,
+                        from: initValues.from,
+                        to: initValues.to,
+                        property: initValues.property,
+                        pax: initValues.pax,
+                        flightNo: initValues.flightNo,
+                        driverNote: initValues.driverNote,
+                        selectedDate: initValues.selectedDate,
+                        timezone: initValues.timezone,
+                        passengers: initValues.passengers,
                     }}
                     validationSchema={Yup.object().shape({ 
                         type: Yup.string().required('This Field is required'),

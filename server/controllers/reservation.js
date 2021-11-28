@@ -38,6 +38,24 @@ exports.postReservation = asyncHandler(async (req, res, next) => {
       }
 });
 
+exports.updateReservation = asyncHandler(async (req, res, next) => {
+    id = req.params.id;
+    updates = req.body;
+    options = { new: true};
+    const reservation = await Reservation.findByIdAndUpdate(id, updates, options);
+
+    if (reservation){
+        res.status(200).json({
+            success: {
+                reservation
+            }
+        })
+    } else {
+        res.status(500);
+        throw new Error("Internal Server Error");
+      }
+});
+
 exports.getReservations = asyncHandler(async (req, res, next) => {
     const reservations = await Reservation.find({ client: req.user.id });
 

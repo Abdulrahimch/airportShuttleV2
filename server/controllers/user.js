@@ -65,7 +65,6 @@ exports.postClient= asyncHandler(async (req, res, next) => {
     businessType,
     address,
     propertyName,
-    role,
     IstAirportMaxFourPaxCost,
     IstAirportMaxSixPaxCost,
     IstAirportMaxTenPaxCost,
@@ -108,5 +107,4 @@ exports.postClient= asyncHandler(async (req, res, next) => {
     res.status(500);
     throw new Error("Internal Server Error");
   }
-
 });

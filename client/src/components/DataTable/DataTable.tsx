@@ -1,5 +1,6 @@
 import useStyles from './useStyles';
 import { DataGrid, GridColumns, GridRowData } from '@material-ui/data-grid';
+import { Box } from '@material-ui/core';
 
 interface Props {  
     rows: GridRowData[];
@@ -8,7 +9,7 @@ interface Props {
 export default function DataTable({ rows, columns }: Props): JSX.Element {
     const classes = useStyles();
     return (
-      <div style={{ height: 700, width: '100%' }}>
+      <Box className={classes.root}>
         <DataGrid
           rows={rows}
           columns={columns}
@@ -18,6 +19,6 @@ export default function DataTable({ rows, columns }: Props): JSX.Element {
           disableDensitySelector={true}
           classes={{ columnHeader: classes.columnHeader }}
         />
-      </div>
+      </Box>
     );
   }

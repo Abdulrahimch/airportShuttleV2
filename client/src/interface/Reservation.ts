@@ -17,6 +17,7 @@ export interface Page {
 }
 
 export interface FormValues {
+    _id?: string;
     type: number;
     from: number;
     to: number;

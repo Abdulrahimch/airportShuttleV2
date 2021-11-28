@@ -1,9 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const protect = require("../middleware/auth");
-const { postReservation, getReservations, deleteReservation } = require('../controllers/reservation');
+const { 
+        postReservation, 
+        updateReservation, 
+        getReservations, 
+        deleteReservation
+       } = require('../controllers/reservation');
 
 router.route("/").post(protect, postReservation);
+
+router.route("/:id").patch(protect, updateReservation);
 
 router.route("/").get(protect, getReservations);
 

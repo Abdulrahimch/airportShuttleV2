@@ -9,7 +9,9 @@ const useStyles = makeStyles((theme) => ({
       },
       root: {
         backgroundColor: 'primary',
-        color: 'primary'
+        color: 'primary',
+        height: 700, 
+        width: '100%'
       },
       row: {
         backgroundColor: 'green',

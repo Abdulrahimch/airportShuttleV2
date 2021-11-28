@@ -1,5 +1,5 @@
 import { Box, Grid, Paper, Typography } from '@material-ui/core';
-import {  useEffect } from 'react';
+import {  useEffect, useRef } from 'react';
 import useStyles from './useStyles';
 import AddReservationForm from './AddReservationForm/AddReservationForm';
 import { useHistory } from 'react-router-dom';
@@ -14,13 +14,27 @@ let page: Page = {title: 'rezervasyon ekle', form: turkishPage.form};
 
 let lan = 'tr';
 
+
 function AddReservation(): JSX.Element {
     const classes = useStyles();
     const history = useHistory();
     const { updateSnackBarMessage } = useSnackBar();
+    const initValues = useRef(
+        {
+            type: 0,
+            from: 0,
+            to: 0,
+            property: '',
+            pax: 0,
+            flightNo: '',
+            driverNote: '',
+            selectedDate: new Date(),
+            timezone: 0,
+            passengers: []
+        }
+    );
 
     const handleSubmit = (values: FormValues) => {
-        values.timezone = values.selectedDate.getTimezoneOffset();
         postReservation(values).then((data) => {
             if (data.error){
                 updateSnackBarMessage(data.error.message);
@@ -50,7 +64,7 @@ function AddReservation(): JSX.Element {
                             <Typography variant="h2" color="primary" className={classes.title}>
                                 { page.title} 
                             </Typography>
-                            <AddReservationForm form={page.form} handleSubmit={handleSubmit}/>
+                            <AddReservationForm form={page.form} handleSubmit={handleSubmit} initValues={initValues.current}/>
                         </Box>
                     </Box>
                 </Grid>
