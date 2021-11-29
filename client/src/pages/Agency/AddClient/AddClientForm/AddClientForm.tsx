@@ -285,7 +285,7 @@ function AddClientForm( { handleSubmit } : Props): JSX.Element {
                             </Grid>
                         </Grid>
                         <Grid item container justifyContent='center'>
-                            <CustomButton isSubmitting={isSubmitting} text='submit'/>
+                            <CustomButton style="Submit" btnText='submit'/>
                         </Grid>
                     </Grid>
                 </Form> 

@@ -2,6 +2,7 @@ import { Formik, FieldArray, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import useStyles from './useStyles';
 import { FormValues, FormLabels } from '../../../../interface/Reservation';
+import CustomButton from '../../../../components/Button/CustomButton';
 
 import DateFnsUtils from '@date-io/date-fns';
 
@@ -316,9 +317,7 @@ function AddReservationForm({ form, handleSubmit, initValues } : Props): JSX.Ele
                                 </Grid>
                             </Grid>
                             <Grid item>
-                                <Button size="large" type="submit" variant="contained" color="primary" className={classes.submit}>
-                                    {isSubmitting ? <CircularProgress className={classes.circularProgress} /> : 'Submit'} 
-                                </Button>
+                                <CustomButton style="submit" btnText="submit" />
                             </Grid>
                         </Grid>
                     </form>

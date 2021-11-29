@@ -1,4 +1,5 @@
 import { Button } from '@material-ui/core';
+import CustomButton from '../components/Button/CustomButton';
 
 export const NewReservationDictionary = {
     engPage: {
@@ -179,14 +180,11 @@ export const engColumn = (handleEditClick, handleCancelClick) => {
       width: 150,
       renderCell: (cellValues) => {
         return (
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
+          <CustomButton
+            style="edit"
+            btnText="edit"
             onClick={() => handleEditClick(cellValues)}
-          >
-            Edit
-          </Button>
+          />
         );
       }
     },
@@ -195,13 +193,11 @@ export const engColumn = (handleEditClick, handleCancelClick) => {
       width: 150,
       renderCell: (cellValues) => {
         return (
-          <Button
-            variant="contained"
-            color="secondary"
+          <CustomButton
+            style="delete"
+            btnText="Cancel"
             onClick={() => handleCancelClick(cellValues)}
-          >
-            Cancel
-          </Button>
+          />
         );
       }
     }
@@ -251,14 +247,11 @@ export const turksihColumns = (handleEditClick, handleCancelClick) => {
       width: 150,
       renderCell: (cellValues) => {
         return (
-          <Button
-            variant="contained"
-            color="primary"
-            size="small"
-            onClick={() => handleEditClick(cellValues)}
-          >
-            Düzenle
-          </Button>
+          <CustomButton
+          style="edit"
+          btnText="Düzenle"
+          onClick={() => handleEditClick(cellValues)}
+        />
         );
       }
     },
@@ -267,13 +260,11 @@ export const turksihColumns = (handleEditClick, handleCancelClick) => {
       width: 150,
       renderCell: (cellValues) => {
         return (
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => handleCancelClick(cellValues)}
-          >
-            Iptal
-          </Button>
+          <CustomButton
+          style="delete"
+          btnText="Iptal"
+          onClick={() => handleCancelClick(cellValues)}
+        />
         );
       }
     }

@@ -1,17 +1,27 @@
-import { Button, CircularProgress } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import useStyles from './useStyles';
+import clsx from 'clsx';
 
 interface Props {
-    text: string;
-    isSubmitting: boolean;
+    btnText: string;
+    isSubmitBtn?: boolean;
+    style?: string;
+    cssStyle?: React.CSSProperties;
+    onClick?: () => void
+    
 }
 
-function CustomButton({ text,  isSubmitting }: Props): JSX.Element {
-    const classes = useStyles();
+function CustomButton({ btnText,  style, onClick, isSubmitBtn }: Props): JSX.Element {
+    const { button } = useStyles();
+    const btnStyle = clsx(button, style)
 
     return (
-        <Button size="large" type="submit" variant="contained" color="primary" className={classes.submit}>
-            {isSubmitting ? <CircularProgress className={classes.circularProgress} /> : text} 
+        <Button
+        className={btnStyle}
+        onClick={onClick}
+        type="submit"
+        >
+            {btnText}
         </Button>
                        
     )

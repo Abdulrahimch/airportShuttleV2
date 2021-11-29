@@ -4,16 +4,34 @@ const useStyles = makeStyles((theme) => ({
     circularProgress: {
         color: theme.palette.common.white,
     },
-    submit: {
+    button: {
         textTransform: 'uppercase',
         borderRadius: theme.shape.borderRadius,
-        backgroundColor: theme.palette.primary.main,
-        margin: theme.spacing(6, 2, 2),
-        padding: theme.spacing(1),
-        width: 160,
-        height: 56,
-        fontSize: 12,
-        fontWeight: 600,
+        '&.submit': {
+            backgroundColor: theme.palette.primary.main,
+            margin: theme.spacing(6, 2, 2),
+            padding: theme.spacing(1),
+            width: 160,
+            height: 56,
+            fontSize: 12,
+            fontWeight: 600,
+        },
+        '&.edit': {
+            backgroundColor: "#006400",
+            padding: theme.spacing(1),
+            width: 50,
+            height: 25,
+            fontSize: 12,
+            fontWeight: 600,
+        },
+        '&.delete': {
+            backgroundColor: '#8B0000',
+            padding: theme.spacing(1),
+            width: 50,
+            height: 25,
+            fontSize: 12,
+            fontWeight: 600,
+        }
     },
 }));
 
