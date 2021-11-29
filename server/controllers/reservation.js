@@ -10,7 +10,6 @@ exports.postReservation = asyncHandler(async (req, res, next) => {
         to,
         pax,
         property,
-        fullName,
         passenger,
         driverNote,
         flightNo,
@@ -40,7 +39,19 @@ exports.postReservation = asyncHandler(async (req, res, next) => {
 
 exports.updateReservation = asyncHandler(async (req, res, next) => {
     id = req.params.id;
-    updates = req.body;
+    const updates = {
+        type,
+        from,
+        to,
+        pax,
+        property,
+        passenger,
+        driverNote,
+        flightNo,
+        selectedDate,
+        timezone,
+    } = req.body;
+    
     options = { new: true};
     const reservation = await Reservation.findByIdAndUpdate(id, updates, options);
 
