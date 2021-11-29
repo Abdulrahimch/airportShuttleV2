@@ -1,6 +1,5 @@
 import { createContext, FunctionComponent, useCallback, useContext, useState } from "react"
-
-type Language = 'eng' | 'tr';
+import { Language } from '../interface/Language';
 
 interface ILanguageContext {
     language: Language;
