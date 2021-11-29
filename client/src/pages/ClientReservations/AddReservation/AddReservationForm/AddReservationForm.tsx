@@ -4,10 +4,12 @@ import useStyles from './useStyles';
 import { FormValues, FormLabels } from '../../../../interface/Reservation';
 
 import DateFnsUtils from '@date-io/date-fns';
+
 import {
     MuiPickersUtilsProvider,
     DateTimePicker
   } from '@material-ui/pickers';
+
 import { 
         Box, 
         InputLabel, 
@@ -18,8 +20,6 @@ import {
         Button, 
         CircularProgress, 
         FormHelperText } from '@material-ui/core';
-import { useEffect, useRef } from 'react';
-
 
 const airports = [
     {value: 'IST airport', name: 'Istanbul Airport'}, 
