@@ -3,6 +3,8 @@ import AgencyHeader from './AgencyHeader/AgencyHeader';
 import useStyles from './useStyles';
 import { useAuth } from '../../context/useAuthContext';
 import { AppBar, Box, Toolbar } from '@material-ui/core';
+import LanguageTab from './LanguageTab/LanguageTab';
+
 
 function Header(): JSX.Element {
     const { loggedInUser } = useAuth();
@@ -13,6 +15,7 @@ function Header(): JSX.Element {
             <AppBar position="static" className={classes.root}>
                 <Toolbar>
                     {!loggedInUser ? null :  loggedInUser?.role === 'client' ?<ClientHeader /> : <AgencyHeader />}
+                    <LanguageTab />
                 </Toolbar>
             </AppBar>
         </Box>

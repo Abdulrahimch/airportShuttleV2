@@ -10,12 +10,12 @@ import { useSnackBar } from '../../context/useSnackbarContext';
 import CustomDialog from '../../components/CustomDialog/CustomDialog';
 import UpdateReservation from './UpdateReservation/UpdateReservation';
 import { useHistory } from 'react-router-dom';
-
-let lan = 'eng';
+import { useLanguage } from '../../context/useLanguageContext';
 
 function ListReservations(): JSX.Element{
     const classes = useStyles();
     const history = useHistory();
+    const { language } = useLanguage();
     const { updateSnackBarMessage } = useSnackBar();
 
     const [rows, setRows] = useState<any>([]);
@@ -56,7 +56,7 @@ function ListReservations(): JSX.Element{
         setOpen(true)
     }
 
-    const columns = lan === 'tr' ? turksihColumns(handleEditClick, handleCacelClick): engColumn(handleEditClick, handleCacelClick);
+    const columns = language === 'tr' ? turksihColumns(handleEditClick, handleCacelClick): engColumn(handleEditClick, handleCacelClick);
     
     useEffect(() => {
         getReservations().then((data) => {

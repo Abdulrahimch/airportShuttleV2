@@ -6,6 +6,7 @@ import AddReservation from './pages/ClientReservations/AddReservation/AddReserva
 import { AuthProvider } from './context/useAuthContext';
 import AddClient from './pages/Agency/AddClient/AddClient';
 import { SnackBarProvider } from './context/useSnackbarContext';
+import { LanguageProvider } from './context/useLanguageContext';
 
 import './App.css';
 import Login from './pages/Login/Login';
@@ -17,14 +18,16 @@ function App (): JSX.Element {
         <BrowserRouter>
             <SnackBarProvider>
                 <AuthProvider>
-                    <Header />
-                        <Switch>
-                            <Route exact path="/login" component={Login} />
-                            <Route exact path="/reservation" component={ListReservations} />
-                            <Route exact path="/payment" component={ClientPayment} />
-                            <Route exact path="/new-reservation" component={AddReservation} />
-                            <Route exact path="/add-client" component={AddClient} />
-                        </Switch>
+                    <LanguageProvider>
+                        <Header />
+                            <Switch>
+                                <Route exact path="/login" component={Login} />
+                                <Route exact path="/reservation" component={ListReservations} />
+                                <Route exact path="/payment" component={ClientPayment} />
+                                <Route exact path="/new-reservation" component={AddReservation} />
+                                <Route exact path="/add-client" component={AddClient} />
+                            </Switch>
+                        </LanguageProvider>
                 </AuthProvider>
             </SnackBarProvider>
         </BrowserRouter>

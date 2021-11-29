@@ -7,18 +7,16 @@ import { NewReservationDictionary } from '../../../utils/dictionary';
 import { Page, FormValues } from '../../../interface/Reservation';
 import { postReservation } from '../../../helpers/APICalls/reservation';
 import { useSnackBar } from '../../../context/useSnackbarContext';
+import { useLanguage } from '../../../context/useLanguageContext';
 
 const { engPage, turkishPage } = NewReservationDictionary;
-let page: Page = {title: 'rezervasyon ekle', form: turkishPage.form};
-
-
-let lan = 'tr';
-
+let page: Page = {title: '', form: turkishPage.form};
 
 function AddReservation(): JSX.Element {
     const classes = useStyles();
     const history = useHistory();
     const { updateSnackBarMessage } = useSnackBar();
+    const { language } = useLanguage();
     const initValues = useRef(
         {
             type: 0,
@@ -47,9 +45,10 @@ function AddReservation(): JSX.Element {
     };
 
     useEffect(() => { 
-        if (lan === 'tr') page = turkishPage; 
-        else page = engPage;
-    }, [history])
+        if (language === 'tr') {
+            page = turkishPage; 
+        } else page = engPage;
+    }, [history, language])
 
     return (
         <>

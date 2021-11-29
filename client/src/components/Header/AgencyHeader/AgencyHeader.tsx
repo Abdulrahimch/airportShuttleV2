@@ -2,17 +2,19 @@ import useStyles from './useStyles';
 import { Link } from 'react-router-dom';
 import { Tabs, Tab, Box } from '@material-ui/core';
 import { AgencyTabsDictionary } from '../../../utils/dictionary';
+import { useLanguage } from '../../../context/useLanguageContext';
 
 const { englishTabs,  turkishTabs } = AgencyTabsDictionary;
 
 
 function AgencyHeader(): JSX.Element {
     const classes = useStyles();
-    let lan = 'eng';
+    const { language } = useLanguage();
+
     let tabs = [];
     
     function tabFormation() {
-        if (lan === 'tr') tabs = turkishTabs;
+        if (language === 'tr') tabs = turkishTabs;
         else tabs = englishTabs;
         return tabs.map(({ label, to }, idx) => (
             <Tab
