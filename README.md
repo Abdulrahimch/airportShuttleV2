@@ -5,7 +5,9 @@ A website that makes it easier for airport shuttle companies in dealing with man
 The goal is to create a beautiful, easy-to-use website that helps airport shuttle companies manage all reservations they receive from many clients and listing thier details, payments and debts.
 moreover, it helps clients to scheduale airport shuttle for thier guests and track their debt.
 
-# Tech Stack: MongoDB, Express.js, React.js, Node.js, Typescript
+# Tech Stack:
+
+MongoDB, Express.js, React.js, Node.js, Typescript
 
 # Getting Started:
 
