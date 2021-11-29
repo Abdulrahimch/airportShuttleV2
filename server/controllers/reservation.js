@@ -51,7 +51,7 @@ exports.updateReservation = asyncHandler(async (req, res, next) => {
         selectedDate,
         timezone,
     } = req.body;
-    
+
     options = { new: true};
     const reservation = await Reservation.findByIdAndUpdate(id, updates, options);
 
@@ -68,6 +68,7 @@ exports.updateReservation = asyncHandler(async (req, res, next) => {
 });
 
 exports.getReservations = asyncHandler(async (req, res, next) => {
+    console.log('id is: ', req.user.id)
     const reservations = await Reservation.find({ client: req.user.id });
 
     if (reservations) {

@@ -1,3 +1,4 @@
+const Reservation = require('../models/reservation');
 const { check, validationResult } = require("express-validator");
 
 exports.validateCreateUpdateReservation = [
@@ -24,3 +25,19 @@ exports.validateCreateUpdateReservation = [
     next();
   },
 ];
+
+exports.validateReservationOwner = async (req, res, next) => {
+    const userId = req.user.id;
+    const reservationId = req.params.id;
+
+    const reservation = await Reservation.findById(reservationId);
+
+    const isReservationOwner = reservation.client.toString() === userId;
+
+    if (!isReservationOwner){
+        res.status(400);
+        throw new Error("This reservation does not belong to relevant client!");
+    };
+
+    next();
+}

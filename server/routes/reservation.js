@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const protect = require("../middleware/auth");
-const {  validateCreateUpdateReservation } = require('../validators/reservation');
+const {  validateCreateUpdateReservation, validateReservationOwner } = require('../validators/reservation');
 const { 
         postReservation, 
         updateReservation, 
@@ -11,10 +11,11 @@ const {
 
 router.route("/").post(protect, validateCreateUpdateReservation, postReservation);
 
-router.route("/:id").patch(protect, validateCreateUpdateReservation, updateReservation);
-
 router.route("/").get(protect, getReservations);
 
-router.route("/:id").delete(protect, deleteReservation);
+router.route("/:id").delete(protect, validateReservationOwner, deleteReservation);
+
+router.route("/:id")
+        .patch(protect, validateReservationOwner, validateCreateUpdateReservation, updateReservation);
 
 module.exports = router;
