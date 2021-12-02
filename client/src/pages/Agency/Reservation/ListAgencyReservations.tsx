@@ -28,13 +28,14 @@ function ListAgencyReservations(): JSX.Element {
         })
     }
 
-    const handleCacelClick = (cellValues: any) => {
+    const handleUnprocessedClick = (cellValues: any) => {
         const id = cellValues.row._id;
-        deleteReservation(id).then((data) => {
+        const inputs = { status: 'unprocessed' };
+        updateReservation(inputs, id).then((data) => {
             if (data.error) {
                 updateSnackBarMessage(data.error.message);
             } else if (data.success) {
-                updateSnackBarMessage('reservation deleted!');
+                updateSnackBarMessage('reservation has been unprocessed successfully!');
                 setRows(rows.filter((row: any) => row.id !== cellValues.id));
             } else {
                 updateSnackBarMessage('An unexpected error occurred. Please try again !');
@@ -62,7 +63,7 @@ function ListAgencyReservations(): JSX.Element {
         })
     }, [])
 
-    const columns = language === 'eng' ? agencyEngColumns(handleProcessedClick, handleCacelClick) : agencyTurksihColumns(handleProcessedClick, handleCacelClick);
+    const columns = language === 'eng' ? agencyEngColumns(handleProcessedClick, handleUnprocessedClick) : agencyTurksihColumns(handleProcessedClick, handleUnprocessedClick);
 
     return (
         <Box>

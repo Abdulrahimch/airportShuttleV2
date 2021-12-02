@@ -273,7 +273,7 @@ export const turksihColumns = (handleEditClick, handleCancelClick) => {
 };
 
 
-export const agencyEngColumns = (handleProcessedClick, handleCancelClick) => {
+export const agencyEngColumns = (handleProcessedClick, handleUnprocessedClick) => {
   const columns = [
     { 
       field: 'date', 
@@ -324,14 +324,14 @@ export const agencyEngColumns = (handleProcessedClick, handleCancelClick) => {
       }
     },
     {
-      field: "Cancel",
+      field: "Unprocessed",
       width: 150,
       renderCell: (cellValues) => {
         return (
           <CustomButton
-            style="delete"
-            btnText="Cancel"
-            onClick={() => handleCancelClick(cellValues)}
+            style="unprocessed"
+            btnText="unprocessed"
+            onClick={() => handleUnprocessedClick(cellValues)}
           />
         );
       }
@@ -340,7 +340,7 @@ export const agencyEngColumns = (handleProcessedClick, handleCancelClick) => {
   return columns;
 };
 
-export const agencyTurksihColumns = (handleProcessedClick, handleCancelClick) => {
+export const agencyTurksihColumns = (handleProcessedClick, handleUnprocessedClick) => {
   const columns = [
     { 
       field: 'date', 
@@ -378,27 +378,27 @@ export const agencyTurksihColumns = (handleProcessedClick, handleCancelClick) =>
       width: 150,
     },
     {
-      field: "Düzenle",
+      field: "Işlenmiş",
       width: 150,
       renderCell: (cellValues) => {
         return (
           <CustomButton
           style="edit"
-          btnText="Düzenle"
+          btnText="işlenmiş"
           onClick={() => handleProcessedClick(cellValues)}
         />
         );
       }
     },
     {
-      field: "Iptal",
+      field: "Işlenmemiş",
       width: 150,
       renderCell: (cellValues) => {
         return (
           <CustomButton
-          style="delete"
-          btnText="Iptal"
-          onClick={() => handleCancelClick(cellValues)}
+          style="unprocessed"
+          btnText="işlenmemiş"
+          onClick={() => handleUnprocessedClick(cellValues)}
         />
         );
       }

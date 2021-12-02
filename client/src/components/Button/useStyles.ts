@@ -7,38 +7,34 @@ const useStyles = makeStyles((theme) => ({
     button: {
         textTransform: 'uppercase',
         borderRadius: theme.shape.borderRadius,
+        fontSize: 12,
+        fontWeight: 600,
+        padding: theme.spacing(1),
         '&.submit': {
             backgroundColor: theme.palette.primary.main,
             margin: theme.spacing(6, 2, 2),
-            padding: theme.spacing(1),
             width: 160,
             height: 56,
-            fontSize: 12,
-            fontWeight: 600,
         },
         '&.edit': {
             backgroundColor: "#006400",
-            padding: theme.spacing(1),
             width: 50,
             height: 25,
-            fontSize: 12,
-            fontWeight: 600,
         },
         '&.delete': {
             backgroundColor: '#8B0000',
-            padding: theme.spacing(1),
             width: 50,
             height: 25,
-            fontSize: 12,
-            fontWeight: 600,
         },
         '&.processed': {
             backgroundColor: "#006400",
-            padding: theme.spacing(1),
             width: 80,
             height: 25,
-            fontSize: 12,
-            fontWeight: 600,
+        },
+        '&.unprocessed': {
+            backgroundColor: '#8B0000',
+            width: 100,
+            height: 25,
         }
     },
 }));

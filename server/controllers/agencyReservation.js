@@ -23,6 +23,13 @@ exports.updateReservation = asyncHandler(async (req, res, next) => {
     const options = { new: true }
     const reservation = await Reservation.findByIdAndUpdate(id, updates, options);
 
+    if ( status === 'processed' ){
+        const userId = reservation.client.toString();
+        const user = await User.findById(userId);
+        user.debt = user.debt + reservation.cost;
+        await user.save();
+    }
+
     if (reservation){
         res.status(200).json({
             success: {

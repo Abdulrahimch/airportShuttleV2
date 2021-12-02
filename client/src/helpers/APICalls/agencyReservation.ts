@@ -11,10 +11,10 @@ export const getReservations = (): Promise<GetReservationApiData> => {
 };
 
 interface Status {
-    status: string
+    status: string;
 }
 
-export const updateReservation = (inputs: Status, id: number): Promise<GetReservationApiData> => {
+export const updateReservation = (inputs: Status, id: string): Promise<GetReservationApiData> => {
     return axios.patch(`/agency-reservation/${id}`, inputs)
             .then((res) => res.data)
             .catch(() => ({
