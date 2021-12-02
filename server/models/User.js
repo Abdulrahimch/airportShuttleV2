@@ -47,6 +47,10 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  property: {
+    type: String,
+    required: true
+  },
   IstAirportMaxFourPaxCost: Number,
   IstAirportMaxSixPaxCost: Number,
   IstAirportMaxTenPaxCost: Number,

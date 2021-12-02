@@ -33,6 +33,13 @@ const reservationSchema = mongoose.Schema({
         type: Date,
         required: true
     },
+    status: {
+        type: String,
+        default: 'waiting',
+        trim: true,
+        enum: ['processed','unprocessed', 'waiting', 'canceled']
+    },
+    cost: Number,
     timezone: Number,
 });
 

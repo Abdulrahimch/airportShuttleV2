@@ -271,3 +271,138 @@ export const turksihColumns = (handleEditClick, handleCancelClick) => {
   ];
   return columns;
 };
+
+
+export const agencyEngColumns = (handleProcessedClick, handleCancelClick) => {
+  const columns = [
+    { 
+      field: 'date', 
+      headerName: 'Date and Time', 
+      width: 300 
+    },
+    {
+      field: 'flightNo',
+      headerName: 'Flight No',
+      width: 150,
+    },
+    {
+      field: 'from',
+      headerName: 'From',
+      width: 150,
+    },
+    {
+      field: 'to',
+      headerName: 'To',
+      width: 150,
+    },
+    {
+      field: 'pax',
+      headerName: 'Pax',
+      width: 120,
+    },
+    {
+      field: 'driverNote',
+      headerName: 'Note/property',
+      width: 150,
+    },
+    {
+      field: 'property',
+      headerName: 'Property',
+      width: 150,
+    },
+    {
+      field: "Processed",
+      width: 150,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+            style="processed"
+            btnText="processed"
+            onClick={() => handleProcessedClick(cellValues)}
+          />
+        );
+      }
+    },
+    {
+      field: "Cancel",
+      width: 150,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+            style="delete"
+            btnText="Cancel"
+            onClick={() => handleCancelClick(cellValues)}
+          />
+        );
+      }
+    }
+  ];
+  return columns;
+};
+
+export const agencyTurksihColumns = (handleProcessedClick, handleCancelClick) => {
+  const columns = [
+    { 
+      field: 'date', 
+      headerName: 'Traih va Saat', 
+      width: 300 
+    },
+    {
+      field: 'flightNo',
+      headerName: 'Uçuş No ',
+      width: 150,
+    },
+    {
+      field: 'from',
+      headerName: 'Nerden',
+      width: 150,
+    },
+    {
+      field: 'to',
+      headerName: 'Nereye',
+      width: 150,
+    },
+    {
+      field: 'pax',
+      headerName: 'Pax',
+      width: 120,
+    },
+    {
+      field: 'driverNote',
+      headerName: 'Note/Emlak',
+      width: 150,
+    },
+    {
+      field: 'property',
+      headerName: 'Emlak',
+      width: 150,
+    },
+    {
+      field: "Düzenle",
+      width: 150,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+          style="edit"
+          btnText="Düzenle"
+          onClick={() => handleProcessedClick(cellValues)}
+        />
+        );
+      }
+    },
+    {
+      field: "Iptal",
+      width: 150,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+          style="delete"
+          btnText="Iptal"
+          onClick={() => handleCancelClick(cellValues)}
+        />
+        );
+      }
+    }
+  ];
+  return columns;
+};

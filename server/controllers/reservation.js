@@ -2,6 +2,7 @@ const User = require("../models/User");
 const Reservation = require("../models/reservation");
 const asyncHandler = require("express-async-handler");
 const ObjectId = require("mongoose").Types.ObjectId;
+const calculateShuttleCost = require('../utils/calculateShuttleCost');
 
 exports.postReservation = asyncHandler(async (req, res, next) => {
     const newReservation = {
@@ -18,6 +19,10 @@ exports.postReservation = asyncHandler(async (req, res, next) => {
     } = req.body;
 
     const user = await User.findById(req.user.id);
+
+    const airport = from.includes('airport') ? from : to;
+    
+    newReservation.cost = calculateShuttleCost(user, airport, pax)
 
     const reservation = await Reservation.create({
         client: ObjectId(req.user.id),

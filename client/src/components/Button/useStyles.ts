@@ -31,6 +31,14 @@ const useStyles = makeStyles((theme) => ({
             height: 25,
             fontSize: 12,
             fontWeight: 600,
+        },
+        '&.processed': {
+            backgroundColor: "#006400",
+            padding: theme.spacing(1),
+            width: 80,
+            height: 25,
+            fontSize: 12,
+            fontWeight: 600,
         }
     },
 }));

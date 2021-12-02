@@ -17,21 +17,19 @@ import {
         TextField, 
         Grid, 
         Select, 
-        MenuItem, 
-        Button, 
-        CircularProgress, 
+        MenuItem,  
         FormHelperText } from '@material-ui/core';
 
 const airports = [
-    {value: 'IST airport', name: 'Istanbul Airport'}, 
-    {value: 'SAW Airport', name:'Sabiha Airport'},
+    { value: 'IST airport', name: 'Istanbul Airport' }, 
+    { value: 'SAW airport', name:'Sabiha Airport' },
  ];
 const resorts = [
-    {value: 'SultanAhmet', name: 'SultanAhmet'},
-    {value: 'Sirkeci', name: 'Sirkeci'},
-    {value: 'Taksim', name: 'Taksim'},
-    {value: 'Fatih', name: 'Fatih'},
-    {value: 'Laleli', name: 'Laleli'}
+    { value: 'SultanAhmet', name: 'SultanAhmet' },
+    { value: 'Sirkeci', name: 'Sirkeci' },
+    { value: 'Taksim', name: 'Taksim' },
+    { value: 'Fatih', name: 'Fatih' },
+    { value: 'Laleli', name: 'Laleli' }
 ];
 
 interface Props {
