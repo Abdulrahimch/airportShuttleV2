@@ -13,6 +13,8 @@ const authRouter = require("./routes/auth");
 const userRouter = require("./routes/user");
 const reservationRouter = require("./routes/reservation");
 const agencyReservationRouter = require("./routes/agencyReservation");
+const agencyPaymentRouter = require("./routes/agencyPayment");
+
 
 
 const { json, urlencoded } = express;
@@ -48,7 +50,7 @@ app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/reservation", reservationRouter);
 app.use("/agency-reservation", agencyReservationRouter);
-
+app.use("/agency-payment", agencyPaymentRouter);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "/client/build")));

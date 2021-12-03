@@ -30,9 +30,10 @@ interface Props {
         paidInTL: string;
     },
     handleSubmit: (inputs: Payment) => void;
+    clientId: string;
 };
 
-function AddPaymentForm({ form, handleSubmit }: Props): JSX.Element {
+function AddPaymentForm({ form, handleSubmit, clientId }: Props): JSX.Element {
     const { type, note, paid, currency, exchangeRate, paidInTL } = form;
 
     const classes = useStyles();
@@ -40,7 +41,8 @@ function AddPaymentForm({ form, handleSubmit }: Props): JSX.Element {
     return (
         <>
             <Formik
-                initialValues={{ 
+                initialValues={{
+                    clientId: clientId, 
                     type: '',
                     paid: 0,
                     currency: 'TL',
@@ -53,7 +55,7 @@ function AddPaymentForm({ form, handleSubmit }: Props): JSX.Element {
                     paid: Yup.number().min(1).default(0),
                     currency: Yup.string().required('This Field is required'),
                     exchangeRate: Yup.number().min(1).default(1),
-                    paidInTL: Yup.number().min(1).default(0),
+                    paidInTL: Yup.number().min(1).default(1),
                     note: Yup.string(),                    
                 })}
                 onSubmit={(values) => {handleSubmit(values)}}
@@ -189,12 +191,11 @@ function AddPaymentForm({ form, handleSubmit }: Props): JSX.Element {
                                             name='paidInTL'
                                             error={Boolean(errors.paidInTL)}
                                             helperText={errors.paidInTL}
-                                            disabled={true}
                                             InputProps= {{
                                                 classes: { input: classes.inputs },
                                                 disableUnderline: true
                                             }}
-                                            value={values.paid * values.exchangeRate}
+                                            value={values.paidInTL = values.paid * values.exchangeRate}
                                             onChange={handleChange}
                                         />
                                     </Grid>

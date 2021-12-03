@@ -24,6 +24,16 @@ const paymentSchema = mongoose.Schema({
     paidInTL: {
         type: Number,
         default: 1
+    },
+    agency: {
+        type: mongoose.Types.ObjectId, 
+        required: true, 
+        ref: "user"
+    },
+    client: {
+        type: mongoose.Types.ObjectId, 
+        required: true, 
+        ref: "user"
     }
 });
 

@@ -1,10 +1,11 @@
 export interface Payment {
-    type: String;
-    note: String;
-    paid: Number;
-    currency: String;
-    exchangeRate: Number;
-    paidInTL: Number;
+    clientId: string;
+    type: string;
+    note: string;
+    paid: number;
+    currency: string;
+    exchangeRate: number;
+    paidInTL: number;
 };
 
 export interface PaymentApiDataSuccess {

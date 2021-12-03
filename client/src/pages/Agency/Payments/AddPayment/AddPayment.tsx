@@ -9,7 +9,11 @@ import { useSnackBar } from "../../../../context/useSnackbarContext";
 
 const { engPage, turkishPage } = agencyPaymentPage;
 
-function AddPayment(): JSX.Element {
+interface Props {
+    clientId: string;
+}
+
+function AddPayment( { clientId } : Props): JSX.Element {
     const classes = useStyles();
     const { language } = useLanguage();
     const { updateSnackBarMessage } = useSnackBar();
@@ -41,7 +45,7 @@ function AddPayment(): JSX.Element {
                         <Typography variant="h4" color="primary" className={classes.title}>
                             { page.title} 
                         </Typography>
-                        <AddPaymentForm form={page.form} handleSubmit={handleSubmit} />
+                        <AddPaymentForm form={page.form} handleSubmit={handleSubmit} clientId={clientId} />
                     </Box>
                 </Box>
             </Grid>

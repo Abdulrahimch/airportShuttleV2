@@ -11,12 +11,14 @@ function AgencyPayments(): JSX.Element {
     const { language } = useLanguage();
     const [open, setOpen] = useState<boolean>(false);
     const [rows, setRows] = useState<any>([]);
+    const [clientId, setClientId] = useState<string>('');
 
     const handleDialogClose = () => {
         setOpen(false)
     }
-    const handleAddPaymentClick = () => {
-        console.log('add payment has been clicked')
+    const handleAddPaymentClick = (cellValues: any) => {
+        console.log('cellValues are: ', cellValues)
+        setClientId(cellValues.row._id)
         setOpen(true)
     };
 
@@ -45,7 +47,7 @@ function AgencyPayments(): JSX.Element {
                 console.log('external error')
             }
         });
-    }, [])
+    }, [open])
     
     return (
         <>
@@ -55,7 +57,7 @@ function AgencyPayments(): JSX.Element {
                 onClose={handleDialogClose}
                 style={'addPayment'}
             >
-                <AddPayment />
+                <AddPayment clientId={clientId}/>
             </CustomDialog>
         </>
         
