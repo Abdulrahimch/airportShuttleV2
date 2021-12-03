@@ -30,7 +30,6 @@ exports.searchUsers = asyncHandler(async (req, res, next) => {
 // @access Private
 exports.getClients = asyncHandler(async (req, res, next) => {
     const clients = await User.find({ agencyId: req.user.id });
-    console.log('clients are: ', clients)
     if (clients) {
       res.status(200).json({
         success: {
