@@ -3,13 +3,30 @@ import AddPaymentForm from "./AddPaymentForm/AddPaymentForm";
 import useStyles from "./useStyles";
 import { agencyPaymentPage } from '../../../../utils/dictionary';
 import { useLanguage } from "../../../../context/useLanguageContext";
+import { postPayment } from '../../../../helpers/APICalls/agencyPayment';
+import { Payment } from '../../../../interface/AgencyPayment';
+import { useSnackBar } from "../../../../context/useSnackbarContext";
 
 const { engPage, turkishPage } = agencyPaymentPage;
 
 function AddPayment(): JSX.Element {
     const classes = useStyles();
     const { language } = useLanguage();
+    const { updateSnackBarMessage } = useSnackBar();
     const page = language === 'eng' ? engPage : turkishPage;
+
+
+    const handleSubmit = (inputs: Payment) => {
+        postPayment(inputs).then((data) => {
+            if (data.error) {
+                updateSnackBarMessage(data.error.message)
+            } else if (data.success) {
+                updateSnackBarMessage('Payment has been saved successfully ')
+            } else {
+                updateSnackBarMessage('An unexpected error occurred. Please try again !')
+            }
+        })    
+    };
     
     return (
         <Grid container component={Paper} className={classes.root} alignItems='center'>
@@ -24,7 +41,7 @@ function AddPayment(): JSX.Element {
                         <Typography variant="h4" color="primary" className={classes.title}>
                             { page.title} 
                         </Typography>
-                        <AddPaymentForm form={page.form} />
+                        <AddPaymentForm form={page.form} handleSubmit={handleSubmit} />
                     </Box>
                 </Box>
             </Grid>

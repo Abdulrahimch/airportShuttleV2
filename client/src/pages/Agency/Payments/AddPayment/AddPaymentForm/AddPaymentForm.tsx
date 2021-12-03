@@ -3,6 +3,7 @@ import { Grid, InputLabel, Select, MenuItem, FormHelperText, TextField } from '@
 import * as Yup from 'yup';
 import useStyles from "./useStyles";
 import CustomButton from '../../../../../components/Button/CustomButton';
+import { Payment } from '../../../../../interface/AgencyPayment';
 
 const currencies = [
     {
@@ -27,16 +28,15 @@ interface Props {
         note: string;
         exchangeRate: string;
         paidInTL: string;
-    }
+    },
+    handleSubmit: (inputs: Payment) => void;
 };
 
-function AddPaymentForm({ form }: Props): JSX.Element {
+function AddPaymentForm({ form, handleSubmit }: Props): JSX.Element {
     const { type, note, paid, currency, exchangeRate, paidInTL } = form;
 
     const classes = useStyles();
-    const handleSubmit = (values: any) => {
-        console.log('submitted...')
-    }
+
     return (
         <>
             <Formik
@@ -175,7 +175,7 @@ function AddPaymentForm({ form }: Props): JSX.Element {
                                                 classes: { input: classes.inputs },
                                                 disableUnderline: true
                                             }}
-                                            value={values.exchangeRate}
+                                            value={values.currency === 'TL' ?  values.exchangeRate = 1 : values.exchangeRate}
                                             onChange={handleChange}
                                             
                                         />
@@ -189,11 +189,12 @@ function AddPaymentForm({ form }: Props): JSX.Element {
                                             name='paidInTL'
                                             error={Boolean(errors.paidInTL)}
                                             helperText={errors.paidInTL}
+                                            disabled={true}
                                             InputProps= {{
                                                 classes: { input: classes.inputs },
                                                 disableUnderline: true
                                             }}
-                                            value={values.paidInTL}
+                                            value={values.paid * values.exchangeRate}
                                             onChange={handleChange}
                                         />
                                     </Grid>

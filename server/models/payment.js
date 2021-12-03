@@ -27,8 +27,4 @@ const paymentSchema = mongoose.Schema({
     }
 });
 
-paymentSchema.pre('save', async function (next) {
-    this.paidInTL = this.paid * this.exchangeRate;
-});
-
 module.exports = Payment = mongoose.model("payment", paymentSchema);

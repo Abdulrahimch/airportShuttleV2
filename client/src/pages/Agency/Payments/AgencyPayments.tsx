@@ -31,7 +31,6 @@ function AgencyPayments(): JSX.Element {
     const columns = language === 'eng'  
                                     ? agencyPaymentEngColumns(handleAddPaymentClick, handleAllPaymentsClick, handleDetailsClick) 
                                     : agencyPaymentTurkishColumns(handleAddPaymentClick, handleAllPaymentsClick, handleDetailsClick);
-    // const rows = [{ id: 1, property: 'dilhayat kalfa', email: 'info@dilhayatkalfahotel.com', debt: 100 }]
     
     useEffect(() => {
         getClients().then((data) => {
