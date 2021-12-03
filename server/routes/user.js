@@ -1,11 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const protect = require("../middleware/auth");
-const { searchUsers, getUser, updateUser, postClient } = require("../controllers/user");
+const { getClients, getUser, updateUser, postClient } = require("../controllers/user");
 
-router.route("/").get(protect, searchUsers);
-
-router.route("/users/:username").get(getUser);
+router.route("/").get(protect, getClients);
 
 router.route("/users/:id").patch(updateUser);
 

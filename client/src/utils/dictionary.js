@@ -527,3 +527,29 @@ export const agencyPaymentTurkishColumns = (handleAddPaymentClick, handleAllPaym
   ];
   return columns;
 };
+
+export const agencyPaymentPage = {
+  engPage : {
+    title: 'add payment',
+    form: {
+      type: 'type',
+      paid: 'paid',
+      currency: 'currency',
+      note: 'note',
+      exchangeRate: 'exchange rate',
+      paidInTL: 'paid in TL'
+    }
+  },
+  turkishPage: {
+    title: 'ödeme ekle ',
+    form: {
+      type: 'tip',
+      paid: 'ödenmiş',
+      currency: 'para birimi',
+      note: 'not',
+      exchangeRate: 'Döviz kuru',
+      paidInTL: 'TL olarak ödendi'
+    }
+  }
+};
+

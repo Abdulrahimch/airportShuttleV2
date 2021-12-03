@@ -10,3 +10,18 @@ export interface AuthApiData {
   error?: { message: string };
   success?: AuthApiDataSuccess;
 }
+
+export interface GetClientsApiDataSuccess {
+  clients: [
+    {
+      id: number;
+      property: string;
+      debt: number;
+    }
+  ]
+}
+
+export interface GetClientsApiData {
+  error?: { message: string };
+  success?: GetClientsApiDataSuccess;
+}

@@ -4,6 +4,9 @@ const useStyles = makeStyles((theme) => ({
     dialog: {
         '&.updateReservation': {
             maxHeight:"1000px",
+        },
+        '&.addPayment': {
+            maxHeight:"1000px",
         }
     }
 }));

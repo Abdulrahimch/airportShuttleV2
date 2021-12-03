@@ -25,15 +25,22 @@ exports.searchUsers = asyncHandler(async (req, res, next) => {
   res.status(200).json({ users: users });
 });
 
-// @route GET /users/:username
-// @desc Get a user by username
+// @route GET /users/
+// @desc Get clients for an
 // @access Private
-exports.getUser = asyncHandler(async (req, res, next) => {
-    const username = req.params.username
-    const user = await User.findOne({ username });
-
-    if (!user) res.status(404).send({ error: "User not found" });
-    else res.status(200).send(user);
+exports.getClients = asyncHandler(async (req, res, next) => {
+    const clients = await User.find({ agencyId: req.user.id });
+    console.log('clients are: ', clients)
+    if (clients) {
+      res.status(200).json({
+        success: {
+          clients
+        }
+      })
+    } else {
+      res.status(500);
+      throw new Error("Internal Server Error");
+    }
 });
 
 // @route PATCH /users/:id
@@ -56,7 +63,9 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
         res.status(400).send(e);
     }
 });
-
+// @route POST /users/
+// @desc Post a user
+// @access Private
 exports.postClient= asyncHandler(async (req, res, next) => {
   const newClient = {
     email,
