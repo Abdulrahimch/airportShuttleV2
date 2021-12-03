@@ -8,6 +8,7 @@ import AddClient from './pages/Agency/AddClient/AddClient';
 import { SnackBarProvider } from './context/useSnackbarContext';
 import { LanguageProvider } from './context/useLanguageContext';
 import ListAgencyReservations from './pages/Agency/Reservation/ListAgencyReservations';
+import AgencyPayments from './pages/Agency/Payments/AgencyPayments';
 
 import './App.css';
 import Login from './pages/Login/Login';
@@ -28,6 +29,7 @@ function App (): JSX.Element {
                                 <Route exact path="/new-reservation" component={AddReservation} />
                                 <Route exact path="/add-client" component={AddClient} />
                                 <Route exact path="/agency-reservation" component={ListAgencyReservations} />
+                                <Route exact path="/agency-payment" component={AgencyPayments} />
                             </Switch>
                         </LanguageProvider>
                 </AuthProvider>

@@ -406,3 +406,124 @@ export const agencyTurksihColumns = (handleProcessedClick, handleUnprocessedClic
   ];
   return columns;
 };
+
+
+export const agencyPaymentEngColumns = (handleAddPaymentClick, handleAllPaymentsClick, handleDetailsClick) => {
+  const columns = [
+    {
+      field: 'property',
+      headerName: 'Property',
+      width: 200,
+    },
+    {
+      field: 'email',
+      headerName: 'Email',
+      width: 275,
+    },
+    {
+      field: 'debt',
+      headerName: 'Debt in TL',
+      width: 150,
+    },
+    {
+      field: "Add Payment",
+      width: 225,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+            style="addPayment"
+            btnText="add payment"
+            onClick={() => handleAddPaymentClick(cellValues)}
+          />
+        );
+      }
+    },
+    {
+      field: "All Payments",
+      width: 225,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+            style="allPayments"
+            btnText="all payments"
+            onClick={() => handleAllPaymentsClick(cellValues)}
+          />
+        );
+      }
+    },
+    {
+      field: "Details",
+      width: 225,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+            style="details"
+            btnText="details"
+            onClick={() => handleDetailsClick(cellValues)}
+          />
+        );
+      }
+    },
+  ];
+  return columns;
+};
+
+export const agencyPaymentTurkishColumns = (handleAddPaymentClick, handleAllPaymentsClick, handleDetailsClick) => {
+  const columns = [
+    {
+      field: 'property',
+      headerName: 'Emlak',
+      width: 200,
+    },
+    {
+      field: 'email',
+      headerName: 'Email',
+      width: 275,
+    },
+    {
+      field: 'debt',
+      headerName: 'Borç TL olarak',
+      width: 150,
+    },
+    {
+      field: "Ödeme Ekle",
+      width: 225,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+            style="addPayment"
+            btnText="Ödeme ekle"
+            onClick={() => handleAddPaymentClick(cellValues)}
+          />
+        );
+      }
+    },
+    {
+      field: "Ödemeler",
+      width: 225,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+            style="allPayments"
+            btnText="Ödemeler"
+            onClick={() => handleAllPaymentsClick(cellValues)}
+          />
+        );
+      }
+    },
+    {
+      field: "Detaylar",
+      width: 225,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+            style="details"
+            btnText="detaylar"
+            onClick={() => handleDetailsClick(cellValues)}
+          />
+        );
+      }
+    },
+  ];
+  return columns;
+};

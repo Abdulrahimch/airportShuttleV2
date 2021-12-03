@@ -35,6 +35,21 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: '#8B0000',
             width: 100,
             height: 25,
+        },
+        '&.addPayment': {
+            backgroundColor: '#006400',
+            width: 100,
+            height: 25,
+        },
+        '&.allPayments': {
+            backgroundColor: '#006400',
+            width: 100,
+            height: 25,
+        },
+        '&.details': {
+            backgroundColor: '#006400',
+            width: 100,
+            height: 25,
         }
     },
 }));
