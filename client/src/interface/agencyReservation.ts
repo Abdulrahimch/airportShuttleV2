@@ -12,6 +12,7 @@ export interface GetReservationApiDataSuccess {
             timezone: number;
             date: string;
             time: string;
+            cost?: number;
             client: {
                 property: string;
             }

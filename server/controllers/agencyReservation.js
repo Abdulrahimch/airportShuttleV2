@@ -7,12 +7,36 @@ exports.getReservations = asyncHandler(async (req, res, next) => {
     const reservations = await Reservation.find({ agency: req.user.id, status: 'waiting' })
                                  .populate({path: 'client', select: { property: 1 }})
                                  
-    if (reservations){
+    if (reservations) {
         res.status(200).json({
             success: {
                 reservations
             }
         });
+    } else {
+        res.status(500);
+        throw new Error("Internal Server Error");
+    }
+
+});
+
+exports.getClientReservations = asyncHandler(async (req, res, next) => {
+    const agencyId = req.user.id;
+    const clientId = req.params.id;
+    const reservations = await Reservation.find({ 
+                                                    agency: agencyId, 
+                                                    client: clientId, 
+                                                    status: 'processed' 
+                                                });
+    if (reservations) {
+        res.status(200).json({
+            success: {
+                reservations
+            }
+        })
+    } else {
+        res.status(500);
+        throw new Error("Internal Server Error");
     }
 
 });

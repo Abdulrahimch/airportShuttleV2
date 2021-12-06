@@ -650,3 +650,213 @@ export const agencyListPaymentTurkishColumns = (handleCancelClick) => {
   ];
   return columns;
 };
+
+export const reservationDetailsEngColumns = () => {
+  const columns = [
+    { 
+      field: 'date', 
+      headerName: 'Date and Time', 
+      width: 300 
+    },
+    {
+      field: 'flightNo',
+      headerName: 'Flight No',
+      width: 150,
+    },
+    {
+      field: 'from',
+      headerName: 'From',
+      width: 150,
+    },
+    {
+      field: 'to',
+      headerName: 'To',
+      width: 150,
+    },
+    {
+      field: 'pax',
+      headerName: 'Pax',
+      width: 120,
+    },
+    {
+      field: 'driverNote',
+      headerName: 'Note/property',
+      width: 200,
+    },
+    {
+      field: 'property',
+      headerName: 'Property',
+      width: 225,
+    },
+  ];
+  return columns;
+};
+
+export const reservationDetailsTurksihColumns = () => {
+  const columns = [
+    { 
+      field: 'date', 
+      headerName: 'Traih va Saat', 
+      width: 300 
+    },
+    {
+      field: 'flightNo',
+      headerName: 'Uçuş No ',
+      width: 150,
+    },
+    {
+      field: 'from',
+      headerName: 'Nerden',
+      width: 150,
+    },
+    {
+      field: 'to',
+      headerName: 'Nereye',
+      width: 150,
+    },
+    {
+      field: 'pax',
+      headerName: 'Pax',
+      width: 120,
+    },
+    {
+      field: 'driverNote',
+      headerName: 'Note/Emlak',
+      width: 200,
+    },
+    {
+      field: 'property',
+      headerName: 'Emlak',
+      width: 225,
+    },
+  ];
+  return columns;
+};
+
+export const paymentDetailsEngColumns = () => {
+  const columns = [
+    {
+      field: 'property',
+      headerName: 'Property',
+      width: 300,
+    },
+    {
+      field: 'createdAt',
+      headerName: 'Date of Payment',
+      width: 350,
+    },
+    {
+      field: 'paid',
+      headerName: 'Paid',
+      width: 150,
+    },
+    {
+      field: 'currency',
+      headerName: 'Currency',
+      width: 150,
+    },
+    {
+      field: 'exchangeRate',
+      headerName: 'Exchange Rate',
+      width: 150,
+    },
+    {
+      field: 'paidInTL',
+      headerName: 'Paid in TL',
+      width: 190,
+    },
+  ];
+  return columns;
+};
+
+export const paymentDetailsTurkishColumns = () => {
+  const columns = [
+    {
+      field: 'property',
+      headerName: 'Emlak',
+      width: 300,
+    },
+    {
+      field: 'createdAt',
+      headerName: 'ödeme Tarihi',
+      width: 350,
+    },
+    {
+      field: 'paid',
+      headerName: 'ödeme',
+      width: 150,
+    },
+    {
+      field: 'currency',
+      headerName: 'Para Birimi ',
+      width: 150,
+    },
+    {
+      field: 'exchangeRate',
+      headerName: 'Döviz Kuru',
+      width: 150,
+    },
+    {
+      field: 'paidInTL',
+      headerName: 'TL Olarak ödenen',
+      width: 190,
+    },
+  ];
+  return columns;
+};
+
+
+export const totalDetailsEngColumns = () => {
+  const columns = [
+    {
+      field: 'reservationTotal',
+      headerName: 'Total Amount Of Reservations',
+      width: 350,
+    },
+    {
+      field: 'paymentTotal',
+      headerName: 'Total Amount Paid',
+      width: 350,
+    },
+    {
+      field: 'currency',
+      headerName: 'currency',
+      width: 240,
+    },
+    {
+      field: 'debt',
+      headerName: 'Remaining Amount In TL',
+      width: 350,
+    },
+  ];
+  return columns;
+};
+
+export const totalDetailsTurkishColumns = () => {
+  const columns = [
+    {
+      field: 'reservationsTotal',
+      headerName: 'Toplam Rezervasyon Tutarı',
+      width: 350,
+    },
+    {
+      field: 'paymentsTotal',
+      headerName: 'Toplamda ödenen miktar ',
+      width: 350,
+    },
+    {
+      field: 'currency',
+      headerName: 'Para Birimi',
+      width: 240,
+    },
+    {
+      field: 'debt',
+      headerName: 'TL Olarak Kalan Tutar  ',
+      width: 350,
+    },
+  ];
+  return columns;
+};
+
+
+

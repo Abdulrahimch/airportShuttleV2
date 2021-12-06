@@ -8,6 +8,6 @@ router.route("/").post(protect, postPayment);
 
 router.route("/:id").patch(protect, isPaymentOwner, updatePayment);
 
-router.route("/:id").get(protect, isPaymentOwner, getClientPayment);
+router.route("/:id").get(protect, getClientPayment);
 
 module.exports = router;
