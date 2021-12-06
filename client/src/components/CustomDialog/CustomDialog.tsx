@@ -7,15 +7,17 @@ interface Props {
     open: boolean;
     style?: string;
     cssStyle?: React.CSSProperties;
+    isFullScreen?: boolean
     onClose: () => void;
   }
 
-const CustomDialog = ({ open, onClose, style, cssStyle, children }: Props): JSX.Element => {
+const CustomDialog = ({ open, onClose, style, cssStyle, children, isFullScreen }: Props): JSX.Element => {
     const { dialog } = useStyles();
     const dialogStyle = clsx(dialog, style);
     return (
         <Dialog 
             open={open} 
+            fullScreen={isFullScreen}
             onClose={onClose}
             className={dialogStyle}
             style={cssStyle}

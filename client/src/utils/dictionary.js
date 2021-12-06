@@ -553,3 +553,100 @@ export const agencyPaymentPage = {
   }
 };
 
+export const agencyListPaymentEngColumns = (handleCancelClick) => {
+  const columns = [
+    {
+      field: 'property',
+      headerName: 'Property',
+      width: 200,
+    },
+    {
+      field: 'createdAt',
+      headerName: 'Date of Payment',
+      width: 275,
+    },
+    {
+      field: 'paid',
+      headerName: 'Paid',
+      width: 150,
+    },
+    {
+      field: 'currency',
+      headerName: 'Currency',
+      width: 150,
+    },
+    {
+      field: 'exchangeRate',
+      headerName: 'Exchange Rate',
+      width: 150,
+    },
+    {
+      field: 'paidInTL',
+      headerName: 'Paid in TL',
+      width: 150,
+    },
+    {
+      field: "Cancel",
+      width: 225,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+            style="delete"
+            btnText="Cancel"
+            onClick={() => handleCancelClick(cellValues)}
+          />
+        );
+      }
+    },
+  ];
+  return columns;
+};
+
+export const agencyListPaymentTurkishColumns = (handleCancelClick) => {
+  const columns = [
+    {
+      field: 'property',
+      headerName: 'Emlak',
+      width: 200,
+    },
+    {
+      field: 'createdAt',
+      headerName: 'ödeme Tarihi',
+      width: 275,
+    },
+    {
+      field: 'paid',
+      headerName: 'ödeme',
+      width: 150,
+    },
+    {
+      field: 'currency',
+      headerName: 'Para Birimi ',
+      width: 150,
+    },
+    {
+      field: 'exchangeRate',
+      headerName: 'Döviz Kuru',
+      width: 150,
+    },
+    {
+      field: 'paidInTL',
+      headerName: 'TL Olarak ödenen',
+      width: 150,
+    },
+    {
+      field: "Iptal",
+      width: 225,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+            style="delete"
+            btnText="Iptal"
+            onClick={() => handleCancelClick(cellValues)}
+          />
+        );
+      }
+    },
+  ];
+  return columns;
+};

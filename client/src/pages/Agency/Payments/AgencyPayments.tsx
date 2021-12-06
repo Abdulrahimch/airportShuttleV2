@@ -3,31 +3,47 @@ import { useLanguage } from '../../../context/useLanguageContext';
 import CustomDialog from '../../../components/CustomDialog/CustomDialog';
 import AddPayment from './AddPayment/AddPayment';
 import { getClients } from '../../../helpers/APICalls/user';
-
+import CloseIcon from '@material-ui/icons/Close';
 import { agencyPaymentEngColumns, agencyPaymentTurkishColumns } from '../../../utils/dictionary';
 import { useEffect, useState } from 'react';
+import ListPayments from './ListPayments/ListPayments';
+import { IconButton, AppBar, Toolbar, Button, Typography } from '@material-ui/core';
 
 function AgencyPayments(): JSX.Element {
     const { language } = useLanguage();
-    const [open, setOpen] = useState<boolean>(false);
+
+    const [openAddPayment, setOpenAddPayment] = useState<boolean>(false);
+    const [openAllPayments, setOpenAllPayments] = useState<boolean>(false);
+    const [details, setDetails] = useState<boolean>(false);
+
     const [rows, setRows] = useState<any>([]);
     const [clientId, setClientId] = useState<string>('');
 
-    const handleDialogClose = () => {
-        setOpen(false)
-    }
     const handleAddPaymentClick = (cellValues: any) => {
-        console.log('cellValues are: ', cellValues)
         setClientId(cellValues.row._id)
-        setOpen(true)
+        setOpenAddPayment(true)
     };
 
-    const handleAllPaymentsClick = () => {
-        console.log('all payment has been clicked')
+    const handleAddPaymentClose = () => {
+        setOpenAddPayment(false)
+    }
+
+    const handleAllPaymentsClick = (cellValues: any) => {
+        setClientId(cellValues.row._id);
+        setOpenAllPayments(true)
     };
 
-    const handleDetailsClick = () => {
-        console.log('Details  has been clicked')
+    const handleAllPaymentsClose = () => {
+        setOpenAllPayments(false)
+    };
+
+    const handleDetailsClick = (cellValues: any) => {
+        setClientId(cellValues.row._id);
+        setDetails(true)
+    };
+
+    const handleDetailsClose = () => {
+        setDetails(false)
     };
 
     const columns = language === 'eng'  
@@ -47,17 +63,40 @@ function AgencyPayments(): JSX.Element {
                 console.log('external error')
             }
         });
-    }, [open])
+    }, [openAddPayment, openAllPayments])
     
     return (
         <>
             <DataTable rows={rows} columns={columns} />
             <CustomDialog 
-                open={open} 
-                onClose={handleDialogClose}
+                open={openAddPayment} 
+                onClose={handleAddPaymentClose}
                 style={'addPayment'}
             >
                 <AddPayment clientId={clientId}/>
+            </CustomDialog>
+            <CustomDialog 
+                open={openAllPayments} 
+                onClose={handleAllPaymentsClose}
+                style={'addPayment'}
+                isFullScreen={true}
+            >
+                <AppBar position="static">
+                    <Toolbar>
+                        <IconButton
+                        edge="start"
+                        color="inherit"
+                        onClick={handleAllPaymentsClose}
+                        aria-label="close"
+                        >
+                            <CloseIcon />
+                        </IconButton>
+                        <Typography variant="h6" component="div">
+                            All Payments
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                <ListPayments clientId={clientId}/>
             </CustomDialog>
         </>
         
