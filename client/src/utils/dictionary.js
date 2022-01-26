@@ -138,7 +138,7 @@ export const clientPaymentDictionary = {
     ]
 };
 
-export const engColumn = (handleEditClick, handleCancelClick) => {
+export const engColumn = (handleEditClick, handleCancelClick, handleDriverDetails) => {
   const columns = [
     { 
       field: 'date', 
@@ -176,6 +176,19 @@ export const engColumn = (handleEditClick, handleCancelClick) => {
       width: 150,
     },
     {
+      field: "Driver",
+      width: 150,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+            style="driverDetails"
+            btnText="Details"
+            onClick={() => handleDriverDetails(cellValues)}
+          />
+        );
+      }
+    },
+    {
       field: "Edit",
       width: 150,
       renderCell: (cellValues) => {
@@ -205,12 +218,12 @@ export const engColumn = (handleEditClick, handleCancelClick) => {
   return columns;
 };
 
-export const turksihColumns = (handleEditClick, handleCancelClick) => {
+export const turksihColumns = (handleEditClick, handleCancelClick, handleDriverDetails) => {
   const columns = [
     { 
       field: 'date', 
       headerName: 'Traih va Saat', 
-      width: 300 
+      width: 200 
     },
     {
       field: 'flightNo',
@@ -241,6 +254,19 @@ export const turksihColumns = (handleEditClick, handleCancelClick) => {
       field: 'cost',
       headerName: 'Ücret',
       width: 150,
+    },
+    {
+      field: "Sürücü",
+      width: 150,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+          style="driverDetails"
+          btnText="Detay"
+          onClick={() => handleDriverDetails(cellValues)}
+        />
+        );
+      }
     },
     {
       field: "Düzenle",
@@ -858,5 +884,15 @@ export const totalDetailsTurkishColumns = () => {
   return columns;
 };
 
+export const engTabs =
+  [
+    { label: 'Confirmed', value: '1' },
+    { label: 'Pending Confirmation', value: '2' }
+  ]
+  export const turkishTabs = 
+  [ 
+    { label: 'Onaylanmış', value: '1' },
+    { label: 'Onay Bekleniyor ', value: '2' }
+  ]
 
 

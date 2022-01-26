@@ -29,6 +29,10 @@ const reservationSchema = mongoose.Schema({
         required: true, 
         ref: "user" 
     },
+    driver: { 
+        type: mongoose.Types.ObjectId,
+        ref: "driver" 
+    },
     selectedDate: {
         type: Date,
         required: true
@@ -38,6 +42,10 @@ const reservationSchema = mongoose.Schema({
         default: 'waiting',
         trim: true,
         enum: ['processed','unprocessed', 'waiting', 'canceled']
+    },
+    confirmed: {
+        type: Boolean,
+        default: false
     },
     cost: Number,
     timezone: Number,

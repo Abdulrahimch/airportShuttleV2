@@ -5,12 +5,10 @@ const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
     required: true,
-    unique: true
   },
   lastName: {
     type: String,
     required: true,
-    unique: true
   },
   username: {
     type: String,
@@ -47,9 +45,8 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
-  property: {
+  propertyName: {
     type: String,
-    required: true
   },
   IstAirportMaxFourPaxCost: Number,
   IstAirportMaxSixPaxCost: Number,

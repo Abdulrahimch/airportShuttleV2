@@ -94,7 +94,8 @@ exports.postClient= asyncHandler(async (req, res, next) => {
 
   newClient.username = username;
   newClient.password = password;
-
+  console.log(username);
+  console.log(password);
   const client = await User.create({
     agencyId: ObjectId(req.user.id),
     ...newClient

@@ -19,12 +19,12 @@ const useStyles = makeStyles((theme) => ({
         '&.edit': {
             backgroundColor: "#006400",
             width: 50,
-            height: 25,
+            height: 40,
         },
         '&.delete': {
             backgroundColor: '#8B0000',
             width: 50,
-            height: 25,
+            height: 40,
         },
         '&.processed': {
             backgroundColor: "#006400",
@@ -50,7 +50,12 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: '#006400',
             width: 100,
             height: 25,
-        }
+        },
+        '&.driverDetails': {
+            backgroundColor: '#0000FF',
+            width: 100,
+            height: 40,
+        },
     },
 }));
 
