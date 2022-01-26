@@ -7,19 +7,20 @@ import { Driver } from '../../../../interface/Driver';
 
 interface Props {
     handleSubmit: (inputs: Driver) => void;
+    initValues: Driver
 }
 
-function AddClientForm( { handleSubmit } : Props): JSX.Element {
+function AddClientForm( { handleSubmit, initValues } : Props): JSX.Element {
     const classes = useStyles();
 
     return (
        <>
         <Formik
             initialValues={{
-                email: '',
-                firstName: '',
-                lastName: '',
-                carNumber: ''
+                email: initValues.email,
+                firstName: initValues.firstName,
+                lastName: initValues.lastName,
+                carNumber: initValues.carNumber
             }}
             validationSchema={Yup.object().shape({
                 email: Yup.string().email('Invalid Email Address').required('Please Enter Email Address'),

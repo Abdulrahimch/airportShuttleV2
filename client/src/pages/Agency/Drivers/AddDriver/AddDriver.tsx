@@ -9,6 +9,14 @@ const AddDriver = (): JSX.Element => {
     const handleSubmit = (inputs: Driver) => {
         console.log(inputs)
     }
+
+    const initValues: Driver = {
+        firstName: '',
+        lastName: '',
+        email: '',
+        carNumber: ''
+    }
+
     return (
         <>
             <Grid container component={Paper} direction="column" className={root} justifyContent="center" alignItems="center">
@@ -16,7 +24,7 @@ const AddDriver = (): JSX.Element => {
                     <Typography className={title}>
                         add driver
                     </Typography>
-                    <DriverForm handleSubmit={handleSubmit} />
+                    <DriverForm handleSubmit={handleSubmit} initValues={initValues}/>
                 </Grid>
             </Grid>
         </>

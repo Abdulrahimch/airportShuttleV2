@@ -18,12 +18,12 @@ const useStyles = makeStyles((theme) => ({
         },
         '&.edit': {
             backgroundColor: "#006400",
-            width: 50,
+            width: 75,
             height: 40,
         },
         '&.delete': {
             backgroundColor: '#8B0000',
-            width: 50,
+            width: 75,
             height: 40,
         },
         '&.processed': {

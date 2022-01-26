@@ -885,9 +885,14 @@ export const engTabs =
 export const engDriverColumn = (handleEditClick, handleCancelClick) => {
   const columns = [
     { 
-      field: 'name', 
-      headerName: 'Name', 
-      width: 300 
+      field: 'firstName', 
+      headerName: 'First Name', 
+      width: 150 
+    },
+    { 
+      field: 'lastName',
+      headerName: 'Last Name', 
+      width: 150 
     },
     {
       field: 'email',
@@ -937,9 +942,14 @@ export const engDriverColumn = (handleEditClick, handleCancelClick) => {
 export const turksihDriverColumns = (handleEditClick, handleCancelClick) => {
   const columns = [
     { 
-      field: 'name', 
-      headerName: 'Isim', 
-      width: 300 
+      field: 'firstName', 
+      headerName: 'Adı', 
+      width: 150 
+    },
+    { 
+      field: 'lastName', 
+      headerName: 'Soyadı', 
+      width: 150 
     },
     {
       field: 'email',
