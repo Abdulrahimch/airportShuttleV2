@@ -28,13 +28,13 @@ const useStyles = makeStyles((theme) => ({
         },
         '&.processed': {
             backgroundColor: "#006400",
-            width: 80,
-            height: 25,
+            width: 100,
+            height: 40,
         },
         '&.unprocessed': {
             backgroundColor: '#8B0000',
-            width: 100,
-            height: 25,
+            width: 120,
+            height: 40,
         },
         '&.addPayment': {
             backgroundColor: '#006400',

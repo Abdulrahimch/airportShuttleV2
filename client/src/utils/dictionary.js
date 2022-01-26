@@ -47,19 +47,6 @@ export const tabsDictionary = {
     ]
 };
 
-export const AgencyTabsDictionary = {
-  englishTabs : [
-      { label: 'add client', to: '/add-client' },
-      { label: 'reservations', to: '/agency-reservation' },
-      { label: 'payments', to: '/agency-payment' }
-  ],
-  turkishTabs : [
-      { label: 'müşteri ekle ', to: '/add-client' },
-      { label: 'rezervasyonlar', to: '/agency-reservation' },
-      { label: 'finans', to: '/agency-payment' }
-  ]
-};
-
 export const clientPaymentDictionary = {
     engColumns:  [
         { 

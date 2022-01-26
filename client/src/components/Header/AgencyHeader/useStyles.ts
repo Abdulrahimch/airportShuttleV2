@@ -11,6 +11,15 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 800,
         fontSize: 12
     },
+    menu: {
+        backgroundColor: theme.palette.primary.main,
+        color: theme.palette.common.white,
+        marginTop: "2em",
+        opacity: 0.7,
+        "&:hover": {
+            opacity: 1
+        }
+    },
 }));
 
 export default useStyles;
