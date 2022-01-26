@@ -3,6 +3,8 @@ import DriverForm from "../DriverForm/DriverForm";
 import { Driver } from '../../../../interface/Driver';
 import { Box, Typography } from "@material-ui/core";
 import useStyles from "./useStyles";
+import { updateDriver } from "../../../../helpers/APICalls/driver";
+import { useSnackBar } from '../../../../context/useSnackbarContext';
 
 interface Props {
     initValues: Driver
@@ -10,8 +12,18 @@ interface Props {
 
 const UpdateDriver = ({ initValues }: Props): JSX.Element => {
     const { title } = useStyles();
+    const { updateSnackBarMessage } = useSnackBar();
     const handleSubmit = (inputs: Driver) => {
-        console.log(inputs)
+        const id = initValues._id;
+        updateDriver(inputs, id).then((data) => {
+            if (data.error) {
+                updateSnackBarMessage(data.error)
+            }else if (data.success) {
+                updateSnackBarMessage('Driver has been updated successfully!')
+            } else {
+                updateSnackBarMessage('An unexpected error occurred. Please try again !');
+            }
+        })
     }
     return (
         <>
