@@ -882,4 +882,106 @@ export const engTabs =
     { label: 'Onay Bekleniyor ', value: '2' }
   ]
 
+export const engDriverColumn = (handleEditClick, handleCancelClick) => {
+  const columns = [
+    { 
+      field: 'name', 
+      headerName: 'Name', 
+      width: 300 
+    },
+    {
+      field: 'email',
+      headerName: 'Email',
+      width: 300,
+    },
+    {
+      field: 'carNumber',
+      headerName: 'Car No',
+      width: 150,
+    },
+    {
+      field: 'createdAt',
+      headerName: 'Joining Date',
+      width: 200,
+    },
+    {
+      field: "Edit",
+      width: 175,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+            style="edit"
+            btnText="edit"
+            onClick={() => handleEditClick(cellValues)}
+          />
+        );
+      }
+    },
+    {
+      field: "Cancel",
+      width: 175,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+            style="delete"
+            btnText="Cancel"
+            onClick={() => handleCancelClick(cellValues)}
+          />
+        );
+      }
+    }
+  ];
+  return columns;
+};
 
+export const turksihDriverColumns = (handleEditClick, handleCancelClick) => {
+  const columns = [
+    { 
+      field: 'name', 
+      headerName: 'Isim', 
+      width: 300 
+    },
+    {
+      field: 'email',
+      headerName: 'Email',
+      width: 300,
+    },
+    {
+      field: 'carNumner',
+      headerName: 'Arac No',
+      width: 150,
+    },
+    {
+      field: 'createdAt',
+      headerName: 'Katılma Tarihi ',
+      width: 200,
+    },
+    {
+      field: "Düzenle",
+      width: 175,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+          style="edit"
+          btnText="Düzenle"
+          onClick={() => handleEditClick(cellValues)}
+        />
+        );
+      }
+    },
+    {
+      field: "Iptal",
+      width: 175,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+          style="delete"
+          btnText="Iptal"
+          onClick={() => handleCancelClick(cellValues)}
+        />
+        );
+      }
+    }
+  ];
+  return columns;
+};

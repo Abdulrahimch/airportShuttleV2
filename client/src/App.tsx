@@ -13,6 +13,7 @@ import AgencyPayments from './pages/Agency/Payments/AgencyPayments';
 import './App.css';
 import Login from './pages/Login/Login';
 import Header from './components/Header/Header';
+import ListDrivers from './pages/Agency/Drivers/ListDrivers/ListDrivers';
 
 
 function App (): JSX.Element {
@@ -30,6 +31,7 @@ function App (): JSX.Element {
                                 <Route exact path="/add-client" component={AddClient} />
                                 <Route exact path="/agency-reservation" component={ListAgencyReservations} />
                                 <Route exact path="/agency-payment" component={AgencyPayments} />
+                                <Route exact path="/drivers" component={ListDrivers} />
                             </Switch>
                         </LanguageProvider>
                 </AuthProvider>
