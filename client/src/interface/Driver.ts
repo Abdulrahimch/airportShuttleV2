@@ -5,6 +5,7 @@ export interface Driver {
     lastName: string;
     email: string;
     carNumber: string;
+    createdAt?: string;
 };
 
 export interface DriverApiData {
@@ -13,6 +14,6 @@ export interface DriverApiData {
 };
 
 export interface GetDriversApiData {
-    error?: { error: string },
-    success?: [Driver]
+    error?:  string,
+    success?: { drivers: Driver []}
 };

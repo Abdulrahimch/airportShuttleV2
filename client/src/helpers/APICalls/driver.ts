@@ -13,7 +13,7 @@ export const updateDriver = async (inputs: Driver, id: string | undefined):Promi
         .catch((error) => error.response.data);
 };
 
-export const deleteDriver = async (id: string):Promise<DriverApiData> => {
+export const deleteDriver = async (id: string | undefined):Promise<DriverApiData> => {
     return await axios.delete(`/driver/${id}`)
         .then((res) => res.data)
         .catch((error) => error.response.data);

@@ -15,6 +15,6 @@ router.route("/all").get(protect, getDrivers);
 
 router.route("/:id").get(protect, getDriver);
 
-router.route("/delete/:id").get(protect, deleteDriver);
+router.route("/:id").delete(protect, deleteDriver);
 
 module.exports = router;

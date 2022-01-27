@@ -18,14 +18,15 @@ const AddDriver = (): JSX.Element => {
             } else {
                 updateSnackBarMessage('An unexpected error occurred. Please try again !');
             }
-        })
+        });
     };
 
     const initValues: Driver = {
         firstName: '',
         lastName: '',
         email: '',
-        carNumber: ''
+        carNumber: '',
+        createdAt: ''
     }
 
     return (

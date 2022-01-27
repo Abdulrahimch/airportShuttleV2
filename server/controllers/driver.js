@@ -33,7 +33,7 @@ exports.updateDriver = asyncHandler(async (req, res, next) => {
 
     const driver = await Driver.findByIdAndUpdate(
         driverId,
-        { updates },
+        updates,
         { new: true }
     );
 

@@ -18,9 +18,7 @@ const driverSchema = mongoose.Schema(
             type: String,
         },
         carNumber: {
-            type: Number,
-            default: 1,
-
+            type: String,
         },
         agency: {
             type: mongoose.Types.ObjectId, 

@@ -7,19 +7,22 @@ import { updateDriver } from "../../../../helpers/APICalls/driver";
 import { useSnackBar } from '../../../../context/useSnackbarContext';
 
 interface Props {
-    initValues: Driver
+    initValues: Driver;
+    setDialogUpdate: any;
+    dialogUpdate: boolean;
 }
 
-const UpdateDriver = ({ initValues }: Props): JSX.Element => {
+const UpdateDriver = ({ initValues, setDialogUpdate, dialogUpdate }: Props): JSX.Element => {
     const { title } = useStyles();
     const { updateSnackBarMessage } = useSnackBar();
     const handleSubmit = (inputs: Driver) => {
         const id = initValues._id;
         updateDriver(inputs, id).then((data) => {
             if (data.error) {
-                updateSnackBarMessage(data.error)
+                updateSnackBarMessage(data.error);
             }else if (data.success) {
-                updateSnackBarMessage('Driver has been updated successfully!')
+                updateSnackBarMessage('Driver has been updated successfully!');
+                setDialogUpdate(!dialogUpdate)
             } else {
                 updateSnackBarMessage('An unexpected error occurred. Please try again !');
             }
