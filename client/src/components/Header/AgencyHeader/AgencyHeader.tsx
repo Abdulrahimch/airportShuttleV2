@@ -48,13 +48,13 @@ function AgencyHeader(): JSX.Element {
     function tabFormation() {
         if (language === 'tr') tabs = turkishTabs;
         else tabs = englishTabs;
-        return tabs.map(({ label, to }, idx) => (
+        return tabs.map(({ label, to, handleClick }, idx) => (
             <Tab
                 key={idx}
                 label={label}
                 component={Link}
                 to={to}
-                onClick={(event: any) => handleClick(event)}
+                onClick={handleClick}
                 className={classes.tabs}
             />
         ));
