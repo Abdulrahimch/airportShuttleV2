@@ -8,11 +8,12 @@ import { useSnackBar } from '../../../../context/useSnackbarContext';
 
 interface Props {
     initValues: Driver;
-    setDialogUpdate: any;
-    dialogUpdate: boolean;
+    handleClose: () => void;
+    rows: Driver [];
+    setRows: any;
 }
 
-const UpdateDriver = ({ initValues, setDialogUpdate, dialogUpdate }: Props): JSX.Element => {
+const UpdateDriver = ({ initValues, handleClose, rows, setRows }: Props): JSX.Element => {
     const { title } = useStyles();
     const { updateSnackBarMessage } = useSnackBar();
     const handleSubmit = (inputs: Driver) => {
@@ -21,8 +22,9 @@ const UpdateDriver = ({ initValues, setDialogUpdate, dialogUpdate }: Props): JSX
             if (data.error) {
                 updateSnackBarMessage(data.error);
             }else if (data.success) {
+                setRows(rows.map(row => row.id === initValues.id ? { ...row, ...data.success?.driver } : row));
                 updateSnackBarMessage('Driver has been updated successfully!');
-                setDialogUpdate(!dialogUpdate)
+                handleClose();
             } else {
                 updateSnackBarMessage('An unexpected error occurred. Please try again !');
             }

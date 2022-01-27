@@ -10,7 +10,7 @@ export interface Driver {
 
 export interface DriverApiData {
     error?: string,
-    success?: Driver
+    success?: { driver: Driver }
 };
 
 export interface GetDriversApiData {

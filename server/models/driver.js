@@ -12,7 +12,8 @@ const driverSchema = mongoose.Schema(
         },
         email: {
             type: String,
-            requried: true
+            requried: true,
+            unique: true
         },
         img: {
             type: String,

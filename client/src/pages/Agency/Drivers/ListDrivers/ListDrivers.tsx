@@ -44,7 +44,7 @@ const ListDrivers = (): JSX.Element => {
         return () => {
             setRows([]);
         };
-    }, [history, dialogUpdate])
+    }, [history])
 
     const handleEditClick = (values: any) => {
         setInitValues(values.row)
@@ -68,8 +68,8 @@ const ListDrivers = (): JSX.Element => {
         <>
             <Box>
                 <DataTable rows={rows} columns={columns} />
-                <CustomDialog open={open} setDialogUpdate={setDialogUpdate} dialogUpdate={dialogUpdate} onClose={handleClose} style="updateReservation">
-                    <UpdateDriver initValues={initValues} setDialogUpdate={setDialogUpdate} dialogUpdate={dialogUpdate} />
+                <CustomDialog open={open} onClose={handleClose} style="updateReservation">
+                    <UpdateDriver initValues={initValues} handleClose={handleClose} rows={rows} setRows={setRows} />
                 </CustomDialog>
                 <CustomDialog open={openDeleteDialog} onClose={handleDeleteDialogClose} style="updateReservation">
                     <DeleteDriver initValues={initValues} handleDeleteDialogClose={handleDeleteDialogClose} rows={rows} setRows={setRows}/>
