@@ -7,16 +7,18 @@ interface Props {
     isSubmitBtn?: boolean;
     style?: string;
     cssStyle?: React.CSSProperties;
-    onClick?: () => void
+    onClick?: () => void;
+    disabled?: boolean
     
 }
 
-function CustomButton({ btnText,  style, onClick, isSubmitBtn }: Props): JSX.Element {
+function CustomButton({ btnText, style, onClick, isSubmitBtn, disabled }: Props): JSX.Element {
     const { button } = useStyles();
     const btnStyle = clsx(button, style)
 
     return (
         <Button
+        disabled={disabled}
         className={btnStyle}
         onClick={onClick}
         type="submit"

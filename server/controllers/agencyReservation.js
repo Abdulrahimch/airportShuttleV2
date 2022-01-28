@@ -42,7 +42,10 @@ exports.getClientReservations = asyncHandler(async (req, res, next) => {
 });
 
 exports.updateReservation = asyncHandler(async (req, res, next) => {
-    const updates = { status } = req.body;
+    const updates = { status, confirmed, driver } = req.body;
+    if (driver) {
+        updates.driver = ObjectId(driver);
+    }
     const  id = req.params.id;
     const options = { new: true }
     const reservation = await Reservation.findByIdAndUpdate(id, updates, options);

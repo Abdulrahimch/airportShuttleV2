@@ -286,7 +286,7 @@ export const turksihColumns = (handleEditClick, handleCancelClick, handleDriverD
 };
 
 
-export const agencyEngColumns = (handleProcessedClick, handleUnprocessedClick) => {
+export const agencyEngColumns = (handleProcessedClick, handleUnprocessedClick, handleConfirmClick) => {
   const columns = [
     { 
       field: 'date', 
@@ -324,6 +324,20 @@ export const agencyEngColumns = (handleProcessedClick, handleUnprocessedClick) =
       width: 150,
     },
     {
+      field: "Confirm",
+      width: 150,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+            disabled={cellValues.row.confirmed}
+            style={!cellValues.row.confirmed ? "confirm" : "confirmed"}
+            btnText={!cellValues.row.confirmed ? "confirm" : "confirmed"}
+            onClick={() => handleConfirmClick(cellValues)}
+          />
+        );
+      }
+    },
+    {
       field: "Processed",
       width: 150,
       renderCell: (cellValues) => {
@@ -353,7 +367,7 @@ export const agencyEngColumns = (handleProcessedClick, handleUnprocessedClick) =
   return columns;
 };
 
-export const agencyTurksihColumns = (handleProcessedClick, handleUnprocessedClick) => {
+export const agencyTurksihColumns = (handleProcessedClick, handleUnprocessedClick, handleConfirmClick) => {
   const columns = [
     { 
       field: 'date', 
@@ -389,6 +403,20 @@ export const agencyTurksihColumns = (handleProcessedClick, handleUnprocessedClic
       field: 'property',
       headerName: 'Emlak',
       width: 150,
+    },
+    {
+      field: "Onay",
+      width: 150,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+            disabled={cellValues.row.confirmed}
+            style={!cellValues.row.confirmed ? "confirm" : "confirmed"}
+            btnText={!cellValues.row.confirmed ? "onay" : "onaylandi"}
+            onClick={() => handleConfirmClick(cellValues)}
+          />
+        );
+      }
     },
     {
       field: "Işlenmiş",

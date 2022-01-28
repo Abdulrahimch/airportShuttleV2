@@ -42,7 +42,7 @@ function Details({ clientId, debt }: Props): JSX.Element {
     useEffect(() => {
         getClientReservation(clientId).then((data) => {
             if (data.error) {
-                console.log(data.error.message)
+                console.log(data.error)
             } else if (data.success) {
                 data.success.reservations.map((reservation, idx) => {
                     reservation.id = idx + 1;

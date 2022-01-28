@@ -21,6 +21,25 @@ export interface GetReservationApiDataSuccess {
 };
 
 export interface GetReservationApiData {
-    error?: { message: string }; 
+    error?:  string; 
     success?: GetReservationApiDataSuccess
 };
+
+export interface Reservation {
+    _id: string;
+    id: number;
+    from: number;
+    to: number;
+    property: string;
+    pax: number;
+    flightNo: string;
+    driverNote: string;
+    selectedDate: Date;
+    timezone: number;
+    date: string;
+    time: string;
+    cost?: number;
+    client: {
+        property: string;
+    }
+} 

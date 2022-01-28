@@ -76,7 +76,7 @@ exports.getReservations = asyncHandler(async (req, res, next) => {
     const confirmedReservations = await Reservation.find({ client: req.user.id, confirmed: true });
     const unConfirmedReservations = await Reservation.find({ client: req.user.id, confirmed: false })
 
-    if (reservations) {
+    if (confirmedReservations || unConfirmedReservations) {
         res.status(200).json({
             success: {
                 reservations: {

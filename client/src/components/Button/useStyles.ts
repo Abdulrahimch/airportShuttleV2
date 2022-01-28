@@ -21,7 +21,17 @@ const useStyles = makeStyles((theme) => ({
             width: 75,
             height: 40,
         },
+        '&.dialogSubmit': {
+            backgroundColor: theme.palette.primary.main,
+            width: 75,
+            height: 40,
+        },
         '&.delete': {
+            backgroundColor: '#8B0000',
+            width: 75,
+            height: 40,
+        },
+        '&.cancel': {
             backgroundColor: '#8B0000',
             width: 75,
             height: 40,
@@ -56,6 +66,16 @@ const useStyles = makeStyles((theme) => ({
             width: 100,
             height: 40,
         },
+        '&.confirm': {
+            backgroundColor: '#0000FF',
+            width: 100,
+            height: 40,
+        },
+        '&.confirmed': {
+            backgroundColor: '#A9A9A9',
+            width: 100,
+            height: 40,
+        }
     },
 }));
 

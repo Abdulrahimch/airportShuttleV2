@@ -10,6 +10,6 @@ router.route("/").get(protect, getReservations);
 router.route("/:id").get(protect, getClientReservations);
 
 router.route("/:id")
-    .patch(protect, validateReservationOwner, validateUpdateReservation, updateReservation);
+    .patch(protect, validateReservationOwner, updateReservation);
 
 module.exports = router;

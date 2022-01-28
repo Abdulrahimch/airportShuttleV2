@@ -10,27 +10,22 @@ export const getReservations = (): Promise<GetReservationApiData> => {
     );
 };
 
-interface Status {
-    status: string;
+interface Inputs {
+    status?: string;
+    confirmed?: boolean;
+    driver?: string
 }
 
-export const updateReservation = (inputs: Status, id: string): Promise<GetReservationApiData> => {
+export const updateReservation = (inputs: Inputs, id: string): Promise<GetReservationApiData> => {
     return axios.patch(`/agency-reservation/${id}`, inputs)
             .then((res) => res.data)
-            .catch(() => ({
-            error: { message: 'error! please try again later' }
-        })
-    )
-    
+            .catch(error => error.response.data);
 };
 
 export const deleteReservation = async (id: string): Promise<GetReservationApiData> => {
     return await axios.delete(`/reservation/${id}`)
                     .then((res) => res.data)
-                    .catch(() => ({
-                        error: { message: 'error! please try again later' }
-                    })
-                );
+                    .catch(error => error.response.data);
 };
 
 export const getClientReservation = async (id: string): Promise<GetReservationApiData> => {

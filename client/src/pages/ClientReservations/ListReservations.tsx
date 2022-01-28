@@ -74,6 +74,7 @@ function ListReservations(): JSX.Element{
             if (data.error){
                 console.log(data.error)
             } else if (data.success) {
+                console.log(data.success)
                 data.success.reservations.confirmedReservations.map((reservation, idx) => {
                     reservation.id = idx + 1;
                     const date = new Date(reservation.selectedDate)
