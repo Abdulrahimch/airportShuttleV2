@@ -40,7 +40,7 @@ function LanguageTab(): JSX.Element {
                     <Tab
                         aria-owns={anchorEl ? "simple-menu" : undefined}
                         aria-haspopup={anchorEl ? true : undefined}
-                        onMouseOver={(event: any) => handleClick(event)}
+                        onClick={(event: any) => handleClick(event)}
                         label="Language" 
                     />
             </Tabs>

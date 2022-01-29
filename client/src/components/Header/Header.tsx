@@ -14,8 +14,18 @@ function Header(): JSX.Element {
         <Box> 
             <AppBar position="static" className={classes.root}>
                 <Toolbar>
-                    {!loggedInUser ? null :  loggedInUser?.role === 'client' ?<ClientHeader /> : <AgencyHeader />}
-                    <LanguageTab />
+                    {!loggedInUser ? null
+                    :loggedInUser?.role === 'client' ?
+                        <>
+                            <ClientHeader />  
+                            <LanguageTab />
+                        </>
+                    :
+                        <>
+                            <AgencyHeader />  
+                            <LanguageTab />
+                        </>
+                    }
                 </Toolbar>
             </AppBar>
         </Box>
