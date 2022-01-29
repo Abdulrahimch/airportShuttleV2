@@ -1,5 +1,5 @@
 import { Box, Grid, Paper, Typography } from '@material-ui/core';
-import {  useEffect, useRef } from 'react';
+import {  useEffect, useRef, useState } from 'react';
 import useStyles from './useStyles';
 import AddReservationForm from './AddReservationForm/AddReservationForm';
 import { useHistory } from 'react-router-dom';
@@ -9,11 +9,11 @@ import { postReservation } from '../../../helpers/APICalls/reservation';
 import { useSnackBar } from '../../../context/useSnackbarContext';
 import { useLanguage } from '../../../context/useLanguageContext';
 
-const { engPage, turkishPage } = NewReservationDictionary;
-let page: Page = {title: '', form: turkishPage.form};
+const { turkishPage, engPage } = NewReservationDictionary;
 
 function AddReservation(): JSX.Element {
     const classes = useStyles();
+    const [page, setPage] = useState<Page>({title: '', form: engPage.form});
     const history = useHistory();
     const { updateSnackBarMessage } = useSnackBar();
     const { language } = useLanguage();
@@ -46,8 +46,8 @@ function AddReservation(): JSX.Element {
 
     useEffect(() => { 
         if (language === 'tr') {
-            page = turkishPage; 
-        } else page = engPage;
+            setPage(turkishPage); 
+        } else setPage(engPage);
     }, [history, language])
 
     return (
