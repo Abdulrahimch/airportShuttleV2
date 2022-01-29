@@ -2,6 +2,7 @@ const User = require("../models/User");
 const asyncHandler = require("express-async-handler");
 const ObjectId = require("mongoose").Types.ObjectId;
 const generator = require('generate-password');
+const { sendEmail } = require('../utils/awsSendEmail');
 
 
 // @route POST /users
@@ -94,19 +95,18 @@ exports.postClient= asyncHandler(async (req, res, next) => {
 
   newClient.username = username;
   newClient.password = password;
-  console.log(username);
-  console.log(password);
+ 
   const client = await User.create({
     agencyId: ObjectId(req.user.id),
     ...newClient
   });
 
-  
   const agency = await User.findById(req.user.id);
   agency.clientId = agency.clientId.concat(client._id);
-  await agency.save();
 
   if (client) {
+    await agency.save();
+    sendEmail(email, firstName, username, password, agency.propertyName);
     res.status(201).json({
       success: {
         client
