@@ -81,3 +81,23 @@ exports.getClientPayment = asyncHandler(async (req, res, next) => {
     }
 });
 
+//Get payments to render it to client
+exports.getMyPayments = asyncHandler(async (req, res, next) => {
+    const clientId = req.user.id;
+    const payment = await Payment.find({
+                                            client: ObjectId(clientId), 
+                                            status: 'paid' 
+                                        });
+    
+    if (payment) {
+        res.status(200).json({
+            success: {
+                payment
+            }
+        });
+    } else {
+        res.status(500);
+        throw new Error('Server Error, please try again later!');
+    }
+});
+

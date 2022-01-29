@@ -9,8 +9,8 @@ export const postPayment = async(inputs: Payment): Promise<PaymentApiData> => {
             }));
 };
 
-export const getClientPayments = (id: String): Promise<PaymentApiData> => {
-    return axios.get(`/agency-payment/${id}`)
+export const getClientPayments = async (id: String): Promise<PaymentApiData> => {
+    return await axios.get(`/agency-payment/${id}`)
             .then((res) => res.data)
             .catch(() => ({
                 error: {message: 'Unable to connect to server. Please try again'}
@@ -22,10 +22,16 @@ interface Status {
     clientId: String;
 }
 
-export const updatePayment = (inputs: Status, id: string) => {
-    return axios.patch(`/agency-payment/${id}`, inputs)
+export const updatePayment = async (inputs: Status, id: string) => {
+    return await axios.patch(`/agency-payment/${id}`, inputs)
             .then((res) => res.data)
             .catch(() => ({
                 error: {message: 'Unable to connect to server. Please try again'}
             }));
-}
+};
+
+export const getmyPayments = async () => {
+    return await axios.get('/agency-payment')
+        .then((res) => res.data)
+        .catch((error) => error.response.data);
+};   

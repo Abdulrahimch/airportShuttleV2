@@ -50,14 +50,9 @@ export const tabsDictionary = {
 export const clientPaymentDictionary = {
     engColumns:  [
         { 
-          field: 'date', 
+          field: 'createdAt', 
           headerName: 'Date', 
           width: 150 
-        },
-        { 
-          field: 'time', 
-          headerName: 'Time', 
-          width: 150,
         },
         {
           field: 'type',
@@ -75,6 +70,16 @@ export const clientPaymentDictionary = {
           width: 150,
         },
         {
+          field: 'paidInTL',
+          headerName: 'Paid In TL',
+          width: 150,
+        },
+        { 
+          field: 'time', 
+          headerName: 'Time', 
+          width: 150,
+        },
+        {
           field: 'debt',
           headerName: 'Debt',
           width: 150,
@@ -88,14 +93,9 @@ export const clientPaymentDictionary = {
     
     turksihColumns: [
       { 
-        field: 'date', 
+        field: 'createdAt', 
         headerName: 'Tarih', 
         width: 150 
-      },
-      { 
-        field: 'time', 
-        headerName: 'saat', 
-        width: 150,
       },
       {
         field: 'type',
@@ -110,6 +110,11 @@ export const clientPaymentDictionary = {
       {
         field: 'currency',
         headerName: 'Parabirimi',
+        width: 150,
+      },
+      {
+        field: 'paidInTL',
+        headerName: 'TL Olarak',
         width: 150,
       },
       {
