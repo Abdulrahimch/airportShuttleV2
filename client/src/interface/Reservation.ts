@@ -1,3 +1,5 @@
+import { Driver } from './Driver';
+
 export interface FormLabels {
     type: string;
     from: string;
@@ -70,6 +72,7 @@ interface Reservation {
     timezone: number;
     date: string;
     time: string;
+    driver?: Driver;
 };
 
 export interface GetReservationApiDataSuccess {

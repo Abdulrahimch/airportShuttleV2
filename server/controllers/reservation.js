@@ -73,7 +73,9 @@ exports.updateReservation = asyncHandler(async (req, res, next) => {
 });
 
 exports.getReservations = asyncHandler(async (req, res, next) => {
-    const confirmedReservations = await Reservation.find({ client: req.user.id, confirmed: true });
+    const confirmedReservations = await Reservation.find({ client: req.user.id, confirmed: true })
+                                    .populate({ path: 'driver', select: { _id: 0, agency: 0 } });
+
     const unConfirmedReservations = await Reservation.find({ client: req.user.id, confirmed: false })
 
     if (confirmedReservations || unConfirmedReservations) {

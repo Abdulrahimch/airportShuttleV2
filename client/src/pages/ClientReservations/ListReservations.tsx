@@ -8,13 +8,23 @@ import { getReservations } from '../../helpers/APICalls/reservation';
 import { deleteReservation } from '../../helpers/APICalls/reservation';
 import { useSnackBar } from '../../context/useSnackbarContext';
 import CustomDialog from '../../components/CustomDialog/CustomDialog';
-import UpdateReservation from './UpdateReservation/UpdateReservation';
 import { useHistory } from 'react-router-dom';
 import { useLanguage } from '../../context/useLanguageContext';
 import TabContext from '@material-ui/lab/TabContext';
 import TabList from '@material-ui/lab/TabList';
 import TabPanel from '@material-ui/lab/TabPanel';
 import { turkishTabs, engTabs } from '../../utils/dictionary';
+import DriverDetail from '../Agency/Drivers/DriverDetail/DriverDetail';
+import { Driver } from '../../interface/Driver';
+
+const driverInitValue = {
+    firstName: '',
+    lastName: '',
+    img: '',
+    carNumber: '',
+    phoneNumber: '',
+    email: ''
+};
 
 function ListReservations(): JSX.Element{
     const { root } = useStyles();
@@ -25,6 +35,8 @@ function ListReservations(): JSX.Element{
     const [confirmedReservations, setConfirmedReservations] = useState<any>([]);
     const [unConfirmedReservations, setUnConfirmedReservations] = useState<any>([]);
     const [open, setOpen] = useState<boolean>(false);
+    const [openDetailDialog, setOpenDetailDialog] = useState<boolean>(false);
+    const [driver, setDriver] = useState<Driver>(driverInitValue);
     const [value, setValue] = useState('1');
     const [initValues, setInitValues] = useState( {
         type: 0,
@@ -66,7 +78,17 @@ function ListReservations(): JSX.Element{
         setValue(newValue);
     };
 
-    const columns = language === 'tr' ? turksihColumns(handleEditClick, handleCacelClick): engColumn(handleEditClick, handleCacelClick);
+    const handleDriverDetails = (cellValues: any) => {
+        setDriver(cellValues.row.driver);
+        setOpenDetailDialog(true);
+    };
+
+    const onDetailDialogClose = () => {
+        setOpenDetailDialog(false);
+    };
+
+    const columns = language === 'tr' ? turksihColumns(handleEditClick, handleCacelClick, handleDriverDetails)
+                                      : engColumn(handleEditClick, handleCacelClick, handleDriverDetails);
     const tabs = language === 'tr' ? turkishTabs : engTabs
 
     useEffect(() => {
@@ -74,7 +96,6 @@ function ListReservations(): JSX.Element{
             if (data.error){
                 console.log(data.error)
             } else if (data.success) {
-                console.log(data.success)
                 data.success.reservations.confirmedReservations.map((reservation, idx) => {
                     reservation.id = idx + 1;
                     const date = new Date(reservation.selectedDate)
@@ -100,19 +121,6 @@ function ListReservations(): JSX.Element{
     
     
     return (
-        // <>
-        // <Box className={root}>
-        //     <DataTable rows={rows} columns={columns} />
-        //     <CustomDialog 
-        //         open={open} 
-        //         onClose={handleDialogClose}
-        //         // eslint-disable-next-line react/style-prop-object
-        //         style={'updateReservation'}
-        //     >
-        //         <UpdateReservation initValues={initValues} setOpen={setOpen} />
-        //     </CustomDialog>
-        // </Box>
-        // </>
         <>
             <Box sx={{ width: '100%' }} className={root}>
                 <TabContext value={value}>
@@ -126,6 +134,9 @@ function ListReservations(): JSX.Element{
                     <TabPanel value="1" style={{ width: '100%' }}><DataTable rows={confirmedReservations} columns={columns} /></TabPanel>
                     <TabPanel value="2" style={{ width: '100%' }}><DataTable rows={unConfirmedReservations} columns={columns} /></TabPanel>
                 </TabContext>
+                <CustomDialog open={openDetailDialog} onClose={onDetailDialogClose} style='updateReservation'>
+                    <DriverDetail driver={driver}/>
+                </CustomDialog>
             </Box>
         </>
     )

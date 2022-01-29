@@ -7,6 +7,7 @@ export interface Driver {
     carNumber: string;
     createdAt?: string;
     phoneNumber?: string;
+    img?: string;
 };
 
 export interface DriverApiData {

@@ -4,10 +4,7 @@ import { GetReservationApiData } from '../../interface/agencyReservation';
 export const getReservations = (): Promise<GetReservationApiData> => {
     return axios.get('/agency-reservation')
         .then((res) => res.data )
-        .catch(() => ({
-            error: { message: 'error! please try again later' }
-        })
-    );
+        .catch((error) => error.response.data);
 };
 
 interface Inputs {
@@ -31,9 +28,6 @@ export const deleteReservation = async (id: string): Promise<GetReservationApiDa
 export const getClientReservation = async (id: string): Promise<GetReservationApiData> => {
     return await axios.get(`/agency-reservation/${id}`)
                     .then((res) => res.data)
-                    .catch(() => ({
-                        error: { message: 'error! please try again later' }
-                    })
-                );
+                    .catch((error) => error.response.data);
 };
 

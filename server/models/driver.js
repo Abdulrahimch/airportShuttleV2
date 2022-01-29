@@ -17,6 +17,7 @@ const driverSchema = mongoose.Schema(
         },
         img: {
             type: String,
+            default: 'https://airportshuttle0.s3.amazonaws.com/defaultAvatar.png'
         },
         carNumber: {
             type: String,
@@ -26,6 +27,10 @@ const driverSchema = mongoose.Schema(
             required: true, 
             ref: "user"
         },
+        phoneNumber: {
+            type: String,
+            required: true
+        }
     },
     {
         timestamps: true

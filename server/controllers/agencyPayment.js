@@ -66,7 +66,7 @@ exports.getClientPayment = asyncHandler(async (req, res, next) => {
                                         })
                                         .populate({
                                                     path: 'client', 
-                                                    select: {property: 1, email: 1}
+                                                    select: { property: 1, email: 1 }
                                                 });
     
     if (payment) {

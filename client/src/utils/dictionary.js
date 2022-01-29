@@ -168,6 +168,7 @@ export const engColumn = (handleEditClick, handleCancelClick, handleDriverDetail
       renderCell: (cellValues) => {
         return (
           <CustomButton
+            disabled={!cellValues.row.confirmed}
             style="driverDetails"
             btnText="Details"
             onClick={() => handleDriverDetails(cellValues)}
@@ -248,9 +249,10 @@ export const turksihColumns = (handleEditClick, handleCancelClick, handleDriverD
       renderCell: (cellValues) => {
         return (
           <CustomButton
-          style="driverDetails"
-          btnText="Detay"
-          onClick={() => handleDriverDetails(cellValues)}
+            disabled={!cellValues.row.confirmed}
+            style="driverDetails"
+            btnText="Detay"
+            onClick={() => handleDriverDetails(cellValues)}
         />
         );
       }
