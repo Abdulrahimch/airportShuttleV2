@@ -117,3 +117,20 @@ exports.postClient= asyncHandler(async (req, res, next) => {
     throw new Error("Internal Server Error");
   }
 });
+
+exports.deleteClient = asyncHandler(async (req, res, next) => {
+  const userId = req.params.id;
+  const user = await User.findByIdAndDelete(userId);
+
+  if (user) {
+    res.status(200).json({
+      success: {
+        user
+      }
+    })
+  } else {
+    res.status(500);
+    throw new Error('Sever Error');
+  }
+});
+

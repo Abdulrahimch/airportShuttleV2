@@ -3,7 +3,7 @@ import DataTable from "../../../components/DataTable/DataTable";
 import { turkishClientColumn, engClientColumn } from '../../../utils/dictionary';
 import { useLanguage } from '../../../context/useLanguageContext';
 import { useSnackBar } from '../../../context/useSnackbarContext';
-import { getClients } from '../../../helpers/APICalls/user';
+import { deleteClient, getClients } from '../../../helpers/APICalls/user';
 import { format } from 'date-fns';
 import { Client } from '../../../interface/Client';
 import { useHistory } from 'react-router-dom';
@@ -36,8 +36,18 @@ const ListClients = (): JSX.Element => {
         console.log('edit is hitted');
     };
 
-    const handleCancelClick = () => {
-        console.log('cancel is hitted');
+    const handleCancelClick = (values: any) => {
+        const id = values.row._id;
+        deleteClient(id).then((data) => {
+            if (data.error) {
+                updateSnackBarMessage(data.error.message);
+            } else if (data.success) {
+                updateSnackBarMessage('Client has been deleted successfully!');
+                setRows(rows.filter(row => row.id !== values.id));
+            } else {
+                updateSnackBarMessage('An unexpected error occurred. Please try again !');
+            }
+        });
     };
 
     const columns = language === 'tr' ? turkishClientColumn(handleEditClick, handleCancelClick) 

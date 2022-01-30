@@ -17,3 +17,11 @@ export const getClients = async (): Promise<GetClientsApiData> => {
                 error: {message: 'Unable to connect to server. Please try again'}
             }))
 };
+
+export const deleteClient = async (id: string) => {
+    return await axios.delete(`/users/${id}`)
+        .then((res) => res.data)
+        .catch(() => ({
+            error: {message: 'Unable to connect to server. Please try again'}
+        }));
+};
