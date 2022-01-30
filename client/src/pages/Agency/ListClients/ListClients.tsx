@@ -1,9 +1,36 @@
+import { useState, useEffect } from 'react';
 import DataTable from "../../../components/DataTable/DataTable";
 import { turkishClientColumn, engClientColumn } from '../../../utils/dictionary';
 import { useLanguage } from '../../../context/useLanguageContext';
+import { useSnackBar } from '../../../context/useSnackbarContext';
+import { getClients } from '../../../helpers/APICalls/user';
+import { format } from 'date-fns';
+import { Client } from '../../../interface/Client';
+import { useHistory } from 'react-router-dom';
 
 const ListClients = (): JSX.Element => {
     const { language } = useLanguage();
+    const [rows, setRows] = useState<Client []>([]);
+    const { updateSnackBarMessage } = useSnackBar();
+    const history = useHistory();
+
+    useEffect(() => {
+        getClients().then((data) => {
+            if (data.error) {
+                console.log(data.error);
+                updateSnackBarMessage(data.error.message);
+            } else if (data.success){
+                data.success.clients.map((client, idx) => {
+                    client.id = idx + 1;
+                    const date = new Date(client.createdAt ? client.createdAt : Date.now());
+                    client.createdAt = format(date, 'dd-MM-yyyy kk:mm')
+                });
+                setRows(data.success.clients);
+            } else {
+                updateSnackBarMessage('An unexpected error occurred. Please try again !');
+            }
+        });
+    }, [history])
 
     const handleEditClick = () => {
         console.log('edit is hitted');
@@ -12,8 +39,6 @@ const ListClients = (): JSX.Element => {
     const handleCancelClick = () => {
         console.log('cancel is hitted');
     };
-
-    const rows = [{id: 1, propertyName: 'dilhayat', businessType: 'hotel', email: 'dilhayat@gmail.com', address: 'dultanahmet', createdAt: '2019-01-01'}]
 
     const columns = language === 'tr' ? turkishClientColumn(handleEditClick, handleCancelClick) 
                                         : engClientColumn(handleEditClick, handleCancelClick);

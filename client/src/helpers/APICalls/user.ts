@@ -8,7 +8,7 @@ export const postClient = async (inputs: Client): Promise<AuthApiData> => {
             .catch(() => ({
                 error: {message: 'Unable to connect to server. Please try again'}
             }))
-}
+};
 
 export const getClients = async (): Promise<GetClientsApiData> => {
     return await axios.get('/users/')
@@ -16,4 +16,4 @@ export const getClients = async (): Promise<GetClientsApiData> => {
             .catch(() => ({
                 error: {message: 'Unable to connect to server. Please try again'}
             }))
-}
+};
