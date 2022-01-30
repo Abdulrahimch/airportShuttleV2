@@ -7,41 +7,65 @@ import { useLanguage } from '../../../context/useLanguageContext';
 function AgencyHeader(): JSX.Element {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+    const [anchorCleitnEl, setAnchorCleitnEl] = useState<null | HTMLElement>(null);
     const [open, setOpen] = useState<boolean>(false);
-
+    const [openClient, setOpenClient] = useState<boolean>(false);
+    
     const { language } = useLanguage();
-
-    const options = [
-        { label: language === 'eng' ? 'All Drivers' : 'Sürücüler', to: 'drivers' },
-        { label: language === 'eng' ? 'Add Driver' : 'Sürücü Ekle', to: 'add-driver' }
-    ];
 
     let tabs = [];
 
     const handleClose = () => {
         setAnchorEl(null);
         setOpen(false)
-      };
+    };
+
+    const handleClientClose = () => {
+        setAnchorCleitnEl(null);
+        setOpenClient(false);
+    };
 
     const handleClick = (event: any) => {
         setAnchorEl(event.currentTarget);
         setOpen(!open)
-    }
+    };
+
+    const handleClientClick = (event: any) => {
+        setAnchorCleitnEl(event.currentTarget);
+        setOpenClient(!openClient)
+    };
 
     const AgencyTabsDictionary = {
         englishTabs : [
-            { label: 'add client', to: '/add-client' },
+            { label: 'clients ', to: '', handleClick: handleClientClick },
             { label: 'reservations', to: '/agency-reservation' },
             { label: 'payments', to: '/agency-payment' },
-            { label: 'dirvers', to: '', handleClick: handleClick}
+            { label: 'dirvers', to: '', handleClick: handleClick }
         ],
         turkishTabs : [
-            { label: 'müşteri ekle ', to: '/add-client' },
+            { label: 'müşteriler ', to: '', handleClick: handleClientClick },
             { label: 'rezervasyonlar', to: '/agency-reservation' },
             { label: 'finans', to: '/agency-payment' },
             { label: 'sürücüler', to: '', handleClick: handleClick}
         ]
       };
+
+    const menus = [
+        {
+            anchorEl: anchorEl, open: open, onClose: handleClose, 
+            options: [
+                { label: language === 'eng' ? 'All Drivers' : 'Sürücüler', to: 'drivers' },
+                { label: language === 'eng' ? 'Add Driver' : 'Sürücü Ekle', to: 'add-driver' }
+            ]
+        },
+        {
+            anchorEl: anchorCleitnEl, open: openClient, onClose: handleClientClose, 
+            options: [
+                { label: language === 'eng' ? 'All Clients' : 'Sürücüler', to: 'clients' },
+                { label: language === 'eng' ? 'Add Client' : 'Sürücü Ekle', to: 'add-client' }
+            ],
+        }  
+    ];
 
     const { englishTabs,  turkishTabs } = AgencyTabsDictionary;
     
@@ -72,27 +96,33 @@ function AgencyHeader(): JSX.Element {
             >
                 {tabFormation()}
             </Tabs>
-            <Menu
-                id="lock-menu"
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleClose}
-                classes={{ paper: classes.menu }}
-                MenuListProps={{
-                'aria-labelledby': 'lock-button',
-                role: 'listbox',
-                }}
-            >
-                {options.map(({label, to}, idx) => (
-                <MenuItem
-                    key={idx}
-                    component={Link}
-                    to={to}
-                >
-                {label}
-                </MenuItem>
-            ))}
-      </Menu>
+            {
+                menus.map(({ anchorEl, open, onClose, options }) => (
+                    <>
+                        <Menu
+                            id="lock-menu"
+                            anchorEl={anchorEl}
+                            open={open}
+                            onClose={onClose}
+                            classes={{ paper: classes.menu }}
+                            MenuListProps={{
+                            'aria-labelledby': 'lock-button',
+                            role: 'listbox',
+                            }}
+                        >
+                            {options.map(({label, to}, idx) => (
+                            <MenuItem
+                                key={idx}
+                                component={Link}
+                                to={to}
+                            >
+                                {label}
+                            </MenuItem>
+                            ))}
+                        </Menu>
+                    </>
+                ))
+            }
         </Box>
     )
 }

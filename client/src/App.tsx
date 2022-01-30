@@ -5,6 +5,7 @@ import ClientPayment from './pages/ClientPayment/ClientPayment';
 import AddReservation from './pages/ClientReservations/AddReservation/AddReservation';
 import { AuthProvider } from './context/useAuthContext';
 import AddClient from './pages/Agency/AddClient/AddClient';
+import ListClients from './pages/Agency/ListClients/ListClients';
 import { SnackBarProvider } from './context/useSnackbarContext';
 import { LanguageProvider } from './context/useLanguageContext';
 import ListAgencyReservations from './pages/Agency/Reservation/ListAgencyReservations';
@@ -34,6 +35,7 @@ function App (): JSX.Element {
                                 <Route exact path="/agency-payment" component={AgencyPayments} />
                                 <Route exact path="/drivers" component={ListDrivers} />
                                 <Route exact path="/add-driver" component={AddDriver} />
+                                <Route exact path="/clients" component={ListClients} />
                             </Switch>
                         </LanguageProvider>
                 </AuthProvider>

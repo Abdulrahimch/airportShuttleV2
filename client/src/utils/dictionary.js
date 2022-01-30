@@ -1030,3 +1030,118 @@ export const turksihDriverColumns = (handleEditClick, handleCancelClick) => {
   ];
   return columns;
 };
+
+
+export const engClientColumn = (handleEditClick, handleCancelClick) => {
+  const columns = [
+    { 
+      field: 'propertyName', 
+      headerName: 'Property', 
+      width: 150 
+    },
+    { 
+      field: 'businessType',
+      headerName: 'Type', 
+      width: 150 
+    },
+    {
+      field: 'email',
+      headerName: 'Email',
+      width: 250,
+    },
+    {
+      field: 'address',
+      headerName: 'Address',
+      width: 250,
+    },
+    {
+      field: 'createdAt',
+      headerName: 'Joining Date',
+      width: 200,
+    },
+    {
+      field: "Edit",
+      width: 175,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+            style="edit"
+            btnText="edit"
+            onClick={() => handleEditClick(cellValues)}
+          />
+        );
+      }
+    },
+    {
+      field: "Delete",
+      width: 175,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+            style="delete"
+            btnText="Delete"
+            onClick={() => handleCancelClick(cellValues)}
+          />
+        );
+      }
+    }
+  ];
+  return columns;
+};
+
+export const turkishClientColumn = (handleEditClick, handleCancelClick) => {
+  const columns = [
+    { 
+      field: 'propertyName', 
+      headerName: 'Emlak', 
+      width: 150 
+    },
+    { 
+      field: 'businessType',
+      headerName: 'Tip', 
+      width: 150 
+    },
+    {
+      field: 'email',
+      headerName: 'Email',
+      width: 250,
+    },
+    {
+      field: 'address',
+      headerName: 'Address',
+      width: 250,
+    },
+    {
+      field: 'createdAt',
+      headerName: 'Katılma Tarihi',
+      width: 200,
+    },
+    {
+      field: "Düzenle",
+      width: 175,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+            style="edit"
+            btnText="Düzenle"
+            onClick={() => handleEditClick(cellValues)}
+          />
+        );
+      }
+    },
+    {
+      field: "Sil",
+      width: 175,
+      renderCell: (cellValues) => {
+        return (
+          <CustomButton
+            style="delete"
+            btnText="Sil"
+            onClick={() => handleCancelClick(cellValues)}
+          />
+        );
+      }
+    }
+  ];
+  return columns;
+};
