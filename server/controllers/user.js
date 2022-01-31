@@ -47,22 +47,35 @@ exports.getClients = asyncHandler(async (req, res, next) => {
 // @desc Update user
 // @access Private
 exports.updateUser = asyncHandler(async (req, res, next) => {
-    const updates = Object.keys(req.body);
-    const allowedUpdates = ['username', 'email', 'password'];
-    const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
-    if (!isValidOperation) return res.status(404).send({ error: 'Invalid update' });
+  const toUpdate = {
+    email,
+    firstName,
+    lastName,
+    businessType,
+    address,
+    propertyName,
+    IstAirportMaxFourPaxCost,
+    IstAirportMaxSixPaxCost,
+    IstAirportMaxTenPaxCost,
+    SawAirportMaxFourPaxCost,
+    SawAirportMaxSixPaxCost,
+    SawAirportMaxTenPaxCost
+  } = req.body;
 
-    const user = await User.findById({ _id: req.params.id });
-    if (!user) return res.status(404).send({ error: "User not found" });
-
-    try{
-        updates.forEach((update) => user[update] = req.body[update]);
-        await user.save();
-        res.send(user);
-    } catch (e) {
-        res.status(400).send(e);
-    }
+  const clientId = req.params.id;
+  const client = await User.findByIdAndUpdate(clientId, toUpdate, { new: true });
+  if (client) {
+    res.status(201).json({
+      success: {
+        client
+      }
+    });
+  } else {
+    res.status(500);
+    throw new Error("Internal Server Error");
+  }
 });
+
 // @route POST /users/
 // @desc Post a user
 // @access Private

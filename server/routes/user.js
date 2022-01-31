@@ -6,7 +6,7 @@ const { getClients, getUser, updateUser, postClient, deleteClient } = require(".
 
 router.route("/").get(protect, getClients);
 
-router.route("/users/:id").patch(updateUser);
+router.route("/:id").patch(protect, updateUser);
 
 router.route("/:id").delete(protect, validateUserOwner, deleteClient);
 
