@@ -18,7 +18,7 @@ export const getClients = async (): Promise<GetClientsApiData> => {
             }))
 };
 
-export const deleteClient = async (id: string) => {
+export const deleteClient = async (id: string | undefined) => {
     return await axios.delete(`/users/${id}`)
         .then((res) => res.data)
         .catch(() => ({

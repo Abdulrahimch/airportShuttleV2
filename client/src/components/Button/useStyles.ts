@@ -75,7 +75,19 @@ const useStyles = makeStyles((theme) => ({
             backgroundColor: '#A9A9A9',
             width: 100,
             height: 40,
-        }
+        },
+        '&.yes': {
+            backgroundColor: "#006400",
+            width: 75,
+            height: 40,
+            marginRight: '1em'
+        },
+        '&.no': {
+            backgroundColor: '#8B0000',
+            width: 75,
+            height: 40,
+        },
+
     },
 }));
 
