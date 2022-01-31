@@ -9,6 +9,21 @@ import { useSnackBar } from '../../../context/useSnackbarContext';
 function AddClient(): JSX.Element {
     const classes = useStyles();
     const { updateSnackBarMessage } = useSnackBar();
+
+    const initialValues={
+        email: '',
+        firstName: '',
+        lastName: '',
+        businessType: '',
+        address: '',
+        propertyName: '',
+        IstAirportMaxFourPaxCost: 0,
+        IstAirportMaxSixPaxCost: 0,
+        IstAirportMaxTenPaxCost: 0,
+        SawAirportMaxFourPaxCost: 0,
+        SawAirportMaxSixPaxCost: 0,
+        SawAirportMaxTenPaxCost: 0,
+    };
     
     const handleSubmit = (inputs: Client) => {
         postClient(inputs).then((data) => {
@@ -32,7 +47,7 @@ function AddClient(): JSX.Element {
                     </Typography>
                 </Grid>
                 <Grid item>
-                    <AddClientForm handleSubmit={handleSubmit}/>
+                    <AddClientForm handleSubmit={handleSubmit} values={initialValues}/>
                 </Grid>
             </Grid>
         </>

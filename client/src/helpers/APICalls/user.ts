@@ -25,3 +25,11 @@ export const deleteClient = async (id: string | undefined) => {
             error: {message: 'Unable to connect to server. Please try again'}
         }));
 };
+
+export const patchClient = async (inputs: Client, id: string | undefined) => {
+    return await axios.patch(`/users/${id}`, inputs)
+        .then((res) => res.data)
+        .catch(() => ({
+            error: {message: 'Unable to connect to server. Please try again'}
+        }));
+};

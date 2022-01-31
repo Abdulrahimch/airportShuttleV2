@@ -7,32 +7,31 @@ import { Client } from '../../../../interface/Client';
 
 interface Props {
     handleSubmit: (inputs: Client) => void;
+    values: Client
 }
 
-function AddClientForm( { handleSubmit } : Props): JSX.Element {
+function AddClientForm( { handleSubmit, values } : Props): JSX.Element {
     const classes = useStyles();
 
     return (
        <>
         <Formik
             initialValues={{
-                email: '',
-                role: 'client',
-                firstName: '',
-                lastName: '',
-                businessType: '',
-                address: '',
-                propertyName: '',
-                IstAirportMaxFourPaxCost: 0,
-                IstAirportMaxSixPaxCost: 0,
-                IstAirportMaxTenPaxCost: 0,
-                SawAirportMaxFourPaxCost: 0,
-                SawAirportMaxSixPaxCost: 0,
-                SawAirportMaxTenPaxCost: 0,
+                email: values.email,
+                firstName: values.firstName,
+                lastName: values.lastName,
+                businessType: values.businessType,
+                address: values.address,
+                propertyName: values.propertyName,
+                IstAirportMaxFourPaxCost: values.IstAirportMaxFourPaxCost,
+                IstAirportMaxSixPaxCost: values.IstAirportMaxSixPaxCost,
+                IstAirportMaxTenPaxCost: values.IstAirportMaxTenPaxCost,
+                SawAirportMaxFourPaxCost: values.SawAirportMaxFourPaxCost,
+                SawAirportMaxSixPaxCost: values.SawAirportMaxSixPaxCost,
+                SawAirportMaxTenPaxCost: values.SawAirportMaxTenPaxCost,
             }}
             validationSchema={Yup.object().shape({
                 email: Yup.string().email('Invalid Email Address').required('Please Enter Email Address'),
-                role: Yup.string(),
                 firstName: Yup.string().required('This field can not be blank'),
                 lastName: Yup.string().required('This field can not be blank'),
                 propertyName: Yup.string().required('This field can not be blank'),
