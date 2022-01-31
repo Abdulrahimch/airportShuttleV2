@@ -1,8 +1,8 @@
 import { useState } from 'react';  
 import useStyles from './useStyles';
-import { Link } from 'react-router-dom';
 import { Tabs, Tab, Box, Menu, MenuItem } from '@material-ui/core';
 import { useLanguage } from '../../../context/useLanguageContext';
+import { useHistory } from 'react-router-dom';  
 
 function AgencyHeader(): JSX.Element {
     const classes = useStyles();
@@ -12,6 +12,7 @@ function AgencyHeader(): JSX.Element {
     const [openClient, setOpenClient] = useState<boolean>(false);
     
     const { language } = useLanguage();
+    const history = useHistory();
 
     let tabs = [];
 
@@ -25,28 +26,29 @@ function AgencyHeader(): JSX.Element {
         setOpenClient(false);
     };
 
-    const handleClick = (event: any) => {
-        setAnchorEl(event.currentTarget);
-        setOpen(!open)
+    const handleClick = (event: any, url: string) => {
+        history.push(url);
+        setOpen(false);
+        setOpenClient(false);
     };
 
-    const handleClientClick = (event: any) => {
-        setAnchorCleitnEl(event.currentTarget);
-        setOpenClient(!openClient)
+    const handleClickMenu = (event: any, setAnchorFunc: (event: any) => void, setOpenFunc: (value: boolean) => void) => {
+        setAnchorFunc(event.currentTarget);
+        setOpenFunc(true)
     };
 
     const AgencyTabsDictionary = {
         englishTabs : [
-            { label: 'clients ', to: '', handleClick: handleClientClick },
-            { label: 'reservations', to: '/agency-reservation' },
-            { label: 'payments', to: '/agency-payment' },
-            { label: 'dirvers', to: '', handleClick: handleClick }
+            { label: 'clients ', handleClick: (event: any) => handleClickMenu(event, setAnchorCleitnEl, setOpenClient) },
+            { label: 'reservations', handleClick: (event: any) => handleClick(event, '/agency-reservation') },
+            { label: 'payments', handleClick: (event: any) => handleClick(event, '/agency-payment') },
+            { label: 'dirvers',  handleClick: (event: any) => handleClickMenu(event, setAnchorEl, setOpen) }
         ],
         turkishTabs : [
-            { label: 'müşteriler ', to: '', handleClick: handleClientClick },
-            { label: 'rezervasyonlar', to: '/agency-reservation' },
-            { label: 'finans', to: '/agency-payment' },
-            { label: 'sürücüler', to: '', handleClick: handleClick}
+            { label: 'müşteriler ', handleClick: (event: any) => handleClickMenu(event, setAnchorCleitnEl, setOpenClient) },
+            { label: 'rezervasyonlar', handleClick: (event: any) => handleClick(event, '/agency-reservation') },
+            { label: 'finans', handleClick: (event: any) => handleClick(event, '/agency-payment') },
+            { label: 'sürücüler', handleClick: (event: any) => handleClickMenu(event, setAnchorEl, setOpen)}
         ]
       };
 
@@ -54,15 +56,15 @@ function AgencyHeader(): JSX.Element {
         {
             anchorEl: anchorEl, open: open, onClose: handleClose, 
             options: [
-                { label: language === 'eng' ? 'All Drivers' : 'Sürücüler', to: 'drivers' },
-                { label: language === 'eng' ? 'Add Driver' : 'Sürücü Ekle', to: 'add-driver' }
+                { label: language === 'eng' ? 'All Drivers' : 'Sürücüler', handleClick: (event: any) => handleClick(event, 'drivers') },
+                { label: language === 'eng' ? 'Add Driver' : 'Sürücü Ekle', handleClick: (event: any) => handleClick(event, 'add-driver') }
             ]
         },
         {
             anchorEl: anchorCleitnEl, open: openClient, onClose: handleClientClose, 
             options: [
-                { label: language === 'eng' ? 'All Clients' : 'Sürücüler', to: 'clients' },
-                { label: language === 'eng' ? 'Add Client' : 'Sürücü Ekle', to: 'add-client' }
+                { label: language === 'eng' ? 'All Clients' : 'Müşteriler', handleClick: (event: any) => handleClick(event, 'clients')},
+                { label: language === 'eng' ? 'Add Client' : 'Müşteri Ekle', handleClick: (event: any) => handleClick(event, 'add-client') }
             ],
         }  
     ];
@@ -72,12 +74,10 @@ function AgencyHeader(): JSX.Element {
     function tabFormation() {
         if (language === 'tr') tabs = turkishTabs;
         else tabs = englishTabs;
-        return tabs.map(({ label, to, handleClick }, idx) => (
+        return tabs.map(({ label, handleClick }, idx) => (
             <Tab
                 key={idx}
                 label={label}
-                component={Link}
-                to={to}
                 onClick={handleClick}
                 className={classes.tabs}
             />
@@ -110,11 +110,10 @@ function AgencyHeader(): JSX.Element {
                             role: 'listbox',
                             }}
                         >
-                            {options.map(({label, to}, idx) => (
+                            {options.map(({label, handleClick}, idx) => (
                             <MenuItem
                                 key={idx}
-                                component={Link}
-                                to={to}
+                                onClick={handleClick}
                             >
                                 {label}
                             </MenuItem>
