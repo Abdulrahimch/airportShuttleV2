@@ -5,7 +5,7 @@ const ObjectId = require("mongoose").Types.ObjectId;
 
 exports.getReservations = asyncHandler(async (req, res, next) => {
     const reservations = await Reservation.find({ agency: req.user.id, status: 'waiting' })
-                                 .populate({path: 'client', select: { property: 1 }})
+                                 .populate({ path: 'client', select: { propertyName: 1 } })
                                  
     if (reservations) {
         res.status(200).json({

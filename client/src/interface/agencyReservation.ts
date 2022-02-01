@@ -14,7 +14,7 @@ export interface GetReservationApiDataSuccess {
             time: string;
             cost?: number;
             client: {
-                property: string;
+                propertyName: string;
             }
         }
     ]

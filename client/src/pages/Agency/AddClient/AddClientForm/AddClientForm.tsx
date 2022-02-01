@@ -4,6 +4,8 @@ import useStyles from "./useStyles";
 import { Grid, InputLabel, TextField, Select, MenuItem, Typography } from '@material-ui/core';
 import CustomButton from "../../../../components/Button/CustomButton";
 import { Client } from '../../../../interface/Client';
+import { useLanguage } from "../../../../context/useLanguageContext";
+import { addClientFormlanguage } from '../../../../utils/dictionary';
 
 interface Props {
     handleSubmit: (inputs: Client) => void;
@@ -12,6 +14,11 @@ interface Props {
 
 function AddClientForm( { handleSubmit, values } : Props): JSX.Element {
     const classes = useStyles();
+    const { language } = useLanguage();
+
+    const { firstName, lastName, email, propertyName, businessType, address, istCostTitle, sawCostTitle } =  
+        language === 'tr' ? addClientFormlanguage.turkish : addClientFormlanguage.eng;
+
 
     return (
        <>
@@ -22,6 +29,7 @@ function AddClientForm( { handleSubmit, values } : Props): JSX.Element {
                 lastName: values.lastName,
                 businessType: values.businessType,
                 address: values.address,
+                role: 'client',
                 propertyName: values.propertyName,
                 IstAirportMaxFourPaxCost: values.IstAirportMaxFourPaxCost,
                 IstAirportMaxSixPaxCost: values.IstAirportMaxSixPaxCost,
@@ -36,6 +44,7 @@ function AddClientForm( { handleSubmit, values } : Props): JSX.Element {
                 lastName: Yup.string().required('This field can not be blank'),
                 propertyName: Yup.string().required('This field can not be blank'),
                 address: Yup.string().required('This field can not be blank'),
+                role: Yup.string(),
                 businessType: Yup.string().required('This field can not be blank'),
                 IstAirportMaxFourPaxCost: Yup.number().min(0).required('Please enter the cost for (1 - 4) Pax'),
                 IstAirportMaxSixPaxCost: Yup.number().min(0).required('Please enter the cost for (4 - 6) Pax'),
@@ -53,7 +62,7 @@ function AddClientForm( { handleSubmit, values } : Props): JSX.Element {
                         <Grid item container justify="space-evenly">
                             <Grid item>
                                 <InputLabel className={classes.label}>
-                                    first name
+                                    {firstName}
                                 </InputLabel>
                                 <TextField
                                     id="firstName"
@@ -70,7 +79,7 @@ function AddClientForm( { handleSubmit, values } : Props): JSX.Element {
                             </Grid>
                             <Grid item>
                                 <InputLabel className={classes.label}>
-                                    last name
+                                    {lastName}
                                 </InputLabel>
                                 <TextField
                                     id="lastName"
@@ -89,7 +98,7 @@ function AddClientForm( { handleSubmit, values } : Props): JSX.Element {
                         <Grid item container justify="space-evenly">
                             <Grid item>
                                 <InputLabel className={classes.label}>
-                                    email
+                                    {email}
                                 </InputLabel>
                                 <TextField
                                     id="email"
@@ -106,7 +115,7 @@ function AddClientForm( { handleSubmit, values } : Props): JSX.Element {
                             </Grid>
                             <Grid item>
                                 <InputLabel className={classes.label}>
-                                    business type
+                                    {businessType}
                                 </InputLabel>
                                 <Select
                                     id="businessType"
@@ -136,7 +145,7 @@ function AddClientForm( { handleSubmit, values } : Props): JSX.Element {
                         <Grid item container justify="space-evenly">
                         <Grid item>
                                 <InputLabel className={classes.label}>
-                                        property name
+                                        {propertyName}
                                 </InputLabel>
                                 <TextField
                                     id="propertyName"
@@ -154,7 +163,7 @@ function AddClientForm( { handleSubmit, values } : Props): JSX.Element {
                             </Grid>
                             <Grid item>
                                 <InputLabel className={classes.label}>
-                                        address
+                                        {address}
                                 </InputLabel>
                                 <TextField
                                     id="address"
@@ -172,7 +181,7 @@ function AddClientForm( { handleSubmit, values } : Props): JSX.Element {
                             </Grid>
                         </Grid>
                         <Typography align="center" className={classes.typography}>
-                            ist airport shuttle cost in TL
+                            {istCostTitle}
                         </Typography>
                         <Grid item container justify="space-evenly">
                             <Grid item xs={2} sm={2} md={2} lg={2}>
@@ -228,7 +237,7 @@ function AddClientForm( { handleSubmit, values } : Props): JSX.Element {
                             </Grid>
                         </Grid>
                         <Typography align="center" className={classes.typography}>
-                            saw airport shuttle cost in TL
+                            {sawCostTitle}
                         </Typography>
                         <Grid item container justify="space-evenly">
                             <Grid item xs={2} sm={2} md={2} lg={2}>

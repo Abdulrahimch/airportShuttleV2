@@ -459,7 +459,7 @@ export const agencyTurksihColumns = (handleProcessedClick, handleUnprocessedClic
 export const agencyPaymentEngColumns = (handleAddPaymentClick, handleAllPaymentsClick, handleDetailsClick) => {
   const columns = [
     {
-      field: 'property',
+      field: 'propertyName',
       headerName: 'Property',
       width: 200,
     },
@@ -1144,4 +1144,28 @@ export const turkishClientColumn = (handleEditClick, handleCancelClick) => {
     }
   ];
   return columns;
+};
+
+export const addClientFormlanguage = {
+  eng: {
+      firstName: 'FirstName',
+      lastName: 'lastName',
+      email: 'Email',
+      propertyName: 'Property Name',
+      businessType: 'Business Type',
+      address: 'Address',
+      istCostTitle: 'ist airport cost in TL',
+      sawCostTitle: 'Saw airport cost in TL'
+  },
+  turkish: {
+      firstName: 'Isim',
+      lastName: 'Soyisim',
+      email: 'Email',
+      propertyName: 'Emlak Adı',
+      businessType: 'İşyeri Tipi',
+      address: 'Address',
+      istCostTitle: 'ist airport maliyeti TL olarak',
+      sawCostTitle: 'SAW airport maliyeti TL olarak'
+      
+  }
 };

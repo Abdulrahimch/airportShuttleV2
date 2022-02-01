@@ -49,17 +49,17 @@ const useStyles = makeStyles((theme) => ({
         '&.addPayment': {
             backgroundColor: '#006400',
             width: 100,
-            height: 25,
+            height: 40,
         },
         '&.allPayments': {
             backgroundColor: '#006400',
             width: 100,
-            height: 25,
+            height: 40,
         },
         '&.details': {
             backgroundColor: '#006400',
             width: 100,
-            height: 25,
+            height: 40,
         },
         '&.driverDetails': {
             backgroundColor: '#0000FF',

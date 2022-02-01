@@ -1,14 +1,15 @@
 import useStyles from "./useStyles";
 import AddClientForm from './AddClientForm/AddClientForm';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography, Paper } from '@material-ui/core';
 import { postClient } from '../../../helpers/APICalls/user';
 import { Client } from '../../../interface/Client';
 import { useSnackBar } from '../../../context/useSnackbarContext';
-
+import { useLanguage } from '../../../context/useLanguageContext';
 
 function AddClient(): JSX.Element {
     const classes = useStyles();
     const { updateSnackBarMessage } = useSnackBar();
+    const { language } = useLanguage();
 
     const initialValues={
         email: '',
@@ -40,13 +41,11 @@ function AddClient(): JSX.Element {
     }
     return (
         <>
-            <Grid container direction="column" alignItems="center" component="main" spacing={2}>
-                <Grid item>
+            <Grid container direction="column" alignItems="center" component={Paper} spacing={2} className={classes.root}>
+                <Grid item style={{ backgroundColor: '#D3D3D3' }}>
                     <Typography variant='h2' className={classes.title}>
-                        add client
+                        { language === 'tr' ? 'müşteri ekle' : 'add client' }
                     </Typography>
-                </Grid>
-                <Grid item>
                     <AddClientForm handleSubmit={handleSubmit} values={initialValues}/>
                 </Grid>
             </Grid>

@@ -66,11 +66,12 @@ function ListAgencyReservations(): JSX.Element {
             if (data.error){
                 updateSnackBarMessage(data.error);
             } else if (data.success) {
+                console.log(data.success)
                 data.success.reservations.map((reservation, idx) => {
                     reservation.id = idx + 1;
                     const date = new Date(reservation.selectedDate)
                     reservation.date = format(date, "dd-MM-yyyy kk:mm");
-                    reservation.property = reservation.client.property;
+                    reservation.property = reservation.client?.propertyName;
                 });
                 setRows(data.success.reservations);
             } else {
