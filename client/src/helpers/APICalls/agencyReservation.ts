@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { GetReservationApiData } from '../../interface/agencyReservation';
 
-export const getReservations = (): Promise<GetReservationApiData> => {
-    return axios.get('/agency-reservation')
-        .then((res) => res.data )
-        .catch((error) => error.response.data);
-};
+// export const getReservations = (): Promise<GetReservationApiData> => {
+//     return axios.get('/agency-reservation')
+//         .then((res) => res.data )
+//         .catch((error) => error.response.data);
+// };
 
 interface Inputs {
     status?: string;
@@ -31,3 +31,13 @@ export const getClientReservation = async (id: string): Promise<GetReservationAp
                     .catch((error) => error.response.data);
 };
 
+export const getReservations = async (from: Date, to: Date): Promise<GetReservationApiData> => {
+    return await axios.get(`/agency-reservation`, {
+        params: {
+            from: from,
+            to: to
+        }
+    })
+    .then((res) => res.data)
+    .catch((error) => error.response.data);
+};

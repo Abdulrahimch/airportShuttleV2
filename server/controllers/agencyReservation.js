@@ -4,9 +4,19 @@ const asyncHandler = require("express-async-handler");
 const ObjectId = require("mongoose").Types.ObjectId;
 
 exports.getReservations = asyncHandler(async (req, res, next) => {
-    const reservations = await Reservation.find({ agency: req.user.id, status: 'waiting' })
-                                 .populate({ path: 'client', select: { propertyName: 1 } })
-                                 
+    const fromDate = new Date(req.query.from);
+    const toDate = new Date(req.query.to);
+
+    const reservations = await Reservation.find({
+            $and: [
+                { status: { $eq: 'waiting' } },
+                { agency: { $eq: ObjectId(req.user.id) } },
+                { selectedDate: { $gte: fromDate }},
+                {selectedDate: { $lte: toDate } }
+            ]
+        }        
+    ).populate({ path: 'client', select: { propertyName: 1 } });
+
     if (reservations) {
         res.status(200).json({
             success: {

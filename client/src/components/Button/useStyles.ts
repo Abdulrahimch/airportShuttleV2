@@ -87,6 +87,12 @@ const useStyles = makeStyles((theme) => ({
             width: 75,
             height: 40,
         },
+        '&.searchButton': {
+            backgroundColor: "#006400",
+            width: 75,
+            height: 40,
+            marginTop: '0.5em'
+        },
 
     },
 }));

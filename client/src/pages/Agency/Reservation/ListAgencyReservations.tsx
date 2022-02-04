@@ -9,6 +9,7 @@ import { useSnackBar } from '../../../context/useSnackbarContext';
 import CustomDialog from "../../../components/CustomDialog/CustomDialog";
 import AssignDriver from "../Drivers/AssignDriver/AssignDriver";
 import { Reservation } from '../../../interface/agencyReservation';
+import Search from "../../../components/Search/Search";
 
 function ListAgencyReservations(): JSX.Element {
     const { language } = useLanguage();
@@ -17,6 +18,9 @@ function ListAgencyReservations(): JSX.Element {
     const [open, setOpen] = useState<boolean>(false)
     const [useEffectTrigger, setUseEffectTrigger] = useState<boolean>(false);
     const [reservation, setReservation] = useState<Reservation>()
+    const [from, setFrom] = useState(new Date());
+    const date = new Date();
+    const [to, setTo] = useState(new Date(date.setHours(date.getHours() + 24)));
 
     const handleProcessedClick = (cellValues: any) => {
         const id = cellValues.row._id;
@@ -62,7 +66,7 @@ function ListAgencyReservations(): JSX.Element {
     };
 
     useEffect(() => {
-        getReservations().then((data) => {
+        getReservations(from, to).then((data) => {
             if (data.error){
                 updateSnackBarMessage(data.error);
             } else if (data.success) {
@@ -89,6 +93,7 @@ function ListAgencyReservations(): JSX.Element {
 
     return (
         <Box>
+            <Search from={from} to={to} setFrom={setFrom} setTo={setTo} invokeUseEffect={invokeUseEffect}/>
             <DataTable rows={rows} columns={columns} />
             <CustomDialog open={open} onClose={handleClose}>
                 <AssignDriver reservation={reservation} invokeUseEffect={invokeUseEffect} handleClose={handleClose} />
