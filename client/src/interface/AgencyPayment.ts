@@ -9,11 +9,14 @@ export interface Payment {
     paidInTL: number;
     property?: string | undefined;
     email?: string | undefined;
+    date?: string;
+    createdAt?: Date | string;
+    status?: string;
     client?: {
         property: string;
         email: string;
     },
-    createdAt?: Date | string;
+    
 };
 
 export interface PaymentApiDataSuccess {

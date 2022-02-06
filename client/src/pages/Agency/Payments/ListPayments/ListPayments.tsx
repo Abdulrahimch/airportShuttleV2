@@ -42,6 +42,7 @@ function ListPayments({ clientId }: Props): JSX.Element {
             } else if (data.success) {
                 data.success.payment.map((item, idx) => {
                     item.id = idx + 1;
+                    item.status = 'payment';
                     item.property = item.client?.property;
                     item.email = item.client?.email;
                     const date = item.createdAt ? new Date(item.createdAt): new Date();

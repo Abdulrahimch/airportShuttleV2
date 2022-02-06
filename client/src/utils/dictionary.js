@@ -781,6 +781,128 @@ export const reservationDetailsTurksihColumns = () => {
   return columns;
 };
 
+export const detailsEngColumns = () => {
+  const columns = [
+    { 
+      field: 'date', 
+      headerName: 'Date and Time', 
+      width: 300 
+    },
+    {
+      field: 'flightNo',
+      headerName: 'Flight No',
+      width: 150,
+    },
+    {
+      field: 'from',
+      headerName: 'From',
+      width: 150,
+    },
+    {
+      field: 'to',
+      headerName: 'To',
+      width: 150,
+    },
+    {
+      field: 'pax',
+      headerName: 'Pax',
+      width: 120,
+    },
+    {
+      field: 'driverNote',
+      headerName: 'Note/property',
+      width: 200,
+    },
+    {
+      field: 'property',
+      headerName: 'Property',
+      width: 225,
+    },
+    {
+      field: 'paid',
+      headerName: 'Paid',
+      width: 150,
+    },
+    {
+      field: 'currency',
+      headerName: 'Currency',
+      width: 150,
+    },
+    {
+      field: 'exchangeRate',
+      headerName: 'Exchange Rate',
+      width: 150,
+    },
+    {
+      field: 'paidInTL',
+      headerName: 'Paid in TL',
+      width: 190,
+    },
+  ];
+  return columns;
+};
+
+export const detailsTurksihColumns = () => {
+  const columns = [
+    { 
+      field: 'date', 
+      headerName: 'Traih va Saat', 
+      width: 300 
+    },
+    {
+      field: 'flightNo',
+      headerName: 'Uçuş No ',
+      width: 150,
+    },
+    {
+      field: 'from',
+      headerName: 'Nerden',
+      width: 150,
+    },
+    {
+      field: 'to',
+      headerName: 'Nereye',
+      width: 150,
+    },
+    {
+      field: 'pax',
+      headerName: 'Pax',
+      width: 120,
+    },
+    {
+      field: 'driverNote',
+      headerName: 'Note/Emlak',
+      width: 200,
+    },
+    {
+      field: 'property',
+      headerName: 'Emlak',
+      width: 225,
+    },
+    {
+      field: 'paid',
+      headerName: 'ödeme',
+      width: 150,
+    },
+    {
+      field: 'currency',
+      headerName: 'Para Birimi ',
+      width: 150,
+    },
+    {
+      field: 'exchangeRate',
+      headerName: 'Döviz Kuru',
+      width: 150,
+    },
+    {
+      field: 'paidInTL',
+      headerName: 'TL Olarak ödenen',
+      width: 190,
+    },
+  ];
+  return columns;
+};
+
 export const paymentDetailsEngColumns = () => {
   const columns = [
     {

@@ -42,24 +42,6 @@ export interface ReservationApiData {
     success?: ReservationApiDataSuccess;
 };
 
-// export interface GetReservationApiDataSuccess {
-//     reservations: [
-//         { 
-//             id: number;
-//             from: number;
-//             to: number;
-//             property: string;
-//             pax: number;
-//             flightNo: string;
-//             driverNote: string;
-//             selectedDate: Date;
-//             timezone: number;
-//             date: string;
-//             time: string;
-//         }
-//     ]
-// };
-
 interface Reservation { 
     id: number;
     from: number;
@@ -73,6 +55,7 @@ interface Reservation {
     date: string;
     time: string;
     driver?: Driver;
+    status?: string;
 };
 
 export interface GetReservationApiDataSuccess {

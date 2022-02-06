@@ -13,6 +13,7 @@ export interface Client {
     IstAirportMaxTenPaxCost: number,
     SawAirportMaxFourPaxCost: number,
     SawAirportMaxSixPaxCost: number,
-    SawAirportMaxTenPaxCost: number,   
+    SawAirportMaxTenPaxCost: number, 
+    status?: string; 
 };
 

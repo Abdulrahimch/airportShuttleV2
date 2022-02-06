@@ -9,9 +9,11 @@ import { agencyPaymentEngColumns, agencyPaymentTurkishColumns } from '../../../u
 import ListPayments from './ListPayments/ListPayments';
 import Details from './Details/Details';
 import { IconButton, AppBar, Toolbar, Typography } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 
 function AgencyPayments(): JSX.Element {
     const { language } = useLanguage();
+    const history = useHistory();
 
     const [openAddPayment, setOpenAddPayment] = useState<boolean>(false);
     const [openAllPayments, setOpenAllPayments] = useState<boolean>(false);
@@ -60,13 +62,17 @@ function AgencyPayments(): JSX.Element {
             } else if (data.success) {
                 data.success.clients.map((client, idx) => {
                     client.id = idx + 1;
-                })
+                    client.status = 'client'
+                });
                 setRows(data.success.clients);
             } else {
                 console.log('external error')
             }
         });
-    }, [openAddPayment, openAllPayments])
+        return () => {
+            setRows([])
+        };
+    }, [history, openAllPayments, openAddPayment])
     
     return (
         <>

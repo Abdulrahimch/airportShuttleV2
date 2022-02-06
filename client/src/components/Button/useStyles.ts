@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
             height: 40,
         },
         '&.confirm': {
-            backgroundColor: '#0000FF',
+            backgroundColor: '#483D8B',
             width: 100,
             height: 40,
         },

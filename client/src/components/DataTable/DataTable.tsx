@@ -1,26 +1,28 @@
 import useStyles from './useStyles';
-import { DataGrid, GridColumns, GridRowData, GridToolbar } from '@material-ui/data-grid';
+import { DataGrid, GridColumns, GridRowData, GridToolbar, GridSortModel } from '@material-ui/data-grid';
 import { Box } from '@material-ui/core';
+import { useState } from 'react';
+import clsx from 'clsx';
 
 interface Props {  
     rows: GridRowData[];
     columns: GridColumns;
 }
 export default function DataTable({ rows, columns }: Props): JSX.Element {
-    const classes = useStyles();
-
+    const { root, row, columnHeader } = useStyles();
     
     return (
-      <Box className={classes.root}>
+      <Box className={root}>
         <DataGrid
-          components={{ Toolbar: GridToolbar }}
-          rows={rows}
-          columns={columns}
-          pageSize={10}
-          disableSelectionOnClick
-          disableColumnMenu={true}
-          disableDensitySelector={true}
-          classes={{ columnHeader: classes.columnHeader }}
+            components={{ Toolbar: GridToolbar }}
+            rows={rows}
+            columns={columns}
+            pageSize={10}
+            disableSelectionOnClick
+            disableColumnMenu={true}
+            disableDensitySelector={true}
+            getRowClassName={(params) => `${clsx(row, params.row.status)}`}
+            classes={{ columnHeader: columnHeader }}
         />
       </Box>
     );

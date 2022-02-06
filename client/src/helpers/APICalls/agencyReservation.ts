@@ -1,11 +1,5 @@
 import axios from 'axios';
-import { GetReservationApiData } from '../../interface/agencyReservation';
-
-// export const getReservations = (): Promise<GetReservationApiData> => {
-//     return axios.get('/agency-reservation')
-//         .then((res) => res.data )
-//         .catch((error) => error.response.data);
-// };
+import { GetReservationApiData, GetReservationPaymentApiData } from '../../interface/agencyReservation';
 
 interface Inputs {
     status?: string;
@@ -29,6 +23,17 @@ export const getClientReservation = async (id: string): Promise<GetReservationAp
     return await axios.get(`/agency-reservation/${id}`)
                     .then((res) => res.data)
                     .catch((error) => error.response.data);
+};
+
+export const getClientReservationPaymentStat = async (id: string, from: Date, to: Date): Promise<GetReservationPaymentApiData> => {
+    return await axios.get(`/agency-reservation/stat/${id}`, {
+        params: {
+            from,
+            to
+        }
+    })
+    .then((res) => res.data)
+    .catch((error) => error.response.data);
 };
 
 export const getReservations = async (from: Date, to: Date): Promise<GetReservationApiData> => {

@@ -73,6 +73,7 @@ function ListAgencyReservations(): JSX.Element {
                 console.log(data.success)
                 data.success.reservations.map((reservation, idx) => {
                     reservation.id = idx + 1;
+                    reservation.status = 'reservation';
                     const date = new Date(reservation.selectedDate)
                     reservation.date = format(date, "dd-MM-yyyy kk:mm");
                     reservation.property = reservation.client?.propertyName;

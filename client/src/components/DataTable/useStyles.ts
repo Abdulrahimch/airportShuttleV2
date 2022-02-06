@@ -2,9 +2,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     columnHeader: {
-        backgroundColor: theme.palette.common.black,
-        color: '#ffffff',
-        fontWeight: 700,
+        backgroundColor: '#808080',
+        color: '#000000',
+        fontWeight: 900,
+        fontSize: 16,
         width: '100%',
       },
       root: {
@@ -14,8 +15,18 @@ const useStyles = makeStyles((theme) => ({
         width: '100%'
       },
       row: {
-        backgroundColor: 'green',
-      }
+        '&.reservation': {
+          backgroundColor: '#CD5C5C',
+        },
+        '&.payment': {
+          backgroundColor: '#7FFFD4',
+        },
+        '&.client': {
+          // backgroundColor: '#9400D3',
+        },
+        
+      },
+
 }));
 
 export default useStyles;

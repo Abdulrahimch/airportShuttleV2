@@ -98,6 +98,7 @@ function ListReservations(): JSX.Element{
             } else if (data.success) {
                 data.success.reservations.confirmedReservations.map((reservation, idx) => {
                     reservation.id = idx + 1;
+                    reservation.status = 'reservation';
                     const date = new Date(reservation.selectedDate)
                     reservation.date = format(date, "dd-MM-yyyy kk:mm")
                 });
