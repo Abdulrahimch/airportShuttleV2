@@ -2,11 +2,7 @@ const mongoose = require('mongoose');
 
 const driverSchema = mongoose.Schema(
     {
-        firstName: {
-            type: String,
-            requried: true
-        },
-        lastName: {
+        name: {
             type: String,
             requried: true
         },

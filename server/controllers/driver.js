@@ -6,7 +6,7 @@ const ObjectId = require("mongoose").Types.ObjectId;
 //Post Driver
 exports.postDriver = asyncHandler(async (req, res, next) => {
     const agencyId = req.user.id;
-    const newDriver = { firstName, lastName, email, img, carNumber } = req.body;
+    const newDriver = { name, phoneNumber, email, img, carNumber } = req.body;
 
     const driver = await Driver.create({
         agency: agencyId,
@@ -29,7 +29,7 @@ exports.postDriver = asyncHandler(async (req, res, next) => {
 //Update Driver
 exports.updateDriver = asyncHandler(async (req, res, next) => {
     const driverId = req.params.id;
-    const updates = { firstName, lastName, email, img, carNumber } = req.body;
+    const updates = { name, phoneNumber, email, img, carNumber } = req.body;
 
     const driver = await Driver.findByIdAndUpdate(
         driverId,

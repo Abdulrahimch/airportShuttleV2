@@ -1042,13 +1042,13 @@ export const engTabs =
 export const engDriverColumn = (handleEditClick, handleCancelClick) => {
   const columns = [
     { 
-      field: 'firstName', 
+      field: 'name', 
       headerName: 'First Name', 
       width: 150 
     },
     { 
-      field: 'lastName',
-      headerName: 'Last Name', 
+      field: 'phoneNumber',
+      headerName: 'Cep', 
       width: 150 
     },
     {
@@ -1099,13 +1099,13 @@ export const engDriverColumn = (handleEditClick, handleCancelClick) => {
 export const turksihDriverColumns = (handleEditClick, handleCancelClick) => {
   const columns = [
     { 
-      field: 'firstName', 
+      field: 'name', 
       headerName: 'Adı', 
       width: 150 
     },
     { 
-      field: 'lastName', 
-      headerName: 'Soyadı', 
+      field: 'phoneNumber', 
+      headerName: 'Cep', 
       width: 150 
     },
     {
