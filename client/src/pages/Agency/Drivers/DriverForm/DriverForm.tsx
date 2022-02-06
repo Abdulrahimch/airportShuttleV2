@@ -4,6 +4,21 @@ import useStyles from "./useStyles";
 import { Grid, InputLabel, TextField, Select, MenuItem, Typography } from '@material-ui/core';
 import CustomButton from "../../../../components/Button/CustomButton";
 import { Driver } from '../../../../interface/Driver';
+import { useLanguage } from "../../../../context/useLanguageContext";
+
+const engDriverForm = {
+    name: 'Name',
+    phoneNumber: 'Cep',
+    email: 'Email',
+    carNumber: 'Vehicle No'
+};
+
+const turkishDriverForm = {
+    name: 'Isim',
+    phoneNumber: 'Cep',
+    email: 'Email',
+    carNumber: 'Araç No'
+};
 
 interface Props {
     handleSubmit: (inputs: Driver) => void;
@@ -12,6 +27,8 @@ interface Props {
 
 function AddClientForm( { handleSubmit, initValues } : Props): JSX.Element {
     const classes = useStyles();
+    const { language } = useLanguage();
+    const { name, phoneNumber, email, carNumber } = language === 'tr' ? turkishDriverForm : engDriverForm
 
     return (
        <>
@@ -37,11 +54,11 @@ function AddClientForm( { handleSubmit, initValues } : Props): JSX.Element {
                         <Grid item container justify="space-evenly" spacing={2}>
                             <Grid item>
                                 <InputLabel className={classes.label}>
-                                    name
+                                    {name}
                                 </InputLabel>
                                 <TextField
-                                    id="firstName"
-                                    name="firstName"
+                                    id="name"
+                                    name="name"
                                     value={values.name}
                                     onChange={handleChange}
                                     error={Boolean(errors.name)}
@@ -54,15 +71,15 @@ function AddClientForm( { handleSubmit, initValues } : Props): JSX.Element {
                             </Grid>
                             <Grid item>
                                 <InputLabel className={classes.label}>
-                                    Phone Number
+                                    {phoneNumber}
                                 </InputLabel>
                                 <TextField
-                                    id="lastName"
-                                    name="lastName"
+                                    id="phoneNumber"
+                                    name="phoneNumber"
                                     value={values.phoneNumber}
                                     onChange={handleChange}
                                     error={Boolean(errors.phoneNumber)}
-                                    helperText={errors.phoneNumber}
+                                    helperText={Boolean(errors.phoneNumber) ? 'please enter a valid number': null}
                                     InputProps={{
                                         classes: { input: classes.inputs },
                                         disableUnderline: true
@@ -73,7 +90,7 @@ function AddClientForm( { handleSubmit, initValues } : Props): JSX.Element {
                         <Grid item container justify="space-evenly" spacing={2}>
                         <Grid item>
                                 <InputLabel className={classes.label}>
-                                    email
+                                    {email}
                                 </InputLabel>
                                 <TextField
                                     id="email"
@@ -90,7 +107,7 @@ function AddClientForm( { handleSubmit, initValues } : Props): JSX.Element {
                             </Grid>
                             <Grid item>
                                 <InputLabel className={classes.label}>
-                                    car number
+                                    {carNumber}
                                 </InputLabel>
                                 <TextField
                                     id="carNumber"

@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        minHeight: '100vh'
+        minHeight: '100vh',
     },
     title: {
         textTransform: 'uppercase',
@@ -12,6 +12,10 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: '3em',
         textAlign: "center",
 
+    },
+    itemContaienr: {
+        backgroundColor: '#808080', 
+        padding: theme.spacing(4)
     }
 }));
 

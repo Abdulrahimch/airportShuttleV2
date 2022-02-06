@@ -4,10 +4,12 @@ import DriverForm from '../DriverForm/DriverForm';
 import useStyles from './useStyles';
 import { useSnackBar } from '../../../../context/useSnackbarContext';
 import { postDriver } from '../../../../helpers/APICalls/driver';
+import { useLanguage } from '../../../../context/useLanguageContext';
  
 const AddDriver = (): JSX.Element => {
-    const { root, title } = useStyles();
+    const { root, title, itemContaienr } = useStyles();
     const { updateSnackBarMessage } = useSnackBar();
+    const { language } = useLanguage();
     
     const handleSubmit = (inputs: Driver) => {
         postDriver(inputs).then((data) => {
@@ -32,9 +34,9 @@ const AddDriver = (): JSX.Element => {
     return (
         <>
             <Grid container component={Paper} direction="column" className={root} justifyContent="center" alignItems="center">
-                <Grid item>
+                <Grid item className={itemContaienr}>
                     <Typography className={title}>
-                        add driver
+                        { language === 'eng' ? 'Add Driver' : 'sürücü Ekle'}
                     </Typography>
                     <DriverForm handleSubmit={handleSubmit} initValues={initValues}/>
                 </Grid>
