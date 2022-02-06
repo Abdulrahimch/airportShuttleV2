@@ -4,7 +4,7 @@ const useStyles = makeStyles((theme) => ({
     form: {
         width: '100%',
         marginTop: theme.spacing(1),
-        backgroundColor: '#E0E0E0',
+        backgroundColor: '#D3D3D3',
         '& .MuiFormControl-root': {
             marginTop: theme.spacing(1),
         },

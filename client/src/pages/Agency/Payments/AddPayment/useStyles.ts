@@ -5,7 +5,8 @@ const useStyles = makeStyles((theme) => ({
         minHeight: '100vh',
         justifyContent: 'center',
         alignContent: 'center',
-        marginTop: '2em'
+        marginTop: '2em',
+        padding: theme.spacing(2)
     },
     title: {
         textTransform: 'uppercase',
