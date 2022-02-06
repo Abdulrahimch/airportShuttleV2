@@ -814,8 +814,8 @@ export const detailsEngColumns = () => {
       width: 200,
     },
     {
-      field: 'property',
-      headerName: 'Property',
+      field: 'cost',
+      headerName: 'Cost',
       width: 225,
     },
     {
@@ -875,8 +875,8 @@ export const detailsTurksihColumns = () => {
       width: 200,
     },
     {
-      field: 'property',
-      headerName: 'Emlak',
+      field: 'cost',
+      headerName: 'Ucret',
       width: 225,
     },
     {
