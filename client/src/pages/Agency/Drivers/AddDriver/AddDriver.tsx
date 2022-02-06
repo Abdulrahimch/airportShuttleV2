@@ -22,8 +22,8 @@ const AddDriver = (): JSX.Element => {
     };
 
     const initValues: Driver = {
-        firstName: '',
-        lastName: '',
+        name: '',
+        phoneNumber: 0,
         email: '',
         carNumber: '',
         createdAt: ''

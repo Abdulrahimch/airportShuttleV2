@@ -15,7 +15,7 @@ const DriverDetail = ({ driver }: Props): JSX.Element => {
                 <Grid item>
                     <Avatar className={avatar} src={driver.img} />
                 </Grid>
-                    <Typography className={title}>{`${driver.firstName} ${driver.lastName}`}</Typography>
+                    <Typography className={title}>{`${driver.name}`}</Typography>
                     <Typography variant="body2">{`Cep: ${driver.phoneNumber}`}</Typography>
                     <Typography variant="body2">{`Car No: ${driver.carNumber}`}</Typography>
             </Grid>

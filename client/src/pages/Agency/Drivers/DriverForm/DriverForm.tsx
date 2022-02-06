@@ -18,14 +18,14 @@ function AddClientForm( { handleSubmit, initValues } : Props): JSX.Element {
         <Formik
             initialValues={{
                 email: initValues.email,
-                firstName: initValues.firstName,
-                lastName: initValues.lastName,
+                name: initValues.name,
+                phoneNumber: initValues.phoneNumber,
                 carNumber: initValues.carNumber
             }}
             validationSchema={Yup.object().shape({
                 email: Yup.string().email('Invalid Email Address').required('Please Enter Email Address'),
-                firstName: Yup.string().required('This field can not be blank'),
-                lastName: Yup.string().required('This field can not be blank'),
+                name: Yup.string().required('This field can not be blank'),
+                phoneNumber: Yup.number().required('This field can not be blank'),
                 carNumber: Yup.string().required('This field can not be blank'),
             })} 
             onSubmit={(values) => {handleSubmit(values)}}
@@ -37,15 +37,15 @@ function AddClientForm( { handleSubmit, initValues } : Props): JSX.Element {
                         <Grid item container justify="space-evenly" spacing={2}>
                             <Grid item>
                                 <InputLabel className={classes.label}>
-                                    first name
+                                    name
                                 </InputLabel>
                                 <TextField
                                     id="firstName"
                                     name="firstName"
-                                    value={values.firstName}
+                                    value={values.name}
                                     onChange={handleChange}
-                                    error={Boolean(errors.firstName)}
-                                    helperText={errors.firstName}
+                                    error={Boolean(errors.name)}
+                                    helperText={errors.name}
                                     InputProps={{
                                         classes: { input: classes.inputs },
                                         disableUnderline: true
@@ -54,15 +54,15 @@ function AddClientForm( { handleSubmit, initValues } : Props): JSX.Element {
                             </Grid>
                             <Grid item>
                                 <InputLabel className={classes.label}>
-                                    last name
+                                    Phone Number
                                 </InputLabel>
                                 <TextField
                                     id="lastName"
                                     name="lastName"
-                                    value={values.lastName}
+                                    value={values.phoneNumber}
                                     onChange={handleChange}
-                                    error={Boolean(errors.lastName)}
-                                    helperText={errors.lastName}
+                                    error={Boolean(errors.phoneNumber)}
+                                    helperText={errors.phoneNumber}
                                     InputProps={{
                                         classes: { input: classes.inputs },
                                         disableUnderline: true
@@ -90,7 +90,7 @@ function AddClientForm( { handleSubmit, initValues } : Props): JSX.Element {
                             </Grid>
                             <Grid item>
                                 <InputLabel className={classes.label}>
-                                    card number
+                                    car number
                                 </InputLabel>
                                 <TextField
                                     id="carNumber"

@@ -71,10 +71,10 @@ const AssignDriver = ({ reservation, invokeUseEffect, handleClose }: Props): JSX
                                 <>
                                     <ListItem alignItems="flex-start" className={value !== driver._id ? listItem : selected} onClick={() => {setValue(driver._id)}}>
                                         <ListItemAvatar>
-                                            <Avatar alt={`${driver.firstName} ${driver.lastName}`} src="https://airportshuttle0.s3.amazonaws.com/defaultAvatar.png" />
+                                            <Avatar alt={`${driver.name}`} src="https://airportshuttle0.s3.amazonaws.com/defaultAvatar.png" />
                                         </ListItemAvatar>
                                         <ListItemText
-                                            primary={`${driver.firstName} ${driver.lastName}`}
+                                            primary={`${driver.name}`}
                                             secondary={
                                                 <>
                                                 <Typography

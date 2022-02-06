@@ -18,11 +18,10 @@ import DriverDetail from '../Agency/Drivers/DriverDetail/DriverDetail';
 import { Driver } from '../../interface/Driver';
 
 const driverInitValue = {
-    firstName: '',
-    lastName: '',
+    name: '',
     img: '',
     carNumber: '',
-    phoneNumber: '',
+    phoneNumber: 0,
     email: ''
 };
 
