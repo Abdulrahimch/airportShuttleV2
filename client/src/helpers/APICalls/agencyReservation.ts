@@ -1,5 +1,8 @@
 import axios from 'axios';
-import { GetReservationApiData, GetReservationPaymentApiData } from '../../interface/agencyReservation';
+import { GetReservationApiData, 
+        GetReservationPaymentApiData, 
+        GetStatApiData,
+        GetStatInfoApiData } from '../../interface/agencyReservation';
 
 interface Inputs {
     status?: string;
@@ -43,6 +46,18 @@ export const getReservations = async (from: Date, to: Date): Promise<GetReservat
             to: to
         }
     })
+    .then((res) => res.data)
+    .catch((error) => error.response.data);
+};
+
+export const getStat = async (): Promise<GetStatApiData> => {
+    return await axios.get(`/agency-reservation/stat/`)
+    .then((res) => res.data)
+    .catch((error) => error.response.data);
+};
+
+export const getstatInfo = async (): Promise<GetStatInfoApiData> => {
+    return await axios.get(`/agency-reservation/statinfo/`)
     .then((res) => res.data)
     .catch((error) => error.response.data);
 };

@@ -2,9 +2,9 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     columnHeader: {
-        backgroundColor: '#808080',
+        backgroundColor: '#FFFFFF',
         color: '#000000',
-        fontWeight: 900,
+        fontWeight: 800,
         fontSize: 16,
         width: '100%',
       },

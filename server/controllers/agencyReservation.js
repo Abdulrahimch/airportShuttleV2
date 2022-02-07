@@ -118,14 +118,14 @@ exports.getClientReservationPaymentStat = asyncHandler(async (req, res, next) =>
 
 });
 
-exports.unconfirmedReservations = asyncHandler(async (req, res, next) => {
+exports.agencyStat = asyncHandler(async (req, res, next) => {
     const agencyId = req.user.id;
     const reservations = await Reservation.aggregate([
         {
             $match: {
                 $expr: {
                     $and: [
-                        { $eq: ['$agencyId', ObjectId(agencyId)] },
+                        { $eq: ['$agency', ObjectId(agencyId)] },
                         { $eq: ['$confirmed', false] } 
                     ]
                 }
@@ -138,5 +138,60 @@ exports.unconfirmedReservations = asyncHandler(async (req, res, next) => {
             }
         }
     ]);
-    console.log(reservations)
+    const owedUsers = await User.aggregate([
+        { $match : {
+            $expr: {
+                $and: [
+                    { $eq: ['$agencyId', ObjectId(agencyId)] },
+                    { $gt: ['$debt', 0] }
+                ]
+                }   
+            }
+        },
+        {
+            $group: {
+                _id: null,
+                total: { $sum: 1 }
+            }
+        }
+    ]);
+
+    res.status(200).json({
+        success: {
+            unconfirmedReservationsNumber: reservations[0].total,
+            owedUsersNumber: owedUsers[0].total
+        }
+    });
+});
+
+exports.agencyStatInfo = asyncHandler(async (req, res, next) => {
+    const agencyId = req.user.id;
+    const reservations = await Reservation.find({
+        $and: [
+            { agency: { $eq: ObjectId(agencyId) } },
+            { confirmed: { $eq: false } }
+        ]
+    }).populate({
+        path: 'client', 
+        select: { propertyName: 1 }
+    });
+
+    const owedUsers = await User.aggregate([
+        { $match : {
+            $expr: {
+                $and: [
+                    { $eq: ['$agencyId', ObjectId(agencyId)] },
+                    { $gt: ['$debt', 0] }
+                ]
+                }   
+            }
+        }
+    ]);
+
+    res.status(200).json({
+        success: {
+            unconfirmedReservations: reservations,
+            owedUsers: owedUsers
+        }
+    });
 });

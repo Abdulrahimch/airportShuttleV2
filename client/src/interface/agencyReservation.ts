@@ -28,6 +28,26 @@ export interface GetReservationApiData {
     success?: GetReservationApiDataSuccess
 };
 
+export interface GetStatApiDataSuccess {
+    unconfirmedReservationsNumber: number;
+    owedUsersNumber: number
+};
+
+export interface GetStatApiData {
+    error?:  string; 
+    success?: GetStatApiDataSuccess
+};
+
+export interface GetStatInfoApiDataSuccess {
+    unconfirmedReservations: Reservation[];
+    owedUsers: Reservation[]
+};
+
+export interface GetStatInfoApiData {
+    error?:  string; 
+    success?: GetStatInfoApiDataSuccess
+}
+
 export interface GetReservationPaymentApiData {
     error? : string;
     success?: {  
