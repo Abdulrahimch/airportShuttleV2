@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme) => ({
         border: '2px solid',
         minWidth: 325,
         position: 'relative',
-        marginBottom: 25
+        marginTop: '2em',
+        marginBottom: '2em'
     },
     itemContaienr: {
         position: 'relative'
