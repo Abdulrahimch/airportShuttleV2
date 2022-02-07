@@ -2,16 +2,10 @@ import {  Box } from '@material-ui/core';
 import { useEffect, useState, useRef } from 'react';
 import DataTable from '../../../../components/DataTable/DataTable';
 import { useLanguage } from '../../../../context/useLanguageContext';
-import { getClientReservation, getClientReservationPaymentStat } from '../../../../helpers/APICalls/agencyReservation';
-import { getClientPayments } from '../../../../helpers/APICalls/agencyPayment';
+import { getClientReservationPaymentStat } from '../../../../helpers/APICalls/agencyReservation';
 import { format } from 'date-fns';
 
-import { 
-        reservationDetailsEngColumns,  reservationDetailsTurksihColumns,
-        paymentDetailsEngColumns, paymentDetailsTurkishColumns,
-        totalDetailsEngColumns, totalDetailsTurkishColumns,
-        detailsEngColumns, detailsTurksihColumns
-        } from '../../../../utils/dictionary';
+import { detailsEngColumns, detailsTurksihColumns } from '../../../../utils/dictionary';
 import Search from '../../../../components/Search/Search';
 
 interface Props {
@@ -21,21 +15,17 @@ interface Props {
 
 interface Total {
     id: number;
-    reservationTotal?: number;
+    totalReservationsCost?: number;
     paymentTotal?: number;
-    currency: string;
+    currency?: string;
     debt: number;
+    status?: string;
 }
 
 function Details({ clientId, debt }: Props): JSX.Element {
     const { language } = useLanguage();
-    const reservationColumns = language === 'eng' ? reservationDetailsEngColumns() : reservationDetailsTurksihColumns();
-    const paymentColumns = language === 'eng' ? paymentDetailsEngColumns() : paymentDetailsTurkishColumns();
-    const totalColumns = language === 'eng' ? totalDetailsEngColumns() : totalDetailsTurkishColumns();
     const detailsColumns = language === 'eng' ? detailsEngColumns() : detailsTurksihColumns();
     
-    const [reservationRows, setReservationRows] = useState<any>([]);
-    const [paymentRows, setPaymentRows] = useState<any>([]);
     const [detailsRows, setDetailsRows] = useState<any>([]);
     const [useEffectTrigger, setUseEffectTrigger] = useState<boolean>(false);
     const [from, setFrom] = useState(new Date());
@@ -43,9 +33,9 @@ function Details({ clientId, debt }: Props): JSX.Element {
     const [to, setTo] = useState(new Date(date.setHours(date.getHours() + 24)));
 
 
-    const reservationTotal = useRef(0);
+    const totalReservationsCost = useRef(0);
     const paymentTotal = useRef(0);
-    const totalsRows = useRef<Total[]>([{id: 1, reservationTotal: 0, paymentTotal: 0, currency: 'TL', debt: debt}]); 
+    const totalsRows = useRef<Total[]>([{id: 10000200, totalReservationsCost: 0, paymentTotal: 0, debt: debt, status: 'total'}]); 
 
     const invokeUseEffect = () => {
         setUseEffectTrigger(!useEffectTrigger)
@@ -62,7 +52,7 @@ function Details({ clientId, debt }: Props): JSX.Element {
                         reservation.status = 'reservation'
                         const date = new Date(reservation.selectedDate);
                         reservation.date = format(date, "dd-MM-yyyy kk:mm");
-                        reservationTotal.current =  reservation.cost ? reservation.cost : 0;
+                        totalReservationsCost.current +=  (reservation.cost ? reservation.cost : 0);
                         idx ++;
                         });
                     data.success.payments.map((item) => {
@@ -71,29 +61,31 @@ function Details({ clientId, debt }: Props): JSX.Element {
                         item.status = 'payment'
                         const date = new Date(item.createdAt ? item.createdAt : new Date());
                         item.date = format(date, "dd-MM-yyyy kk:mm");
-                        paymentTotal.current = item.paidInTL;
+                        paymentTotal.current += item.paidInTL;
                         idx++
                     });
-                    totalsRows.current[0].reservationTotal = reservationTotal.current;
+                    totalsRows.current[0].totalReservationsCost = totalReservationsCost.current;
                     totalsRows.current[0].paymentTotal = paymentTotal.current;
-                    // setReservationRows(data.success.reservations);
-                    // setPaymentRows(data.success.payments);
-                    setDetailsRows((data.success.reservations.concat(data.success.payments)).sort(function(a, b) {return parseFloat(a.date) - parseFloat(b.date)}));                    
+                    totalsRows.current[0].debt = totalReservationsCost.current - paymentTotal.current;  
+                    setDetailsRows([...data.success.reservations, ...data.success.payments, ...totalsRows.current]
+                    .sort(function(a, b) {return parseFloat(a.date) - parseFloat(b.date)}));                    
+                 
                 } else {
                     console.log('External Error, please try again Later!')
                 }
             });
+            return () => {
+                totalReservationsCost.current = 0;
+                paymentTotal.current = 0;
+                setDetailsRows([]);
+            }
     }, [useEffectTrigger]);
     
     return (
         <>  
             <Box display='flex' flexDirection='column'>
                 <Search from={from} to={to} setFrom={setFrom} setTo={setTo} invokeUseEffect={invokeUseEffect}/>
-
-                {/* <DataTable rows={reservationRows} columns={reservationColumns}/>
-                <DataTable rows={paymentRows} columns={paymentColumns} /> */}
                 <DataTable rows={detailsRows} columns={detailsColumns} />
-                {/* <DataTable rows={totalsRows.current} columns={totalColumns} /> */}
             </Box>
         </>
     )

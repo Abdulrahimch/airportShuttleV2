@@ -24,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
         '&.client': {
           // backgroundColor: '#9400D3',
         },
+        '&.total': {
+          backgroundColor: '#2F4F4F',
+        },
         
       },
 

@@ -1,5 +1,5 @@
 import useStyles from './useStyles';
-import { DataGrid, GridColumns, GridRowData, GridToolbar, GridSortModel } from '@material-ui/data-grid';
+import { DataGrid, GridColumns, GridRowData, GridToolbar } from '@material-ui/data-grid';
 import { Box } from '@material-ui/core';
 import { useState } from 'react';
 import clsx from 'clsx';

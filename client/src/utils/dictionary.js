@@ -834,9 +834,19 @@ export const detailsEngColumns = () => {
       width: 150,
     },
     {
-      field: 'paidInTL',
+      field: 'totalReservationsCost',
+      headerName: 'Total Cost',
+      width: 150,
+    },
+    {
+      field: 'paymentTotal',
       headerName: 'Paid in TL',
-      width: 190,
+      width: 150,
+    },
+    {
+      field: 'debt',
+      headerName: 'Remaining Amount In TL',
+      width: 150,
     },
   ];
   return columns;
@@ -895,9 +905,19 @@ export const detailsTurksihColumns = () => {
       width: 150,
     },
     {
-      field: 'paidInTL',
-      headerName: 'TL Olarak ödenen',
-      width: 190,
+      field: 'totalReservationsCost',
+      headerName: 'Toplam Tutar ',
+      width: 150,
+    },
+    {
+      field: 'paymentTotal',
+      headerName: 'TL Olarak ödendi',
+      width: 150,
+    },
+    {
+      field: 'debt',
+      headerName: 'Borç',
+      width: 150,
     },
   ];
   return columns;
