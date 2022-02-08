@@ -2,16 +2,16 @@ import { useEffect, useState } from 'react';
 import useStyles from './useStyles';
 import { format } from 'date-fns';
 import { Card, CardMedia, CardContent, Typography, CardActions, Button, Grid } from '@material-ui/core';
-import { useLanguage } from '../../context/useLanguageContext';
+import { useLanguage } from '../../../context/useLanguageContext';
 import { useHistory } from 'react-router-dom';
-import { getStat, getstatInfo } from '../../helpers/APICalls/agencyReservation';
-import { useSnackBar } from '../../context/useSnackbarContext';
-import DataTable from '../../components/DataTable/DataTable';
-import { GetStatApiDataSuccess, GetStatInfoApiDataSuccess } from '../../interface/agencyReservation';
+import { getStat, getstatInfo } from '../../../helpers/APICalls/agencyReservation';
+import { useSnackBar } from '../../../context/useSnackbarContext';
+import DataTable from '../../../components/DataTable/DataTable';
+import { GetStatApiDataSuccess, GetStatInfoApiDataSuccess } from '../../../interface/agencyReservation';
 import { engUnconfirmedResColumns, 
           turkishUnconfirmedResColumns,
           engOwedUsersColumns,
-          turkishOwedUsersColumns } from '../../utils/dictionary/home';
+          turkishOwedUsersColumns } from '../../../utils/dictionary/home';
 
 const initStat = {
     owedUsersNumber: 0,
@@ -23,7 +23,7 @@ const initStatInfo = {
     unconfirmedReservations: []
 };
 
-const Home = (): JSX.Element => {
+const AgencyHome = (): JSX.Element => {
     const { root, card, itemContaienr } = useStyles();
     const { language } = useLanguage();
     const [stat, setStat] = useState<GetStatApiDataSuccess>(initStat);
@@ -120,4 +120,4 @@ const Home = (): JSX.Element => {
     );
 };
 
-export default Home;
+export default AgencyHome;

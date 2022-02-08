@@ -36,11 +36,13 @@ export const NewReservationDictionary = {
 
 export const tabsDictionary = {
     englishTabs : [
+        { label: 'Home', to: '/client-home' },
         { label: 'new reservations', to: '/new-reservation' },
         { label: 'reservations', to: '/reservation' },
         { label: 'payments', to: '/payment' }
     ],
     turkishTabs : [
+        { label: 'Home', to: '/client-home' },
         { label: 'yeni rezervasyonlar', to: '/new-reservation' },
         { label: 'rezervasyonlar', to: '/reservation' },
         { label: 'finans', to: '/payment' }

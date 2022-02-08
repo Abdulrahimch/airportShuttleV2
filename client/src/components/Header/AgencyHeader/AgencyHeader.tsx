@@ -39,12 +39,14 @@ function AgencyHeader(): JSX.Element {
 
     const AgencyTabsDictionary = {
         englishTabs : [
+            { label: 'Home', handleClick: (event: any) => handleClick(event, '/agency-home') },
             { label: 'clients ', handleClick: (event: any) => handleClickMenu(event, setAnchorCleitnEl, setOpenClient) },
             { label: 'reservations', handleClick: (event: any) => handleClick(event, '/agency-reservation') },
             { label: 'payments', handleClick: (event: any) => handleClick(event, '/agency-payment') },
             { label: 'dirvers',  handleClick: (event: any) => handleClickMenu(event, setAnchorEl, setOpen) }
         ],
         turkishTabs : [
+            { label: 'Home', handleClick: (event: any) => handleClick(event, '/agency-home') },
             { label: 'müşteriler ', handleClick: (event: any) => handleClickMenu(event, setAnchorCleitnEl, setOpenClient) },
             { label: 'rezervasyonlar', handleClick: (event: any) => handleClick(event, '/agency-reservation') },
             { label: 'finans', handleClick: (event: any) => handleClick(event, '/agency-payment') },

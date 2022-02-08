@@ -24,7 +24,7 @@ export const AuthProvider: FunctionComponent = ({ children }): JSX.Element => {
   const updateLoginContext = useCallback(
     (data: AuthApiDataSuccess) => {
       setLoggedInUser(data.user);
-      history.push('/');
+      data.user.role === 'client' ? history.push('/client-home') : history.push('/agency-home');
     },
     [history],
   );
@@ -43,7 +43,7 @@ export const AuthProvider: FunctionComponent = ({ children }): JSX.Element => {
       await loginWithCookies().then((data: AuthApiData) => {
         if (data.success) {
           updateLoginContext(data.success);
-          history.push('/');
+          data.success.user.role === 'client' ? history.push('/client-home') : history.push('/agency-home');
         } else {
           setLoggedInUser(null);
           history.push('/login');

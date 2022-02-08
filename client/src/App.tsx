@@ -16,9 +16,8 @@ import Login from './pages/Login/Login';
 import Header from './components/Header/Header';
 import ListDrivers from './pages/Agency/Drivers/ListDrivers/ListDrivers';
 import AddDriver from './pages/Agency/Drivers/AddDriver/AddDriver';
-import Home from './pages/Home/Home';
-import UnconfirmedReservations from './pages/Home/Statistics/UnconfirmedReservations';
-
+import AgencyHome from './pages/Home/AgencyHome/AgencyHome';
+import ClientHome from './pages/Home/ClientHome/ClientHome';
 
 function App (): JSX.Element {
     return (
@@ -29,7 +28,8 @@ function App (): JSX.Element {
                         <Header />
                             <Switch>
                                 <Route exact path="/login" component={Login} />
-                                <Route exact path="/" component={Home} />
+                                <Route exact path="/agency-home" component={AgencyHome} />
+                                <Route exact path="/client-home" component={ClientHome} />
                                 <Route exact path="/reservation" component={ListReservations} />
                                 <Route exact path="/payment" component={ClientPayment} />
                                 <Route exact path="/new-reservation" component={AddReservation} />
@@ -39,7 +39,6 @@ function App (): JSX.Element {
                                 <Route exact path="/drivers" component={ListDrivers} />
                                 <Route exact path="/add-driver" component={AddDriver} />
                                 <Route exact path="/clients" component={ListClients} />
-                                <Route exact path="/unconfirmed-reservations" component={UnconfirmedReservations} />
                             </Switch>
                         </LanguageProvider>
                 </AuthProvider>
