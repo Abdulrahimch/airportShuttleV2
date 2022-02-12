@@ -12,7 +12,7 @@ export const LanguageContext = createContext<ILanguageContext>({
   });
 
 export const LanguageProvider: FunctionComponent = ({ children }): JSX.Element => {
-    const [language, setLanguage] = useState<Language>('eng');
+    const [language, setLanguage] = useState<Language>('tr');
 
     const updateLanguage = useCallback((language: Language) => {
         setLanguage(language);

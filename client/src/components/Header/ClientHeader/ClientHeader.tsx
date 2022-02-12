@@ -1,8 +1,10 @@
 import useStyles from './useStyles';
 import { Link } from 'react-router-dom';
-import { Tabs, Tab, Box } from '@material-ui/core';
+import { Tabs, Tab, Grid } from '@material-ui/core';
 import { tabsDictionary } from '../../../utils/dictionary';
 import { useLanguage } from '../../../context/useLanguageContext';
+import LanguageTab from '../LanguageTab/LanguageTab';
+import Logout from '../Logout/Logout';
 
 const { englishTabs,  turkishTabs } = tabsDictionary;
 
@@ -27,18 +29,26 @@ function ClientHeader(): JSX.Element {
     };
 
     return (
-        <Box className={classes.root}>
-            <Tabs
-                aria-label="wrapped label tabs example"
-                TabIndicatorProps={{
-                    style: {
-                        display: "none",
-                    },
-                }}
-            >
-                {tabFormation()}
-            </Tabs>
-        </Box>
+        <Grid container className={classes.root}>
+            <Grid item>
+                <Tabs
+                    aria-label="wrapped label tabs example"
+                    TabIndicatorProps={{
+                        style: {
+                            display: "none",
+                        },
+                    }}
+                >
+                    {tabFormation()}
+                </Tabs>
+            </Grid>
+            <Grid item className={classes.gridItem}>
+                <Grid container>
+                    <LanguageTab />
+                    <Logout />
+                </Grid>
+            </Grid>
+        </Grid>
     )
 }
 

@@ -11,6 +11,10 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: 800,
         fontSize: 12
     },
+    gridItem: {
+        position: 'absolute',
+        right: 150
+    },
 }));
 
 export default useStyles;

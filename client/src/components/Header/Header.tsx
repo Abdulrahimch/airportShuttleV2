@@ -16,15 +16,15 @@ function Header(): JSX.Element {
                 <Toolbar>
                     {!loggedInUser ? null
                     :loggedInUser?.role === 'client' ?
-                        <>
+                        <Box>
                             <ClientHeader />  
-                            <LanguageTab />
-                        </>
+                            {/* <LanguageTab /> */}
+                        </Box>
                     :
-                        <>
+                        <Box>
                             <AgencyHeader />  
-                            <LanguageTab />
-                        </>
+                            {/* <LanguageTab /> */}
+                        </Box>
                     }
                 </Toolbar>
             </AppBar>

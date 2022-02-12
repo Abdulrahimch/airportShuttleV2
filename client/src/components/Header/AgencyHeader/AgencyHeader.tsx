@@ -1,8 +1,10 @@
 import { useState } from 'react';  
 import useStyles from './useStyles';
-import { Tabs, Tab, Box, Menu, MenuItem } from '@material-ui/core';
+import { Tabs, Tab, Grid, Menu, MenuItem, Button } from '@material-ui/core';
 import { useLanguage } from '../../../context/useLanguageContext';
 import { useHistory } from 'react-router-dom';  
+import LanguageTab from '../LanguageTab/LanguageTab';
+import Logout from '../Logout/Logout';
 
 function AgencyHeader(): JSX.Element {
     const classes = useStyles();
@@ -87,44 +89,52 @@ function AgencyHeader(): JSX.Element {
     };
 
     return (
-        <Box className={classes.root}>
-            <Tabs
-                aria-label="wrapped label tabs example"
-                TabIndicatorProps={{
-                    style: {
-                        display: "none",
-                    },
-                }}
-            >
-                {tabFormation()}
-            </Tabs>
-            {
-                menus.map(({ anchorEl, open, onClose, options }) => (
-                    <>
-                        <Menu
-                            id="lock-menu"
-                            anchorEl={anchorEl}
-                            open={open}
-                            onClose={onClose}
-                            classes={{ paper: classes.menu }}
-                            MenuListProps={{
-                            'aria-labelledby': 'lock-button',
-                            role: 'listbox',
-                            }}
-                        >
-                            {options.map(({label, handleClick}, idx) => (
-                            <MenuItem
-                                key={idx}
-                                onClick={handleClick}
+        <Grid container className={classes.root} >
+            <Grid item>
+                <Tabs
+                    aria-label="wrapped label tabs example"
+                    TabIndicatorProps={{
+                        style: {
+                            display: "none",
+                        },
+                    }}
+                >
+                    {tabFormation()}
+                </Tabs>
+                {
+                    menus.map(({ anchorEl, open, onClose, options }) => (
+                        <>
+                            <Menu
+                                id="lock-menu"
+                                anchorEl={anchorEl}
+                                open={open}
+                                onClose={onClose}
+                                classes={{ paper: classes.menu }}
+                                MenuListProps={{
+                                'aria-labelledby': 'lock-button',
+                                role: 'listbox',
+                                }}
                             >
-                                {label}
-                            </MenuItem>
-                            ))}
-                        </Menu>
-                    </>
-                ))
-            }
-        </Box>
+                                {options.map(({label, handleClick}, idx) => (
+                                <MenuItem
+                                    key={idx}
+                                    onClick={handleClick}
+                                >
+                                    {label}
+                                </MenuItem>
+                                ))}
+                            </Menu>
+                        </>
+                    ))
+                }
+            </Grid>
+            <Grid item className={classes.gridItem}>
+                <Grid container>
+                    <LanguageTab />
+                    <Logout />
+                </Grid>
+            </Grid>
+        </Grid>
     )
 }
 

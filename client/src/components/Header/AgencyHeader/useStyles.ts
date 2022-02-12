@@ -1,6 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
+    gridItem: {
+        position: 'absolute',
+        right: 150
+    },
     root: {
         display: 'flex',
         justifyContent: 'center',
@@ -19,7 +23,8 @@ const useStyles = makeStyles((theme) => ({
         "&:hover": {
             opacity: 1
         }
-    },
+    }
+    
 }));
 
 export default useStyles;
