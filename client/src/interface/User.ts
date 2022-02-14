@@ -6,5 +6,6 @@ export interface User {
   property: string;
   role: role;
   debt: number;
+  id: string
 }
 

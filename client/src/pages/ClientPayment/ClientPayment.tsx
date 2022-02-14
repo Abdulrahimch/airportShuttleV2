@@ -1,42 +1,94 @@
-import DataTable from "../../components/DataTable/DataTable";
-import { Box } from '@material-ui/core';
-import { clientPaymentDictionary } from '../../utils/dictionary';
-import { useLanguage } from "../../context/useLanguageContext";
-import { getmyPayments } from "../../helpers/APICalls/agencyPayment";
-import { useSnackBar } from "../../context/useSnackbarContext";
-import { useEffect, useState } from "react";
-import { useHistory } from 'react-router-dom';
-import { format } from 'date-fns'; 
+import {  Box } from '@material-ui/core';
+import { useEffect, useState, useRef } from 'react';
+import DataTable from '../../components/DataTable/DataTable';
+import { useLanguage } from '../../context/useLanguageContext';
+import { format } from 'date-fns';
+import { detailsEngColumns, detailsTurksihColumns } from '../../utils/dictionary';
+import Search from '../../components/Search/Search';
+import { getMyDetailsStat } from '../../helpers/APICalls/reservation';
+import { useAuth } from '../../context/useAuthContext';
 
-const { engColumns,  turksihColumns } = clientPaymentDictionary;
+interface Props {
+    clientId: string;
+    debt: number;
+};
 
-function ClientPayment(): JSX.Element {
-    const [rows, setRows] = useState<[]>([])
-    const { language } = useLanguage();
-    const { updateSnackBarMessage } = useSnackBar();
-    const history = useHistory();
-
-    useEffect(() => {
-        getmyPayments().then((data) => {
-            if (data.error){
-                updateSnackBarMessage(data.error);
-            } else if (data.success){
-                data.success.payment.map((item: any, idx: number) => {
-                    item.id = idx +1;
-                    const date = new Date(item.createdAt);
-                    item.createdAt = format(date, 'dd-MM-yyyy kk:mm')
-                });
-                setRows(data.success.payment);
-            } else {
-                updateSnackBarMessage('An unexpected error occurred. Please try again !');
-            }
-        })
-    }, [history])
-    return (
-        <Box>
-            <DataTable rows={rows} columns={language === 'tr' ? turksihColumns : engColumns} />
-        </Box>
-    )
+interface Total {
+    id: number;
+    totalReservationsCost?: number;
+    paymentTotal?: number;
+    currency?: string;
+    debt: number;
+    status?: string;
 }
 
-export default ClientPayment;
+function ClientPayment({ clientId, debt }: Props): JSX.Element {
+    const { language } = useLanguage();
+    const { loggedInUser } = useAuth();
+    const detailsColumns = language === 'eng' ? detailsEngColumns() : detailsTurksihColumns();
+    const [detailsRows, setDetailsRows] = useState<any>([]);
+    const [useEffectTrigger, setUseEffectTrigger] = useState<boolean>(false);
+    const [from, setFrom] = useState(new Date());
+    const date = new Date();
+    const [to, setTo] = useState(new Date(date.setHours(date.getHours() + 24)));
+
+
+    const totalReservationsCost = useRef(0);
+    const paymentTotal = useRef(0);
+    const totalsRows = useRef<Total[]>([{id: 10000200, totalReservationsCost: 0, paymentTotal: 0, debt: debt, status: 'total'}]); 
+
+    const invokeUseEffect = () => {
+        setUseEffectTrigger(!useEffectTrigger)
+    };
+
+    useEffect(() => {
+        const clientId = loggedInUser?.id;
+        getMyDetailsStat(clientId, from, to).then((data) => {
+                let idx = 0;
+                if (data.error) {
+                    console.log(data.error)
+                } else if (data.success) {
+                    data.success.reservations.map((reservation) => {
+                        reservation.id = idx + 1;
+                        reservation.status = 'reservation'
+                        const date = new Date(reservation.selectedDate);
+                        reservation.date = format(date, "dd-MM-yyyy kk:mm");
+                        totalReservationsCost.current +=  (reservation.cost ? reservation.cost : 0);
+                        idx ++;
+                        });
+                    data.success.payments.map((item) => {
+                        item.id = idx + 1;
+                        item.property = item.client?.property;
+                        item.status = 'payment'
+                        const date = new Date(item.createdAt ? item.createdAt : new Date());
+                        item.date = format(date, "dd-MM-yyyy kk:mm");
+                        paymentTotal.current += item.paidInTL;
+                        idx++
+                    });
+                    totalsRows.current[0].totalReservationsCost = totalReservationsCost.current;
+                    totalsRows.current[0].paymentTotal = paymentTotal.current;
+                    totalsRows.current[0].debt = totalReservationsCost.current - paymentTotal.current;  
+                    setDetailsRows([...data.success.reservations, ...data.success.payments, ...totalsRows.current]
+                    .sort(function(a, b) {return parseFloat(a.date) - parseFloat(b.date)}));                    
+                 
+                } else {
+                    console.log('External Error, please try again Later!')
+                }
+            });
+            return () => {
+                totalReservationsCost.current = 0;
+                paymentTotal.current = 0;
+                setDetailsRows([]);
+            }
+    }, [useEffectTrigger]);
+    
+    return (
+        <>  
+            <Box display='flex' flexDirection='column'>
+                <Search from={from} to={to} setFrom={setFrom} setTo={setTo} invokeUseEffect={invokeUseEffect}/>
+                <DataTable rows={detailsRows} columns={detailsColumns} />
+            </Box>
+        </>
+    )
+}
+export default ClientPayment

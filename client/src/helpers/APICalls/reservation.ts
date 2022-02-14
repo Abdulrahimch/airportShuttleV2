@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { GetReservationPaymentApiData } from '../../interface/agencyReservation';
 import { FormValues, ReservationApiData, GetReservationApiData } from '../../interface/Reservation';
 
 export const postReservation = async (inputs: FormValues): Promise<ReservationApiData> => {
@@ -36,4 +37,14 @@ export const deleteReservation = async (id: string): Promise<ReservationApiData>
         })
     );
 };
-
+// get Client reservations and payments stat.
+export const getMyDetailsStat = async (id: string | undefined, from: Date, to: Date): Promise<GetReservationPaymentApiData> => {
+    return await axios.get(`/reservation/stat/${id}`, {
+        params: {
+            from,
+            to
+        }
+    })
+    .then((res) => res.data)
+    .catch((error) => error.response.data);
+};

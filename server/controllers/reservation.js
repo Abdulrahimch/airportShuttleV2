@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const Reservation = require("../models/reservation");
+const Payment = require("../models/payment");
 const asyncHandler = require("express-async-handler");
 const ObjectId = require("mongoose").Types.ObjectId;
 const calculateShuttleCost = require('../utils/calculateShuttleCost');
@@ -108,3 +109,38 @@ exports.deleteReservation = asyncHandler(async (req, res, next) => {
     }
 });
 
+exports.getMyDetailsStat = asyncHandler(async (req, res, next) => {
+    const fromDate = new Date(req.query.from);
+    const toDate = new Date(req.query.to);
+    const id = req.params.id;
+    const reservations = await Reservation.aggregate([
+        { $match: {
+            $expr: {
+                $and: [
+                    {$eq: ['$client', ObjectId(id)]},
+                    {$eq: ['$status', 'processed'] },
+                    {$gte: ['$selectedDate', fromDate]},
+                    {$lte: ['$selectedDate', toDate]}
+                ]
+            }
+        } }
+    ]);
+    const payments = await Payment.aggregate([
+        { $match: {
+            $expr: {
+                $and: [
+                    {$eq: ['$client', ObjectId(id)]},
+                    {$eq: ['$status', 'paid'] },
+                    {$gte: ['$createdAt', fromDate]},
+                    {$lte: ['$createdAt', toDate]}
+                ]
+            }
+        } }
+    ]);
+    res.status(200).json({ 
+        success: {
+            reservations,
+            payments
+        }
+    });
+});

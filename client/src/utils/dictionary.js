@@ -36,14 +36,14 @@ export const NewReservationDictionary = {
 
 export const tabsDictionary = {
     englishTabs : [
-        { label: 'Home', to: '/client-home' },
-        { label: 'new reservations', to: '/new-reservation' },
+        // { label: 'Home', to: '/client-home' },
+        { label: 'new reservation', to: '/new-reservation' },
         { label: 'reservations', to: '/reservation' },
         { label: 'payments', to: '/payment' }
     ],
     turkishTabs : [
-        { label: 'Home', to: '/client-home' },
-        { label: 'yeni rezervasyonlar', to: '/new-reservation' },
+        // { label: 'Home', to: '/client-home' },
+        { label: 'yeni rezervasyon', to: '/new-reservation' },
         { label: 'rezervasyonlar', to: '/reservation' },
         { label: 'finans', to: '/payment' }
     ]
@@ -189,6 +189,7 @@ export const engColumn = (handleEditClick, handleCancelClick, handleDriverDetail
       renderCell: (cellValues) => {
         return (
           <CustomButton
+            disabled={cellValues.row.confirmed}
             style="edit"
             btnText="edit"
             onClick={() => handleEditClick(cellValues)}
@@ -202,6 +203,7 @@ export const engColumn = (handleEditClick, handleCancelClick, handleDriverDetail
       renderCell: (cellValues) => {
         return (
           <CustomButton
+            disabled={cellValues.row.confirmed}
             style="delete"
             btnText="Cancel"
             onClick={() => handleCancelClick(cellValues)}
@@ -270,9 +272,10 @@ export const turksihColumns = (handleEditClick, handleCancelClick, handleDriverD
       renderCell: (cellValues) => {
         return (
           <CustomButton
-          style="edit"
-          btnText="Düzenle"
-          onClick={() => handleEditClick(cellValues)}
+            disabled={cellValues.row.confirmed}
+            style="edit"
+            btnText="Düzenle"
+            onClick={() => handleEditClick(cellValues)}
         />
         );
       }
@@ -283,9 +286,10 @@ export const turksihColumns = (handleEditClick, handleCancelClick, handleDriverD
       renderCell: (cellValues) => {
         return (
           <CustomButton
-          style="delete"
-          btnText="Iptal"
-          onClick={() => handleCancelClick(cellValues)}
+            disabled={cellValues.row.confirmed}
+            style="delete"
+            btnText="Iptal"
+            onClick={() => handleCancelClick(cellValues)}
         />
         );
       }

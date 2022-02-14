@@ -6,10 +6,13 @@ const {
         postReservation, 
         updateReservation, 
         getReservations, 
-        deleteReservation
+        deleteReservation,
+        getMyDetailsStat
        } = require('../controllers/reservation');
 
 router.route("/").post(protect, validateCreateUpdateReservation, postReservation);
+
+router.route("/stat/:id").get(protect, getMyDetailsStat);
 
 router.route("/").get(protect, getReservations);
 
